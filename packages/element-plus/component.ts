@@ -98,6 +98,7 @@ import { ElTree } from '@element-plus/components/tree'
 import { ElTreeSelect } from '@element-plus/components/tree-select'
 import { ElTreeV2 } from '@element-plus/components/tree-v2'
 import { ElUpload } from '@element-plus/components/upload'
+import { ElBgyAnchor, ElBgyAnchorLink } from '../components/bgy-anchor'
 import type { Plugin } from 'vue'
 
 export default [
@@ -195,4 +196,6 @@ export default [
   ElTreeSelect,
   ElTreeV2,
   ElUpload,
+  ElBgyAnchor,
+  ElBgyAnchorLink,
 ] as Plugin[]
