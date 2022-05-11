@@ -1,0 +1,9 @@
+.el-link.el-link--default.bgyAnchorLink__link--active {
+  color: var(--el-color-primary);
+}
+.bgyAnchorLink__link {
+  padding: 7px 0 7px 16px;
+}
+.bgyAnchorLink__link.el-link.is-underline:hover:after {
+  border-bottom: none;
+}
