@@ -322,6 +322,10 @@
       {
         "link": "/bgy-tree-transfer",
         "text": "BgyTreeTransfer 树形穿梭框"
+      },
+      {
+        "link": "/toolbar",
+        "text": "Toolbar 顶部工具栏"
       }
     ]
   }

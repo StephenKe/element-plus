@@ -103,6 +103,7 @@ import {
   ElBgyAnchorLink,
 } from '@element-plus/components/bgy-anchor'
 import { ElBgyTreeTransfer } from '@element-plus/components/bgy-tree-transfer'
+import { ElToolbar } from '@element-plus/components/toolbar'
 import type { Plugin } from 'vue'
 
 export default [
@@ -203,4 +204,5 @@ export default [
   ElBgyAnchor,
   ElBgyAnchorLink,
   ElBgyTreeTransfer,
+  ElToolbar,
 ] as Plugin[]
