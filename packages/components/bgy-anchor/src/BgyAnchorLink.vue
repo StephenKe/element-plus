@@ -13,7 +13,7 @@
   </el-link>
 </template>
 <script lang="ts">
-import '../style/bgy-anchor-link.scss'
+// import '../style/bgy-anchor-link.scss'
 import {
   defineComponent,
   nextTick,

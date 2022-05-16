@@ -6,3 +6,4 @@ CHANGELOG.en-US.md
 docs/components.d.ts
 coverage
 ssr-testing/cases/*
+packages/components/bgy-anchor/src/BgyAnchor.vue

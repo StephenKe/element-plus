@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import '../style/bgy-anchor.scss'
+// import '../style/bgy-anchor.scss'
 import {
   computed,
   defineComponent,
@@ -150,7 +150,7 @@ export default defineComponent({
         if (!sharpLinkMatch) {
           return
         }
-        const target = document.querySelector(sharpLinkMatch[1])[0]
+        const target = document.getElementById(sharpLinkMatch[1])
         if (target) {
           const top = getOffsetTop(target, currentContainer)
           if (top < offset + bounds) {
@@ -252,7 +252,7 @@ export default defineComponent({
       if (!sharpLinkMatch) {
         return
       }
-      const targetElement = document.querySelector(sharpLinkMatch[1])[0]
+      const targetElement = document.getElementById(sharpLinkMatch[1])
       if (!targetElement) {
         return
       }
