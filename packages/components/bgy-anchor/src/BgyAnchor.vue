@@ -18,6 +18,7 @@
 
 <script lang="ts">
 // import '../style/bgy-anchor.scss'
+// @ts-nocheck
 import {
   computed,
   defineComponent,
