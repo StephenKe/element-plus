@@ -318,6 +318,10 @@
       {
         "link": "/bgy-anchor",
         "text": "BgyAnchor 锚点组件"
+      },
+      {
+        "link": "/bgy-tree-transfer",
+        "text": "BgyTreeTransfer 树形穿梭框"
       }
     ]
   }
