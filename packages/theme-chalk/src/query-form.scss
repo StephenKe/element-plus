@@ -1,0 +1,23 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+
+@include b(query-form) {
+  @include set-component-css-var('query-form', $queryForm);
+
+  @include e('content') {
+    overflow: hidden;
+    transition: height 0.3s linear;
+
+    @include when(collapse) {
+    }
+
+    @include when(expand) {
+    }
+  }
+
+  @include e('operationbtns') {
+    width: 100%;
+    text-align: right;
+  }
+}

@@ -29,6 +29,14 @@ export interface FormValidateFailure {
   fields: ValidateFieldsError
 }
 
+export interface ValidateFieldCallback {
+  (isValid?: string, invalidFields?: ValidateFieldsError): void
+}
+
+export interface Callback2 {
+  (isValid?: boolean, invalidFields?: ValidateFieldsError): void
+}
+
 export type FormContext = FormProps &
   UnwrapRef<FormLabelWidthContext> & {
     emit: SetupContext<FormEmits>['emit']
