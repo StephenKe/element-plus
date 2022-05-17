@@ -1470,3 +1470,7 @@ $contractEditForm: map.merge(
   ),
   $contractEditForm
 );
+
+// query-form
+$queryForm: () !default;
+$queryForm: map.merge((), $queryForm);

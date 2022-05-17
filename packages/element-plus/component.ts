@@ -110,6 +110,7 @@ import {
   ElCustomMenuItem,
   ElCustomMenuItemGroup,
 } from '@element-plus/components/custom-menu'
+import { ElQueryForm } from '@element-plus/components/query-form'
 import type { Plugin } from 'vue'
 
 export default [
@@ -215,4 +216,5 @@ export default [
   ElCustomMenu,
   ElCustomMenuItem,
   ElCustomMenuItemGroup,
+  ElQueryForm,
 ] as Plugin[]

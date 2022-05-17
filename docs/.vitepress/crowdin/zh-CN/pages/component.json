@@ -330,6 +330,10 @@
       {
         "link": "/complete-menu",
         "text": "CompleteMenu 左侧菜单导航"
+      },
+      {
+        "link": "/query-form",
+        "text": "QueryForm 筛选表单"
       }
     ]
   }
