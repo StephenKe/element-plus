@@ -104,6 +104,12 @@ import {
 } from '@element-plus/components/bgy-anchor'
 import { ElBgyTreeTransfer } from '@element-plus/components/bgy-tree-transfer'
 import { ElToolbar } from '@element-plus/components/toolbar'
+import { ElCompleteMenu } from '@element-plus/components/complete-menu'
+import {
+  ElCustomMenu,
+  ElCustomMenuItem,
+  ElCustomMenuItemGroup,
+} from '@element-plus/components/custom-menu'
 import type { Plugin } from 'vue'
 
 export default [
@@ -205,4 +211,8 @@ export default [
   ElBgyAnchorLink,
   ElBgyTreeTransfer,
   ElToolbar,
+  ElCompleteMenu,
+  ElCustomMenu,
+  ElCustomMenuItem,
+  ElCustomMenuItemGroup,
 ] as Plugin[]

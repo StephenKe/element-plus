@@ -95,6 +95,7 @@ declare module 'vue' {
     ElSelectV2: typeof import('../packages/element-plus')['ElSelectV2']
     ElBgyAnchor: typeof import('../packages/element-plus')['ElBgyAnchor']
     ElToolbar: typeof import('../packages/element-plus')['ElToolbar']
+    ElCompleteMenu: typeof import('../packages/element-plus')['ElCompleteMenu']
   }
 }
 
