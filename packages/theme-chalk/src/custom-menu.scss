@@ -1,0 +1,250 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'mixins/utils' as *;
+@use 'common/var' as *;
+@use 'common/transition';
+
+@mixin custom-menu-item {
+  display: flex;
+  align-items: center;
+  height: var(--el-menu-item-height);
+  line-height: var(--el-menu-item-height);
+  font-size: var(--el-menu-item-font-size);
+  color: var(--el-menu-text-color);
+  padding: 0 20px;
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--el-transition-duration),
+    background-color var(--el-transition-duration),
+    color var(--el-transition-duration);
+  box-sizing: border-box;
+  white-space: nowrap;
+
+  * {
+    vertical-align: bottom;
+  }
+
+  i {
+    color: inherit;
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: var(--el-menu-hover-bg-color);
+  }
+
+  @include when(disabled) {
+    opacity: 0.25;
+    cursor: not-allowed;
+    background: none !important;
+  }
+
+  // 菜单文字高亮
+  & .is-highlight {
+    color: var(--el-menu-active-color);
+  }
+}
+
+@include b(custom-menu) {
+  @include set-component-css-var('menu', $menu);
+
+  // border-right: solid 1px var(--el-menu-border-color);
+  border-right: none;
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding-left: 0;
+  background-color: var(--el-menu-bg-color);
+  box-sizing: border-box;
+
+  @include m(collapse) {
+    width: 64px;
+
+    > .#{$namespace}-custom-menu-item,
+    > .#{$namespace}-custom-sub-menu > .#{$namespace}-custom-sub-menu__title {
+      [class^='#{$namespace}-icon'] {
+        margin: 0;
+        vertical-align: middle;
+        width: 24px;
+        text-align: center;
+      }
+
+      .#{$namespace}-custom-sub-menu__icon-arrow {
+        display: none;
+      }
+
+      > span > span {
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+        display: inline-block;
+      }
+    }
+
+    > .#{$namespace}-custom-menu-item.is-active i {
+      color: inherit;
+    }
+
+    .#{$namespace}-menu .#{$namespace}-custom-sub-menu {
+      min-width: 200px;
+    }
+
+    .#{$namespace}-custom-sub-menu {
+      position: relative;
+
+      & .#{$namespace}-menu {
+        position: absolute;
+        margin-left: 5px;
+        top: 0;
+        left: 100%;
+        z-index: 10;
+        border: 1px solid var(--el-border-color-light);
+        border-radius: var(--el-border-radius-small);
+        box-shadow: var(--el-box-shadow-light);
+      }
+
+      &.is-opened {
+        > .#{$namespace}-custom-sub-menu__title
+          .#{$namespace}-custom-sub-menu__icon-arrow {
+          transform: none;
+        }
+      }
+
+      &.is-active i {
+        color: inherit;
+      }
+    }
+  }
+  @include m(popup) {
+    z-index: 100;
+    min-width: 200px;
+    border: none;
+    padding: 5px 0;
+    border-radius: var(--el-border-radius-small);
+    box-shadow: var(--el-box-shadow-light);
+  }
+}
+
+@include b(custom-menu-item) {
+  @include custom-menu-item;
+
+  & [class^='#{$namespace}-icon'] {
+    margin-right: 5px;
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+    vertical-align: middle;
+  }
+  @include when(active) {
+    color: var(--el-menu-active-color);
+    i {
+      color: inherit;
+    }
+
+    & > span {
+      border-left: 3px solid var(--el-menu-active-color);
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+
+  // 菜单收藏图标
+  &:hover {
+    .#{$namespace}-complete-menu__icon--collect {
+      display: block;
+    }
+  }
+}
+
+@include b(custom-sub-menu) {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+
+  @include e(title) {
+    @include custom-menu-item;
+
+    &:hover {
+      background-color: var(--el-menu-hover-bg-color);
+    }
+  }
+  & .#{$namespace}-custom-menu {
+    border: none;
+  }
+  & .#{$namespace}-custom-menu-item {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 45px;
+    min-width: 200px;
+  }
+  @include e(hide-arrow) {
+    .#{$namespace}-custom-sub-menu__icon-arrow {
+      display: none !important;
+    }
+  }
+  @include when(active) {
+    .#{$namespace}-custom-sub-menu__title {
+      border-bottom-color: var(--el-menu-active-color);
+    }
+  }
+  @include when(opened) {
+    > .#{$namespace}-custom-sub-menu__title
+      .#{$namespace}-custom-sub-menu__icon-arrow {
+      transform: rotateZ(180deg);
+    }
+  }
+  @include when(disabled) {
+    .#{$namespace}-custom-sub-menu__title,
+    .#{$namespace}-custom-menu-item {
+      opacity: 0.25;
+      cursor: not-allowed;
+      background: none !important;
+    }
+  }
+  .#{$namespace}-icon {
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+
+    &.#{$namespace}-custom-sub-menu__icon-more {
+      margin-right: 0 !important;
+    }
+  }
+  .#{$namespace}-custom-sub-menu__icon-arrow {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    margin-top: -7px;
+    transition: transform var(--el-transition-duration);
+    font-size: 12px;
+    margin-right: 0;
+    width: inherit;
+  }
+}
+
+@include b(menu-item-group) {
+  > ul {
+    padding: 0;
+  }
+  @include e(title) {
+    padding: 7px 0 7px 20px;
+    line-height: normal;
+    font-size: 12px;
+    color: var(--el-text-color-secondary);
+  }
+}
+
+.horizontal-collapse-transition
+  .#{$namespace}-custom-sub-menu__title
+  .#{$namespace}-custom-sub-menu__icon-arrow {
+  transition: var(--el-transition-duration-fast);
+  opacity: 0;
+}

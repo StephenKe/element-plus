@@ -326,6 +326,10 @@
       {
         "link": "/toolbar",
         "text": "Toolbar 顶部工具栏"
+      },
+      {
+        "link": "/complete-menu",
+        "text": "CompleteMenu 左侧菜单导航"
       }
     ]
   }

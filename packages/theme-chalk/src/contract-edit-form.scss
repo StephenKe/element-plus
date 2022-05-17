@@ -1,0 +1,23 @@
+@use 'mixins/mixins' as *;
+@use 'common/var' as *;
+@use 'mixins/var' as *;
+@use 'mixins/utils' as *;
+@use 'mixins/config' as *;
+
+@include b(contract-edit-form) {
+  @include set-component-css-var('contract-edit-form', $contractEditForm);
+  height: var(--el-contract-edit-form-height);
+
+  .el-tabs__content {
+    height: var(--el-contract-edit-form-content-height);
+  }
+
+  @include e(tab-pane) {
+    height: var(--el-contract-edit-form-pane-height);
+  }
+
+  @include e(footer) {
+    text-align: right;
+    line-height: var(--el-footer-height);
+  }
+}

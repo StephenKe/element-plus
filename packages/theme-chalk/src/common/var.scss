@@ -1424,3 +1424,49 @@ $toolbar: map.merge(
   ),
   $toolbar
 );
+
+// completeMenu
+$complete-menu: () !default;
+$complete-menu: map.merge(
+  (
+    'color-inactive': #e3e9ff,
+    'padding': 10px,
+    'top-height': 40px,
+    'middle-height': 32px,
+    'bottom-height': calc(100% - 72px),
+  ),
+  $complete-menu
+);
+
+// contract-edit-form
+$contractEditForm: () !default;
+$contractEditForm: map.merge(
+  (
+    'height': 800px,
+    'content-height': calc(100% - 55px),
+    'pane-height': 100%,
+    'font-size': var(--el-font-size-base),
+    'text-color': var(--el-text-color-primary),
+    'background-color': var(--el-color-white),
+    'scrollbar-m-r': 230px,
+    'anchor-width': 200px,
+    'contentbox-padding': 20px,
+    'item-label-p-r': 10px,
+    'item-label-font-weight': 400,
+    'item-width': 100%,
+    'margin-padding': 16px,
+    'footer-line-height': map.get($footer, 'height'),
+    'footer-padding': 40px,
+    'sub-title-padding': 0 20px,
+    'sub-title-height': 41px,
+    'sub-title-main-height': 40px,
+    'sub-title-main-color': #505050,
+    'sub-title-border-color': var(--el-border-color-lighter),
+    'sub-title-left-border-color': var(--el-color-primary),
+    'sub-title-text-height': 16px,
+    'sub-title-text-border-width': 3px,
+    'sub-title-text-padding': 4px,
+    'reqired-color': var(--el-color-danger),
+  ),
+  $contractEditForm
+);
