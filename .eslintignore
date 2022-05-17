@@ -7,4 +7,6 @@ docs/components.d.ts
 coverage
 ssr-testing/cases/*
 packages/components/bgy-anchor/src/BgyAnchor.vue
-packages/components/bgy-tree-transfer/src/utils.ts
+packages/components/bgy-tree-transfer/*
+packages/components/complete-menu/*
+packages/components/custom-menu/*
