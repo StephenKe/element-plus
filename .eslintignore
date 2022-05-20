@@ -12,3 +12,4 @@ packages/components/complete-menu/*
 packages/components/custom-menu/*
 packages/components/query-form/*
 packages/components/bgy-upload/*
+packages/components/render/*
