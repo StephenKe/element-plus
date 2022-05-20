@@ -334,6 +334,10 @@
       {
         "link": "/query-form",
         "text": "QueryForm 筛选表单"
+      },
+      {
+        "link": "/bgy-upload",
+        "text": "BgyUpload 附件上传"
       }
     ]
   }

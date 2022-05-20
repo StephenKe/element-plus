@@ -111,6 +111,7 @@ import {
   ElCustomMenuItemGroup,
 } from '@element-plus/components/custom-menu'
 import { ElQueryForm } from '@element-plus/components/query-form'
+import { ElBgyUpload } from '@element-plus/components/bgy-upload'
 import type { Plugin } from 'vue'
 
 export default [
@@ -217,4 +218,5 @@ export default [
   ElCustomMenuItem,
   ElCustomMenuItemGroup,
   ElQueryForm,
+  ElBgyUpload,
 ] as Plugin[]
