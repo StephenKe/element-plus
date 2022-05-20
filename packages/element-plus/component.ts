@@ -112,6 +112,7 @@ import {
 } from '@element-plus/components/custom-menu'
 import { ElQueryForm } from '@element-plus/components/query-form'
 import { ElBgyUpload } from '@element-plus/components/bgy-upload'
+import { ElTableRender } from '@element-plus/components/render'
 import type { Plugin } from 'vue'
 
 export default [
@@ -219,4 +220,5 @@ export default [
   ElCustomMenuItemGroup,
   ElQueryForm,
   ElBgyUpload,
+  ElTableRender,
 ] as Plugin[]

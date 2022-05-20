@@ -340,5 +340,14 @@
         "text": "BgyUpload 附件上传"
       }
     ]
+  },
+  "render": {
+    "text": "Render 系列",
+    "children": [
+      {
+        "link": "/table-render",
+        "text": "TableRender"
+      }
+    ]
   }
 }
