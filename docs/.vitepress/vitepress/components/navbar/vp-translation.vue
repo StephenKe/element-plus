@@ -7,7 +7,7 @@ const { switchLang, languageMap, langs, lang, helpTranslate } = useTranslation()
 
 <template>
   <div class="translation-container">
-    <ClientOnly>
+    <!-- <ClientOnly>
       <ElPopover
         :show-arrow="false"
         trigger="hover"
@@ -32,7 +32,7 @@ const { switchLang, languageMap, langs, lang, helpTranslate } = useTranslation()
           </VPLink>
         </div>
       </ElPopover>
-    </ClientOnly>
+    </ClientOnly> -->
   </div>
 </template>
 
