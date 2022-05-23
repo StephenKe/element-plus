@@ -29,23 +29,33 @@ dialog/basic-usage
 
 :::demo
 
-dialog/customizations
+dialog/customization-content
 
 :::
 
-## 嵌套的 Dialog
+## 自定义头部
+
+`header` 可用于自定义显示标题的区域。 为了保持可用性，除了使用此插槽外，使用 `title` 属性，或使用 `titleId` 插槽属性来指定哪些元素应该读取为对话框标题。
+
+:::demo
+
+dialog/customization-header
+
+:::
+
+## 嵌套的对话框
 
 如果需要在一个 Dialog 内部嵌套另一个 Dialog，需要使用 `append-to-body` 属性。
 
-:::demo 通常我们不建议使用嵌套对话框。 如果你需要在页面上呈现多个对话框，你可以简单地打平它们，以便它们彼此之间是平级关系。 如果必须要在一个对话框内展示另一个对话框，可以将内部嵌套的对话框属性 `append-to-body` 设置为 true，嵌套的对话框将附加到 body 而不是其父节点，这样两个对话框都可以被正确地渲染。
+:::demo 通常我们不建议使用嵌套对话框。 如果你需要在页面上呈现多个对话框，你可以简单地打平它们，以便它们彼此之间是平级关系。 将内层 Dialog 的该属性设置为 true，它就会插入至 body 元素上，从而保证内外层 Dialog 和遮罩层级关系的正确。
 
 dialog/nested-dialog
 
 :::
 
-## 居中布局
+## 内容居中
 
-对话框的内容可以居中。
+标题和底部可水平居中
 
 :::demo 将`center`设置为`true`即可使标题和底部居中。 `center`仅影响标题和底部区域。 Dialog 的内容是任意的，在一些情况下，内容并不适合居中布局。 如果需要内容也水平居中，请自行为其添加 CSS 样式。
 
@@ -55,7 +65,7 @@ dialog/centered-content
 
 :::tip
 
-Dialog 的内容是懒渲染的——在被第一次打开之前，传入的默认 slot 不会被立即渲染到 DOM 上。 因此，如果需要对 DOM 进行操作，或通过 `ref` 获取相应的组件，请在 `open` 事件的回调中进行。
+Dialog 的内容是懒渲染的——在被第一次打开之前，传入的默认 slot 不会被立即渲染到 DOM 上。 因此，如果需要执行 DOM 操作，或通过 `ref` 获取相应组件，请在 `open` 事件回调中进行。
 
 :::
 
@@ -63,13 +73,13 @@ Dialog 的内容是懒渲染的——在被第一次打开之前，传入的默�
 
 启用此功能时，默认栏位下的内容将使用 `v-if` 指令销毁。 当出现性能问题时，可以启用此功能。
 
-:::demo 需要注意的是，当这个属性被启用时，在 `transition.beforeEnter` 事件卸载前，除了 `overlay`、`header (可选)`与`footer(可选)` ，Dialog 内不会有其它任何其它的 DOM 节点存在。
+:::demo 需要注意的是，当这个属性被启用时，Dialog 内并不会有任何的 DOM 节点存在，除了 `overlay` `header（如果有）` `footer（如果有）`
 
 dialog/destroy-on-close
 
 :::
 
-## 可拖拽的 Dialog
+## 可拖拽对话框
 
 试着拖动一下`header`部分吧
 
@@ -81,11 +91,11 @@ dialog/draggable-dialog
 
 :::tip
 
-当设置 `modal` 属性为 false 时，请将 `append-to-body` 属性设置为 **true**，因为 `Dialog` 是通过 `position: relative` 来确定位置的。一旦移除了 `modal` 属性，`Dialog` 会基于当前的 DOM 元素来进行定位， 而不是基于 `document.body`，这会导致样式问题。
+当 `modal` 的值为 false 时，请一定要确保 `append-to-body` 属性为 **true**，由于 `Dialog` 使用 `position: relative` 定位，当外层的遮罩层被移除时，`Dialog` 则会根据当前 DOM 上的祖先节点来定位，因此可能造成定位问题。
 
 :::
 
-## Dialog 属性
+## 属性
 
 | 属性                  | 说明                                                                          | 类型                                 | 可选值 | 默认值 |
 | --------------------- | ----------------------------------------------------------------------------- | ------------------------------------ | ------ | ------ |
@@ -108,15 +118,16 @@ dialog/draggable-dialog
 | center                | 是否让 Dialog 的 header 和 footer 部分居中排列                                | boolean                              | —      | false  |
 | destroy-on-close      | 当关闭 Dialog 时，销毁其中的元素                                              | boolean                              | —      | false  |
 
-## Dialog 插槽
+## 插槽
 
-| 插槽名 | 说明                    |
-| ------ | ----------------------- |
-| —      | Dialog 的内容           |
-| title  | Dialog 标题区的内容     |
-| footer | Dialog 按钮操作区的内容 |
+| 插槽名      | 说明                                                   |
+| ----------- | ------------------------------------------------------ |
+| —           | Dialog 的内容                                          |
+| header      | 对话框标题的内容；会替换标题部分，但不会移除关闭按钮。 |
+| title(废弃) | 与 header 作用相同 请使用 header                       |
+| footer      | Dialog 按钮操作区的内容                                |
 
-## Dialog 事件
+## 事件
 
 | 事件名           | 说明                               | 参数 |
 | ---------------- | ---------------------------------- | ---- |
