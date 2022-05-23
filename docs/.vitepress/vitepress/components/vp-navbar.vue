@@ -34,11 +34,12 @@ const currentLink = computed(() => {
     <div class="header-container">
       <div class="logo-container">
         <a :href="currentLink">
-          <img
+          <!-- <img
             class="logo"
             src="/images/element-plus-logo.svg"
             alt="Element Plus Logo"
-          />
+          /> -->
+          <span class="logo-bgy">Cs Element</span>
         </a>
       </div>
       <div class="content">
@@ -69,6 +70,15 @@ const currentLink = computed(() => {
   .logo {
     position: relative;
     height: 100%;
+  }
+  .logo-bgy {
+    font-family: Arial;
+    &::after {
+      content: '+';
+      font-size: 8px;
+      position: relative;
+      top: -5px;
+    }
   }
 }
 </style>
