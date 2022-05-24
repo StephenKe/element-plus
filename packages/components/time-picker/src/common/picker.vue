@@ -73,7 +73,7 @@
         :class="[
           nsDate.b('editor'),
           nsDate.bm('editor', type),
-          nsInput.e('inner'),
+          nsInput.e('wrapper'),
           nsDate.is('disabled', pickerDisabled),
           nsDate.is('active', pickerVisible),
           nsRange.b('editor'),
@@ -269,6 +269,7 @@ export default defineComponent({
     'calendar-change',
     'panel-change',
     'visible-change',
+    'keydown',
   ],
   setup(props, ctx) {
     const { lang } = useLocale()
@@ -321,6 +322,9 @@ export default defineComponent({
         ctx.emit('update:modelValue', val ? formatValue : val, lang.value)
       }
     }
+    const emitKeydown = (e) => {
+      ctx.emit('keydown', e)
+    }
     const refInput = computed<HTMLInputElement[]>(() => {
       if (inputRef.value) {
         const _r = isRangeInput.value
@@ -348,6 +352,7 @@ export default defineComponent({
         _inputs[1].focus()
       }
     }
+
     const onPick = (date: any = '', visible = false) => {
       if (!visible) {
         focus(true, true)
@@ -380,13 +385,11 @@ export default defineComponent({
 
     const onHide = () => {
       pickerActualVisible.value = false
+      ignoreFocusEvent = false
       ctx.emit('visible-change', false)
     }
 
-    const focus = async (
-      focusStartInput = true,
-      isIgnoreFocusEvent = false
-    ) => {
+    const focus = (focusStartInput = true, isIgnoreFocusEvent = false) => {
       ignoreFocusEvent = isIgnoreFocusEvent
       let input = refStartInput.value
       if (!focusStartInput && isRangeInput.value) {
@@ -395,8 +398,6 @@ export default defineComponent({
       if (input) {
         input.focus()
       }
-      await nextTick()
-      ignoreFocusEvent = false
     }
 
     const handleFocusInput = (e) => {
@@ -618,7 +619,7 @@ export default defineComponent({
 
     const handleKeydownInput = async (event) => {
       const code = event.code
-
+      emitKeydown(event)
       if (code === EVENT_CODE.esc) {
         if (pickerVisible.value === true) {
           pickerVisible.value = false
@@ -666,7 +667,6 @@ export default defineComponent({
         event.stopPropagation()
         return
       }
-
       if (pickerOptions.value.handleKeydownInput) {
         pickerOptions.value.handleKeydownInput(event)
       }

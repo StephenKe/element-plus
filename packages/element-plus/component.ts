@@ -103,6 +103,16 @@ import {
   ElBgyAnchorLink,
 } from '@element-plus/components/bgy-anchor'
 import { ElBgyTreeTransfer } from '@element-plus/components/bgy-tree-transfer'
+import { ElToolbar } from '@element-plus/components/toolbar'
+import { ElCompleteMenu } from '@element-plus/components/complete-menu'
+import {
+  ElCustomMenu,
+  ElCustomMenuItem,
+  ElCustomMenuItemGroup,
+} from '@element-plus/components/custom-menu'
+import { ElQueryForm } from '@element-plus/components/query-form'
+import { ElBgyUpload } from '@element-plus/components/bgy-upload'
+import { ElTableRender } from '@element-plus/components/render'
 import type { Plugin } from 'vue'
 
 export default [
@@ -203,4 +213,12 @@ export default [
   ElBgyAnchor,
   ElBgyAnchorLink,
   ElBgyTreeTransfer,
+  ElToolbar,
+  ElCompleteMenu,
+  ElCustomMenu,
+  ElCustomMenuItem,
+  ElCustomMenuItemGroup,
+  ElQueryForm,
+  ElBgyUpload,
+  ElTableRender,
 ] as Plugin[]

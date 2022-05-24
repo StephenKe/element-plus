@@ -30,9 +30,11 @@
             focus-start-el="container"
             @focus-after-trapped="onOpenAutoFocus"
             @focus-after-released="onCloseAutoFocus"
+            @release-requested="onCloseRequested"
           >
             <el-dialog-content
               v-if="rendered"
+              ref="dialogContentRef"
               :custom-class="customClass"
               :center="center"
               :close-icon="closeIcon"
@@ -45,12 +47,13 @@
             >
               <template #header>
                 <slot
+                  v-if="!$slots.title"
                   name="header"
                   :close="handleClose"
                   :title-id="titleId"
                   :title-class="ns.e('title')"
                 />
-                <slot name="title" />
+                <slot v-else name="title" />
               </template>
               <slot />
               <template v-if="$slots.footer" #footer>
@@ -92,7 +95,7 @@ useDeprecated(
     scope: 'el-dialog',
     from: 'the title slot',
     replacement: 'the header slot',
-    version: '2.3.0',
+    version: '3.0.0',
     ref: 'https://element-plus.org/en-US/component/dialog.html#slots',
   },
   computed(() => !!slots.title)
@@ -101,6 +104,7 @@ useDeprecated(
 const ns = useNamespace('dialog')
 const dialogRef = ref<HTMLElement>()
 const headerRef = ref<HTMLElement>()
+const dialogContentRef = ref()
 
 const {
   visible,
@@ -116,6 +120,7 @@ const {
   onModalClick,
   onOpenAutoFocus,
   onCloseAutoFocus,
+  onCloseRequested,
 } = useDialog(props, dialogRef)
 
 provide(dialogInjectionKey, {
@@ -136,5 +141,6 @@ useDraggable(dialogRef, headerRef, draggable)
 defineExpose({
   /** @description whether the dialog is visible */
   visible,
+  dialogContentRef,
 })
 </script>

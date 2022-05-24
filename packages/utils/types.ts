@@ -28,3 +28,13 @@ export const isElement = (e: unknown): e is Element => {
 export const isPropAbsent = (prop: unknown): prop is null | undefined => {
   return isNil(prop)
 }
+
+export type Indexable<T> = {
+  [key: string]: T
+}
+
+export type Truth = boolean
+
+export type TruthResolver<T> = (self: T, ...args: any[]) => boolean
+
+export type TruthOrResolver<T> = Truth | TruthResolver<T>

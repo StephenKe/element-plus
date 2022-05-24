@@ -1,0 +1,106 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+@use 'mixins/utils' as *;
+
+@include b(complete-menu) {
+  @include set-component-css-var('complete-menu', $complete-menu);
+  overflow: hidden;
+
+  @include e(top) {
+    height: var(--el-complete-menu-top-height);
+    padding: var(--el-complete-menu-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+    & > div {
+      display: flex;
+      padding: 0 5px;
+    }
+  }
+
+  @include e(middle) {
+    height: var(--el-complete-menu-middle-height);
+    padding: 0 var(--el-complete-menu-padding);
+    max-width: 250px;
+
+    @include m(select) {
+      display: inline-flex;
+
+      .#{$namespace}-input__inner {
+        border-radius: var(
+            --el-input-border-radius,
+            var(--el-border-radius-base)
+          )
+          0 0 var(--el-input-border-radius, var(--el-border-radius-base));
+      }
+    }
+
+    & .#{$namespace}-input-group__prepend {
+      & button span {
+        max-width: 50px;
+        display: block;
+        text-align: left;
+        @include utils-ellipsis;
+      }
+    }
+
+    input,
+    button {
+      background-color: inherit;
+      border-radius: 0
+        var(--el-input-border-radius, var(--el-border-radius-base))
+        var(--el-input-border-radius, var(--el-border-radius-base)) 0;
+    }
+  }
+
+  @include e(bottom) {
+    height: var(--el-complete-menu-bottom-height);
+  }
+
+  @include e(icon) {
+    padding: 3px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    @include m(inactive) {
+      margin-right: 10px;
+      color: var(--el-text-color-secondary);
+      background-color: var(--el-complete-menu-color-inactive);
+    }
+
+    @include m(active) {
+      margin-right: 10px;
+      color: var(--el-color-white);
+      background-color: var(--el-color-primary);
+    }
+
+    @include m(collapse) {
+      margin-left: 10px;
+    }
+
+    @include m(collect) {
+      display: none;
+      position: absolute;
+      right: 5px;
+      top: 25%;
+    }
+  }
+}
+
+.#{$namespace}-custom-menu-item.is-active,
+.#{$namespace}-custom-menu-item {
+  .is-collect {
+    color: #ffc175;
+  }
+}
+
+.#{$namespace}-custom-menu-item.is-active,
+.#{$namespace}-custom-menu-item {
+  .is-unCollect {
+    color: #797979;
+  }
+}

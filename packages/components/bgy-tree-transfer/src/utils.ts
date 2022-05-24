@@ -1,4 +1,4 @@
-// @ts-check
+// @ts-nocheck
 import type { App } from 'vue'
 
 export const withInstall = <T>(component: T, alias?: string) => {

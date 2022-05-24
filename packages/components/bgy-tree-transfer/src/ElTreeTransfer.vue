@@ -94,7 +94,8 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from 'vue'
+// @ts-nocheck
+import { computed, defineComponent, ref, watch } from 'vue'
 import ElIcon from '@element-plus/components/icon'
 // 全局组件 Checkbox
 import {
@@ -162,7 +163,7 @@ export default defineComponent({
 
     //添加
     const add = () => {
-      debugger
+      // debugger
       //是否全选
       if (fromChekAll.value) {
         emit('addBtn', [])
@@ -229,10 +230,10 @@ export default defineComponent({
       checkAllToDataCache.value = []
     }
     const fromHandleNodeClick = (data: any) => {
-      // console.log(data)
+      console.log(data)
     }
     const toHandleNodeClick = (data: any) => {
-      // console.log(data)
+      console.log(data)
     }
     //fromdata 全选
     const fromHandleCheckAllChange = (val: boolean) => {
