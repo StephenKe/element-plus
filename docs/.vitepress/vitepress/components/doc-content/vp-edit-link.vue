@@ -6,7 +6,7 @@ const { url, text } = useEditLink()
 
 <template>
   <div class="edit-link">
-    <a
+    <!-- <a
       v-if="url"
       class="link text-sm"
       :href="url"
@@ -17,7 +17,7 @@ const { url, text } = useEditLink()
       <ElIcon :size="16" style="vertical-align: text-top; line-height: 24px">
         <i-ri-external-link-line />
       </ElIcon>
-    </a>
+    </a> -->
   </div>
 </template>
 
