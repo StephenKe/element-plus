@@ -46,6 +46,7 @@ languages.forEach((lang) => {
 })
 
 export const config: UserConfig = {
+  base: process.env.NODE_ENV === 'production' ? '/plus/' : '/',
   title: 'Element Plus',
   description: 'a Vue 3 based component library for designers and developers',
   lastUpdated: true,
