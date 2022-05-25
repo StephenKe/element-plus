@@ -58,7 +58,10 @@ export default defineConfig(async ({ mode }) => {
   )
 
   return {
-    base: process.env.NODE_ENV === 'production' ? '/plus/' : '/',
+    base:
+      process.env.NODE_ENV === 'production'
+        ? 'https://csdev.bgy.com.cn/plus/'
+        : '/',
     server: {
       host: true,
       https: !!env.HTTPS,
