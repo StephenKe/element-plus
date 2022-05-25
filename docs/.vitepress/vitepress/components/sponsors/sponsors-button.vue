@@ -1,6 +1,6 @@
 <template>
   <div class="join">
-    <el-tooltip placement="top" :hide-after="1000" :offset="20">
+    <!-- <el-tooltip placement="top" :hide-after="1000" :offset="20">
       <template #content>
         {{ homeLang['21'] }}
         <a href="mailto:element-plus@outlook.com" target="_blank">
@@ -12,7 +12,7 @@
           homeLang['20']
         }}</el-button>
       </a>
-    </el-tooltip>
+    </el-tooltip> -->
   </div>
 </template>
 

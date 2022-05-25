@@ -96,6 +96,8 @@ export function insertLinkIcon(
     ) ?? []
   )
 
+  console.log('====', links)
+
   links.forEach((link) => {
     link.classList.add('vp-link')
     if (
@@ -132,6 +134,11 @@ export function insertLinkIcon(
           </path>
         </svg>
         `
+    }
+    const preEl = link?.parentElement?.previousSibling as HTMLDivElement
+    const parentEl = link?.parentElement as HTMLDivElement
+    if (preEl.id === '源代码' && parentEl.style.visibility !== 'hidden') {
+      parentEl.style.visibility = 'hidden'
     }
   })
 }
