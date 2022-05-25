@@ -58,6 +58,7 @@ export default defineConfig(async ({ mode }) => {
   )
 
   return {
+    base: process.env.DOC_ENV === 'production' ? '/plus/' : '/',
     server: {
       host: true,
       https: !!env.HTTPS,
