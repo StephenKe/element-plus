@@ -104,9 +104,18 @@ function initialize(userOptions: any) {
         hit: DocSearchHit
         children: any
       }) => {
-        const relativeHit = hit.url.startsWith('http')
-          ? getRelativePath(hit.url as string)
-          : hit.url
+        const relativeHit = (
+          hit.url.startsWith('http')
+            ? getRelativePath(
+                (!(
+                  location.href.includes('localhost') ||
+                  location.href.includes('127.0.0.1')
+                )
+                  ? `/plus${hit.url}`
+                  : hit.url) as string
+              )
+            : hit.url
+        ).replace('en-US', 'zh-CN')
 
         return {
           type: 'a',
