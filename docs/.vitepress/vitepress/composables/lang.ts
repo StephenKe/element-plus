@@ -14,6 +14,8 @@ export const useLang = () => {
     } else {
       lang = defaultLang
     }
+    // 强制中文
+    lang = 'zh-CN'
     return lang
   })
 }
