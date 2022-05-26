@@ -96,8 +96,6 @@ export function insertLinkIcon(
     ) ?? []
   )
 
-  console.log('====', links)
-
   links.forEach((link) => {
     link.classList.add('vp-link')
     if (
