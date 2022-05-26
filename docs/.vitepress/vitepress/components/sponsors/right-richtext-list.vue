@@ -14,7 +14,7 @@ const onItemClick = (item: any) => {
 
 <template>
   <div class="sponsor-container m-t-16px">
-    <a
+    <!-- <a
       v-for="item in rightRichTextSponsors"
       :key="item.name"
       :href="item.url"
@@ -54,6 +54,6 @@ const onItemClick = (item: any) => {
           </div>
         </div>
       </div>
-    </a>
+    </a> -->
   </div>
 </template>
