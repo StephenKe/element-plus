@@ -25,6 +25,7 @@
 `cs-element-plus`在`element-plus`的基础上新增了碧桂园`bgy`组件，并且实时同步`element-plus`最新版本，因此`cs-element-plus`的使用除了使用内部 https://npm.countrygarden.com.cn 源(npm install 前先切换内部源)和新增的`bgy`组件外，其它与`element-plus`无异
 
 - [`cs-element-plus`采用内部开源共建模式，欢迎各位提 issue/pr 👏](https://git.bgy.com.cn/pt00057/cs-element-plus)
+- [在线文档](https://csdev.bgy.com.cn/plus)
 
 ## Getting Started
 
