@@ -41,7 +41,15 @@ function isSpecialClick(event: MouseEvent) {
 function getRelativePath(absoluteUrl: string) {
   const { pathname, hash } = new URL(absoluteUrl)
 
-  return pathname + hash
+  return (
+    (!(
+      location.href.includes('localhost') || location.href.includes('127.0.0.1')
+    )
+      ? '/plus'
+      : '') +
+    pathname +
+    hash
+  )
 }
 
 function update(options: any) {
@@ -106,14 +114,7 @@ function initialize(userOptions: any) {
       }) => {
         const relativeHit = (
           hit.url.startsWith('http')
-            ? getRelativePath(
-                (!(
-                  location.href.includes('localhost') ||
-                  location.href.includes('127.0.0.1')
-                )
-                  ? `/plus${hit.url}`
-                  : hit.url) as string
-              )
+            ? getRelativePath(hit.url as string)
             : hit.url
         ).replace('en-US', 'zh-CN')
 
