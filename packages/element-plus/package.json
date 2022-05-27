@@ -1,6 +1,6 @@
 {
-  "name": "element-plus",
-  "version": "0.0.0-dev.1",
+  "name": "cs-element-plus",
+  "version": "2.2.2",
   "description": "A Component Library for Vue 3",
   "keywords": [
     "element-plus",
@@ -10,9 +10,9 @@
     "ui",
     "vue"
   ],
-  "homepage": "https://element-plus.org/",
+  "homepage": "https://csdev.bgy.com.cn/plus",
   "bugs": {
-    "url": "https://github.com/element-plus/element-plus/issues"
+    "url": "https://git.bgy.com.cn/pt00057/cs-element-plus/issues"
   },
   "license": "MIT",
   "main": "lib/index.js",
@@ -34,7 +34,7 @@
   "jsdelivr": "dist/index.full.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/element-plus/element-plus.git"
+    "url": "git@git.bgy.com.cn:pt00057/cs-element-plus.git"
   },
   "publishConfig": {
     "access": "public"
