@@ -12,12 +12,7 @@ defineEmits(['close'])
 
 const route = useRoute()
 const getActive = (link) => {
-  return !(
-    window.location.href.includes('localhost') ||
-    window.location.href.includes('127.0.0.1')
-  )
-    ? `/plus${link}`
-    : link
+  return process.env.NODE_ENV === 'production' ? `/plus${link}` : link
 }
 </script>
 
