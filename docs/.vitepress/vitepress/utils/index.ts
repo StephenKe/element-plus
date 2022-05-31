@@ -135,7 +135,7 @@ export function insertLinkIcon(
     }
     const preEl = link?.parentElement?.previousSibling as HTMLDivElement
     const parentEl = link?.parentElement as HTMLDivElement
-    if (preEl.id === '源代码' && parentEl.style.visibility !== 'hidden') {
+    if (preEl?.id === '源代码' && parentEl.style.visibility !== 'hidden') {
       parentEl.style.visibility = 'hidden'
     }
   })

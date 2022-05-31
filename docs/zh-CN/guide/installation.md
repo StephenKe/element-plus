@@ -29,53 +29,53 @@ Element Plus 目前还处于快速开发迭代中。
 # 选择一个你喜欢的包管理器
 
 # NPM
-$ npm install element-plus --save
+$ npm install cs-element-plus --save
 
 # Yarn
-$ yarn add element-plus
+$ yarn add cs-element-plus
 
 # pnpm
-$ pnpm install element-plus
+$ pnpm install cs-element-plus
 ```
 
 如果您的网络环境不好，建议使用相关镜像服务 [cnpm](https://github.com/cnpm/cnpm) 或 [中国 NPM 镜像](https://registry.npmmirror.com/)。
 
-## 浏览器直接引入
+<!-- ## 浏览器直接引入
 
 直接通过浏览器的 HTML 标签导入 Element Plus，然后就可以使用全局变量 `ElementPlus`了。
 
-根据不同的 CDN 提供商有不同的引入方式， 根据不同的 CDN 提供商有不同的引入方式， 我们在这里以 [unpkg](https://unpkg.com) 和 [jsDelivr](https://jsdelivr.com) 举例。 你也可以使用其它的 CDN 供应商。
+根据不同的 CDN 提供商有不同的引入方式， 根据不同的 CDN 提供商有不同的引入方式， 我们在这里以 [unpkg](https://unpkg.com) 和 [jsDelivr](https://jsdelivr.com) 举例。 你也可以使用其它的 CDN 供应商。 -->
 
-### unpkg
+<!-- ### unpkg -->
 
-```html
-<head>
+<!-- ```html -->
+<!-- <head style="display: none"> -->
   <!-- 导入样式 -->
-  <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+  <!-- <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" /> -->
   <!-- 导入 Vue 3 -->
-  <script src="//unpkg.com/vue@next"></script>
+  <!-- <script src="//unpkg.com/vue@next"></script> -->
   <!-- 导入组件库 -->
-  <script src="//unpkg.com/element-plus"></script>
-</head>
-```
+  <!-- <script src="//unpkg.com/element-plus"></script> -->
+<!-- </head> -->
+<!-- ``` -->
 
-### jsDelivr
+<!-- ### jsDelivr -->
 
-```html
-<head>
+<!-- ```html -->
+<!-- <head> -->
   <!-- 导入样式 -->
-  <link
+  <!-- <link
     rel="stylesheet"
     href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css"
-  />
+  /> -->
   <!-- 导入 Vue 3 -->
-  <script src="//cdn.jsdelivr.net/npm/vue@next"></script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/vue@next"></script> -->
   <!-- 导入组件库 -->
-  <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
-</head>
-```
+  <!-- <script src="//cdn.jsdelivr.net/npm/element-plus"></script> -->
+<!-- </head> -->
+<!-- ``` -->
 
-:::tip
+<!-- :::tip
 
 我们建议使用 CDN 引入 Element Plus 的用户在链接地址上锁定版本，以免将来 ElementPlus 升级时受到非兼容性更新的影响。 锁定版本的方法请查看 [unpkg.com](https://unpkg.com)。
 
@@ -88,6 +88,6 @@ $ pnpm install element-plus
 <iframe height="469" style="width: 100%;" scrolling="no" title="YzWMaVr" src="https://codepen.io/iamkun/embed/YzWMaVr?height=469&theme-id=light&default -tab=html,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/iamkun/pen/YzWMaVr'>YzWMaVr</a> by iamkun
   (<a href='https://codepen.io/iamkun'>@iamkun</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+</iframe> -->
 
 如果是通过包管理器安装，并希望配合打包工具使用，请阅读下一节：[快速上手](/en-US/guide/quickstart)。
