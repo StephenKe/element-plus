@@ -5,7 +5,7 @@ lang: zh-CN
 
 # 内置过渡动画
 
-Element Plus 内应用在部分组件的过渡动画，你也可以直接使用。 在使用之前，请阅读 [官方的过渡组件文档](https://vuejs.org/guide/built-ins/transition.html)。
+Cs Element Plus 内应用在部分组件的过渡动画，你也可以直接使用。 在使用之前，请阅读 [官方的过渡组件文档](https://vuejs.org/guide/built-ins/transition.html)
 
 ## Fade 淡入淡出
 
@@ -37,9 +37,9 @@ transitions/collapse
 
 ```ts
 // collapse
-import { ElCollapseTransition } from 'element-plus'
+import { ElCollapseTransition } from 'cs-element-plus'
 // fade/zoom
-import 'element-plus/lib/theme-chalk/base.css'
+import 'cs-element-plus/lib/theme-chalk/base.css'
 import App from './App.vue'
 
 const app = createApp(App)

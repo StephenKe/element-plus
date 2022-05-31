@@ -5,7 +5,7 @@ lang: zh-CN
 
 # 快速开始
 
-本节将介绍如何在项目中使用 Element Plus。
+本节将介绍如何在项目中使用 Cs Element Plus。
 
 ## 用法
 
@@ -16,7 +16,7 @@ lang: zh-CN
 ```typescript
 // main.ts
 import { createApp } from 'vue'
-import ElementPlus from 'element-plus'
+import ElementPlus from 'cs-element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
 
@@ -35,7 +35,7 @@ app.mount('#app')
 {
   "compilerOptions": {
     // ...
-    "types": ["element-plus/global"]
+    "types": ["cs-element-plus/global"]
   }
 }
 ```
@@ -111,7 +111,7 @@ Element Plus 提供了基于 ES Module 开箱即用的 [Tree Shaking](https://we
   <el-button>I am ElButton</el-button>
 </template>
 <script>
-  import { ElButton } from 'element-plus'
+  import { ElButton } from 'cs-element-plus'
   export default {
     components: { ElButton },
   }
@@ -134,25 +134,25 @@ export default {
 示例︰
 
 ```ts
-import 'element-plus/es/components/message/style/css'
-import { ElMessage } from 'element-plus'
+import 'cs-element-plus/es/components/message/style/css'
+import { ElMessage } from 'cs-element-plus'
 ```
 
 :::
 
-## 快捷搭建项目模板
+<!-- ## 快捷搭建项目模板 -->
 
-我们提供了 [Vite 模板](https://github.com/element-plus/element-plus-vite-starter)。 对于 Laravel 用户，我们也准备了相应的[模板](https://github.com/element-plus/element-plus-in-laravel-starter)，同样可以直接下载使用。
+<!-- 我们提供了 [Vite 模板](https://github.com/element-plus/element-plus-vite-starter)。 对于 Laravel 用户，我们也准备了相应的[模板](https://github.com/element-plus/element-plus-in-laravel-starter)，同样可以直接下载使用。 -->
 
 ## 全局配置
 
-在引入 Element Plus 时，可以传入一个包含 `size` 和 `zIndex` 属性的全局配置对象。 `size` 用于设置表单组件的默认尺寸，`zIndex` 用于设置弹出组件的层级，`zIndex` 的默认值为 2000。
+在引入 Cs Element Plus 时，可以传入一个包含 `size` 和 `zIndex` 属性的全局配置对象。 `size` 用于设置表单组件的默认尺寸，`zIndex` 用于设置弹出组件的层级，`zIndex` 的默认值为 2000。
 
 完整引入：
 
 ```ts
 import { createApp } from 'vue'
-import ElementPlus from 'element-plus'
+import ElementPlus from 'cs-element-plus'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -170,7 +170,7 @@ app.use(ElementPlus, { size: 'small', zIndex: 3000 })
 
 <script>
 import { defineComponent } from 'vue'
-import { ElConfigProvider } from 'element-plus'
+import { ElConfigProvider } from 'cs-element-plus'
 
 export default defineComponent({
   components: {
@@ -186,13 +186,13 @@ export default defineComponent({
 </script>
 ```
 
-## 使用 Nuxt.js
+<!-- ## 使用 Nuxt.js -->
 
-我们也可以使用 [Nuxt.js](https://v3.nuxtjs.org/)：
+<!-- 我们也可以使用 [Nuxt.js](https://v3.nuxtjs.org/)： -->
 
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
+<!-- <div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
   <iframe src="https://glitch.com/edit/#!/nuxt-element-plus?path=components%2FExamples.vue%3A1%3A0" alt="nuxt-element-plus on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
+</div> -->
 
 ## 开始使用
 

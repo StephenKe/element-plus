@@ -11,13 +11,21 @@ defineProps<{
 defineEmits(['close'])
 
 const route = useRoute()
+const getActive = (link) => {
+  return !(
+    window.location.href.includes('localhost') ||
+    window.location.href.includes('127.0.0.1')
+  )
+    ? `/plus${link}`
+    : link
+}
 </script>
 
 <template>
   <a
     :class="{
       link: true,
-      active: isActive(route, item.link),
+      active: isActive(route, getActive(item.link)),
       'flex items-center': item.promotion,
     }"
     :href="item.link"
