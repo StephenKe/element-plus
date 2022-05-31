@@ -141,7 +141,7 @@ useEventListener(window, 'scroll', handleScroll)
       alt="banner"
       class="mobile-banner"
     />
-    <HomeSponsors />
+    <!-- <HomeSponsors /> -->
     <HomeCards />
   </div>
   <HomeFooter />

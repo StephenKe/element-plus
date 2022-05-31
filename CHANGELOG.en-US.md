@@ -7,6 +7,7 @@ _2022-05-23_
 #### Features
 
 - Dialog expose dialogContentRef (#7633 by @zhoucan38)
+- 同步 bgy-plus 组件[BgyAnchor][BgyTreeTransfer][Toolbar][CompleteMenu][QueryForm][BgyUpload][TableRender]
 
 #### Bug fixes
 
@@ -1274,7 +1275,7 @@ _2021-11-05_
 - Components [el-image] initialIndex (#4235 by @Alanscut)
 - Components [el-message] merge the same content messages(#3836 by @zhazhanitian) (#3988)
 - Docs add support for copying svg content (#4169 by @adaex)
-- 
+-
 #### Bug fixes
 
 - Components [el-tree-v2] indent can not set zero (#3881 by @btea)

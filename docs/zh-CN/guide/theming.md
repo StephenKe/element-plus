@@ -5,7 +5,7 @@ lang: zh-CN
 
 # 自定义主题
 
-Element Plus 默认提供一套主题，CSS 命名采用 BEM 的风格，方便使用者覆盖样式。 但是如果需要大规模替换样式，例如： 将主题颜色从蓝色改为橙色或绿色，也许一个个将其覆盖起来不是一个好主意。
+Cs Element Plus 默认提供一套主题，CSS 命名采用 BEM 的风格，方便使用者覆盖样式。 但是如果需要大规模替换样式，例如： 将主题颜色从蓝色改为橙色或绿色，也许一个个将其覆盖起来不是一个好主意。
 
 我们提供四种方法来改变样式变量。
 
@@ -80,7 +80,7 @@ $colors: map.deep-merge(
 ```scss
 // styles/element/index.scss
 /* 只需要重写你需要的即可 */
-@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+@forward 'cs-element-plus/theme-chalk/src/common/var.scss' with (
   $colors: (
     'primary': (
       'base': green,
@@ -90,14 +90,14 @@ $colors: map.deep-merge(
 
 // 如果只是按需导入，则可以忽略以下内容。
 // 如果你想导入所有样式:
-// @use "element-plus/theme-chalk/src/index.scss" as *;
+// @use "cs-element-plus/theme-chalk/src/index.scss" as *;
 ```
 
 然后在你的项目入口文件中，导入这个样式文件以替换 Element Plus 内置的 CSS：
 
 ::: tip
 
-在 element-plus scss 文件之前导入`element/index.scss`以避免 sass 混合变量的问题，因为我们需要通过你的自定义变量生成 light-x。
+在 cs-element-plus scss 文件之前导入`element/index.scss`以避免 sass 混合变量的问题，因为我们需要通过你的自定义变量生成 light-x。
 
 :::
 
@@ -105,14 +105,14 @@ $colors: map.deep-merge(
 
 ::: tip
 
-除此以外，你应该将你的 scss 文件与 element 变量的 scss 文件区分开来。 如果将它们混合在一起，`element-plus` 每次热更新都需要编译大量的 scss 文件，这将会导致编译速度变慢。
+除此以外，你应该将你的 scss 文件与 element 变量的 scss 文件区分开来。 如果将它们混合在一起，`cs-element-plus` 每次热更新都需要编译大量的 scss 文件，这将会导致编译速度变慢。
 
 :::
 
 ```ts
 import { createApp } from 'vue'
 import './styles/element/index.scss'
-import ElementPlus from 'element-plus'
+import ElementPlus from 'cs-element-plus'
 import App from './App.vue'
 
 const app = createApp(App)
