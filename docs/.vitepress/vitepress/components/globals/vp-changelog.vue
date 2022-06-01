@@ -26,7 +26,7 @@ const onVersionChange = (val) => {
 onMounted(async () => {
   try {
     const { data } = await axios.get<Release[]>(
-      'https://api.github.com/repos/element-plus/element-plus/releases'
+      'https://git.bgy.com.cn/api/v4/projects/3111/releases'
     )
     releases.value = data
     currentRelease.value = data[0]
@@ -67,23 +67,23 @@ onMounted(async () => {
               <div class="changelog-meta">
                 <p class="changelog-by">
                   {{ changelog['published-by'] }}
-                  <strong>{{ currentRelease.author.login }}</strong>
+                  <strong>{{ currentRelease.author.name }}</strong>
                 </p>
                 <p class="changelog-date">
-                  {{
-                    new Date(currentRelease.published_at).toLocaleString(lang)
-                  }}
+                  {{ new Date(currentRelease.created_at).toLocaleString(lang) }}
                 </p>
               </div>
               <div class="operators">
-                <VPLink :href="currentRelease.html_url">
+                <VPLink
+                  :href="`https://git.bgy.com.cn/pt00057/cs-element-plus/tree/${currentRelease.name}`"
+                >
                   {{ changelog['open-link'] }}
                 </VPLink>
               </div>
             </div>
           </template>
           <div>
-            <VPMarkdown :content="currentRelease.body" />
+            <VPMarkdown :content="currentRelease.description" />
           </div>
         </ElCard>
       </ElSkeleton>
