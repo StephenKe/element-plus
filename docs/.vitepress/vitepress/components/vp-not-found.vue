@@ -10,7 +10,9 @@ const locale = computed(() => localeData[lang.value])
 
 const goHome = () => {
   if (!isClient) return
-  window.location.href = `/${lang.value}/`
+  window.location.href = `${
+    process.env.NODE_ENV === 'production' ? '/plus' : ''
+  }/${lang.value}/`
 }
 </script>
 
