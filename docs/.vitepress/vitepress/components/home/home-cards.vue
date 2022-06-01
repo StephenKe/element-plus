@@ -5,6 +5,7 @@ import homeLocale from '../../../i18n/pages/home.json'
 const lang = useLang()
 
 const homeLang = computed(() => homeLocale[lang.value])
+const plus = process.env.NODE_ENV === 'production' ? '/plus' : ''
 </script>
 
 <template>
@@ -15,12 +16,7 @@ const homeLang = computed(() => homeLocale[lang.value])
           <guide-svg w="40" m="y-12" />
           <h3>{{ homeLang['3'] }}</h3>
           <p>{{ homeLang['4'] }}</p>
-          <a
-            :href="`${
-              process.env.NODE_ENV === 'production' ? '/plus' : ''
-            }/${lang}/guide/design.html`"
-            >{{ homeLang['5'] }}</a
-          >
+          <a :href="`${plus}/${lang}/guide/design.html`">{{ homeLang['5'] }}</a>
         </div>
       </li>
       <li>
@@ -28,11 +24,7 @@ const homeLang = computed(() => homeLocale[lang.value])
           <component-svg w="40" m="y-12" />
           <h3>{{ homeLang['6'] }}</h3>
           <p>{{ homeLang['7'] }}</p>
-          <a
-            :href="`${
-              process.env.NODE_ENV === 'production' ? '/plus' : ''
-            }/${lang}/component/layout.html`"
-          >
+          <a :href="`${plus}/${lang}/component/layout.html`">
             {{ homeLang['5'] }}
           </a>
         </div>
@@ -42,11 +34,7 @@ const homeLang = computed(() => homeLocale[lang.value])
           <resource-svg w="40" m="y-12" />
           <h3>{{ homeLang['8'] }}</h3>
           <p>{{ homeLang['9'] }}</p>
-          <a
-            :href="`${
-              process.env.NODE_ENV === 'production' ? '/plus' : ''
-            }/${lang}/resource/index.html`"
-          >
+          <a :href="`${plus}/${lang}/resource/index.html`">
             {{ homeLang['5'] }}
           </a>
         </div>
