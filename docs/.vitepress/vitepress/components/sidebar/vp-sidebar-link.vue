@@ -11,6 +11,12 @@ defineProps<{
 defineEmits(['close'])
 
 const route = useRoute()
+console.log(
+  1111,
+  route,
+  process.env.NODE_ENV,
+  process.env.NODE_ENV === 'production' ? `/plus` : 'mm'
+)
 const getActive = (link) => {
   return process.env.NODE_ENV === 'production' ? `/plus${link}` : link
 }
