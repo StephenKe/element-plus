@@ -11,17 +11,13 @@ defineProps<{
 defineEmits(['close'])
 
 const route = useRoute()
-const getActive = (link) => {
-  console.log(222, link)
-  return link
-}
 </script>
 
 <template>
   <a
     :class="{
       link: true,
-      active: isActive(route, getActive(item.link)),
+      active: isActive(route, item.link.replace(/\/plus/, '')),
       'flex items-center': item.promotion,
     }"
     :href="item.link"
