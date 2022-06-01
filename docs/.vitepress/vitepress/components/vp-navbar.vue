@@ -27,11 +27,7 @@ const currentLink = computed(() => {
 
   let curLink =
     existLangIndex === -1 ? '/' : `/${theme.value.langs[existLangIndex]}/`
-  if (
-    !(
-      location.href.includes('localhost') || location.href.includes('127.0.0.1')
-    )
-  ) {
+  if (process.env.NODE_ENV === 'production') {
     curLink = `/plus${curLink}`
   }
   return curLink
