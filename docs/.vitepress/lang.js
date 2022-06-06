@@ -19,21 +19,12 @@
   // 强制中文
   userPreferredLang = 'zh-CN'
   if (
-    ((location.href.includes('localhost') ||
-      location.href.includes('127.0.0.1')) &&
+    (!location.href.includes('/plus') &&
       !location.pathname.startsWith(`/${userPreferredLang}`)) ||
-    (!(
-      location.href.includes('localhost') || location.href.includes('127.0.0.1')
-    ) &&
-      !location.href.includes('/plus/zh-CN'))
+    (location.href.includes('/plus') && !location.href.includes('/plus/zh-CN'))
   ) {
     const toPath = [
-      `${
-        location.href.includes('localhost') ||
-        location.href.includes('127.0.0.1')
-          ? ''
-          : '/plus'
-      }/${userPreferredLang}`,
+      `${location.href.includes('/plus') ? '/plus' : ''}/${userPreferredLang}`,
     ]
       .concat(location.pathname.split('/').slice(2))
       .join('/')
