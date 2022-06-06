@@ -16,7 +16,9 @@ const homeLang = computed(() => homeLocale[lang.value])
 
 function jumpTo(path: string) {
   // vitepress has not router
-  location.href = `/${lang.value}/${path}`
+  location.href = `${process.env.NODE_ENV === 'production' ? '/plus' : ''}/${
+    lang.value
+  }/${path}`
 }
 
 const containerStyle: CSSProperties = {
