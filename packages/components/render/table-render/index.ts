@@ -1,4 +1,4 @@
-import { withInstall, withNoopInstall } from '@element-plus/utils'
+import { withInstall } from '@element-plus/utils'
 import TableRender from './src/index.vue'
 
 export const ElTableRender = withInstall(TableRender)

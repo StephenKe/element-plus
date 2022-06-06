@@ -1,3 +1,4 @@
+//@ts-nocheck
 let supportsPassive = false
 try {
   const opts = Object.defineProperty({}, 'passive', {
