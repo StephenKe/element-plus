@@ -1,7 +1,8 @@
 // For this project development
+import '@vue/runtime-core'
 
-// GlobalComponents for Volar
-declare module 'vue' {
+declare module '@vue/runtime-core' {
+  // GlobalComponents for Volar
   export interface GlobalComponents {
     ElAffix: typeof import('../packages/element-plus')['ElAffix']
     ElAlert: typeof import('../packages/element-plus')['ElAlert']
@@ -100,9 +101,7 @@ declare module 'vue' {
     ElBgyUpload: typeof import('../packages/element-plus')['ElBgyUpload']
     ElTableRender: typeof import('../packages/element-plus')['ElTableRender']
   }
-}
 
-declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $message: typeof import('../packages/element-plus')['ElMessage']
     $notify: typeof import('../packages/element-plus')['ElNotification']
