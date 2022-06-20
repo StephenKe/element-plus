@@ -57,6 +57,10 @@
     "text": "Form 表单组件",
     "children": [
       {
+        "link": "/autocomplete",
+        "text": "Autocomplete"
+      },
+      {
         "link": "/cascader",
         "text": "Cascader 级联选择器"
       },
@@ -70,11 +74,11 @@
       },
       {
         "link": "/date-picker",
-        "text": "Date Picker 日期选择器"
+        "text": "Date Picker"
       },
       {
         "link": "/datetime-picker",
-        "text": "DateTime Picker 日期时间选择器"
+        "text": "DateTime Picker"
       },
       {
         "link": "/form",
@@ -102,7 +106,7 @@
       },
       {
         "link": "/select-v2",
-        "text": "Virtualized Select 虚拟化选择器"
+        "text": "Virtualized Select"
       },
       {
         "link": "/slider",
@@ -195,29 +199,29 @@
       },
       {
         "link": "/table-v2",
-        "text": "Virtualized Table",
+        "text": "Virtualized Table 虚拟化表格",
         "promotion": "2.2.0"
       },
       {
         "link": "/tag",
-        "text": "Tag"
+        "text": "Tag 标签"
       },
       {
         "link": "/timeline",
-        "text": "Timeline"
+        "text": "Timeline 时间线"
       },
       {
         "link": "/tree",
-        "text": "Tree"
+        "text": "Tree 树形控件"
       },
       {
         "link": "/tree-select",
-        "text": "TreeSelect",
+        "text": "TreeSelect 树形选择",
         "promotion": "2.1.8"
       },
       {
         "link": "/tree-v2",
-        "text": "Virtualized Tree"
+        "text": "Virtualized Tree 虚拟化树形控件"
       }
     ]
   },
@@ -309,44 +313,6 @@
       {
         "link": "/divider",
         "text": "Divider 分割线"
-      }
-    ]
-  },
-  "bgy": {
-    "text": "Bgy 碧桂园",
-    "children": [
-      {
-        "link": "/bgy-anchor",
-        "text": "BgyAnchor 锚点组件"
-      },
-      {
-        "link": "/bgy-tree-transfer",
-        "text": "BgyTreeTransfer 树形穿梭框"
-      },
-      {
-        "link": "/toolbar",
-        "text": "Toolbar 顶部工具栏"
-      },
-      {
-        "link": "/complete-menu",
-        "text": "CompleteMenu 左侧菜单导航"
-      },
-      {
-        "link": "/query-form",
-        "text": "QueryForm 筛选表单"
-      },
-      {
-        "link": "/bgy-upload",
-        "text": "BgyUpload 附件上传"
-      }
-    ]
-  },
-  "render": {
-    "text": "Render 系列",
-    "children": [
-      {
-        "link": "/table-render",
-        "text": "TableRender"
       }
     ]
   }

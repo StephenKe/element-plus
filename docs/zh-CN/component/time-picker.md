@@ -52,7 +52,6 @@ time-picker/range
 | end-placeholder       | 范围选择时结束日期的占位内容              | string                                 | —                                                                                | —           |
 | is-range              | 是否为时间范围选择                        | boolean                                | —                                                                                | false       |
 | arrow-control         | 是否使用箭头进行时间选择                  | boolean                                | —                                                                                | false       |
-| align                 | 对齐方式                                  | left / center / right                  | left                                                                             |             |
 | popper-class          | TimePicker 下拉框的类名                   | string                                 | —                                                                                | —           |
 | range-separator       | 选择范围时的分隔符                        | string                                 | —                                                                                | '-'         |
 | format                | 显示在输入框中的格式                      | string                                 | 请查看 [date formats](/en-US/component/date-picker#date-formats)                 | HH:mm:ss    |
@@ -68,12 +67,12 @@ time-picker/range
 
 ## TimePicker 事件
 
-| 事件名         | 说明                                    | 回调参数                      |
-| -------------- | --------------------------------------- | ----------------------------- |
-| change         | 用户确认选定的值时触发                  | val，组件绑定值               |
-| blur           | 在组件 Input 失去焦点时触发             | 组件实例                      |
-| focus          | 在组件 Input 获得焦点时触发             | 组件实例                      |
-| visible-change | 当 TimePicker 的下拉列表出现/消失时触发 | 出现时为 true，隐藏时为 false |
+| 事件名         | 说明                                    | 回调参数                |
+| -------------- | --------------------------------------- | ----------------------- |
+| change         | 用户确认选定的值时触发                  | `(val: typeof v-model)` |
+| blur           | 在组件 Input 失去焦点时触发             | `(e: FocusEvent)`       |
+| focus          | 在组件 Input 获得焦点时触发             | `(e: FocusEvent)`       |
+| visible-change | 当 TimePicker 的下拉列表出现/消失时触发 | `(visibility: boolean)` |
 
 ## TimePicker 方法
 
