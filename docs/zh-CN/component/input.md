@@ -43,7 +43,7 @@ input/clearable
 
 ## 格式化
 
-Display value within it's situation with `formatter`, and we usually use `parser` at the same time.
+在 `formatter`的情况下显示值，我们通常同时使用 `parser`
 
 :::demo
 
@@ -101,51 +101,21 @@ input/mixed-input
 
 ## 尺寸
 
-:::demo 使用 `size` 属性改变输入框大小。 In addition to the default size, there are two other options: `large`, `small`.
+:::demo 使用 `size` 属性改变输入框大小。 除了默认大小外，还有另外两个选项： `large`, `small`。
 
 input/various-size
 
 :::
 
-## 自动补全
+## Limit length
 
-您可以根据当前输入的内容获取对应的输入建议。
-
-:::demo Autodcomplete 组件提供输入建议。 `fetch-suggestions` 属性为返回建议输入的方法。 在此示例中， `querySearch(queryString, cb)` 方法通过 `cb(data)` 给 Autocomplete 组件返回建议。
-
-input/autocomplete
-
-:::
-
-## 自定义模板
-
-自定义如何显示输入建议。
-
-:::demo 使用 `scoped slot` 自定义输入建议。 在这个范围中，你可以使用 `item` 键来访问当前输入建议对象。
-
-input/autocomplete-template
-
-:::
-
-## 远程搜索
-
-从服务端搜索数据。
-
-:::demo
-
-input/remote-search
-
-:::
-
-## 输入长度限制
-
-:::demo 使用 `maxlength` 和 `minlength` 属性, 来控制输入内容的最大字数和最小字数。 "字符数"使用 JavaScript 字符串长度来衡量。 为文本或文本输入类型设置 `maxlength` prop 可以限制输入值的长度。 允许你通过设置 `show-word-limit` 到 `true` 来显示剩余字数。
+:::demo `maxlength` and `minlength` attributes of input, they declare a limit on the number of characters a user can input. The "number of characters" is measured using JavaScript string length.Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-limit` to `true` at the same time.
 
 input/length-limiting
 
 :::
 
-## Input 属性
+## Input Attributes
 
 | 属性                 | 说明                                                                                                           | 类型                                     | 可选值                                                                                                                               | 默认值 |
 | -------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------ |
@@ -156,8 +126,8 @@ input/length-limiting
 | show-word-limit      | 是否显示输入字数统计，只在 `type = "text"` 或 `type = "textarea"` 时有效                                       | boolean                                  | —                                                                                                                                    | false  |
 | placeholder          | 输入框占位文本                                                                                                 | string                                   | —                                                                                                                                    | —      |
 | clearable            | 是否可清空                                                                                                     | boolean                                  | —                                                                                                                                    | false  |
-| formatter            | specifies the format of the value presented input.(only works when `type` is 'text')                           | function(value: string / number): string | —                                                                                                                                    | —      |
-| parser               | specifies the value extracted from formatter input.(only works when `type` is 'text')                          | function(string): string                 | —                                                                                                                                    | —      |
+| formatter            | 指定输入值的格式。(只有当 `type` 是"text"时才能工作)                                                           | function(value: string / number): string | —                                                                                                                                    | —      |
+| parser               | 指定从格式化器输入中提取的值。(仅当 `type` 是"text"时才起作用)                                                 | function(string): string                 | —                                                                                                                                    | —      |
 | show-password        | 是否显示切换密码图标                                                                                           | boolean                                  | —                                                                                                                                    | false  |
 | disabled             | 是否禁用                                                                                                       | boolean                                  | —                                                                                                                                    | false  |
 | size                 | 输入框尺寸，只在 `type` 不为 'textarea' 时有效                                                                 | string                                   | large / default / small                                                                                                              | —      |
@@ -175,9 +145,9 @@ input/length-limiting
 | autofocus            | 原生属性，自动获取焦点                                                                                         | boolean                                  | —                                                                                                                                    | false  |
 | form                 | 原生属性                                                                                                       | string                                   | —                                                                                                                                    | —      |
 | label                | 标签文本                                                                                                       | string                                   | —                                                                                                                                    | —      |
-| tabindex             | input tabindex                                                                                                 | string / number                          | -                                                                                                                                    | -      |
-| validate-event       | whether to trigger form validation                                                                             | boolean                                  | -                                                                                                                                    | true   |
-| input-style          | the style of the input element or textarea element                                                             | object                                   | -                                                                                                                                    | {}     |
+| tabindex             | 输入框的 tabindex                                                                                              | string / number                          | -                                                                                                                                    | -      |
+| validate-event       | 输入时是否触发表单的校验                                                                                       | boolean                                  | -                                                                                                                                    | true   |
+| input-style          | input 元素或 textarea 元素的 style                                                                             | object                                   | -                                                                                                                                    | {}     |
 
 ## Input slots
 
@@ -205,56 +175,3 @@ input/length-limiting
 | focus  | 使 input 获取焦点   | —    |
 | blur   | 使 input 失去焦点   | —    |
 | select | 选中 input 中的文字 | —    |
-
-## Autocomplete Attributes
-
-| 属性                            | 说明                                                                                         | 类型                            | 可选值                                                         | 默认值       |
-| ------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------- | -------------------------------------------------------------- | ------------ |
-| placeholder                     | 占位文本                                                                                     | string                          | —                                                              | —            |
-| clearable                       | 是否可清空                                                                                   | boolean                         | —                                                              | false        |
-| disabled                        | 是否禁用                                                                                     | boolean                         | —                                                              | false        |
-| value-key                       | 输入建议对象中用于显示的键名                                                                 | string                          | —                                                              | value        |
-| icon                            | 图标组件                                                                                     | string / Component              | —                                                              | —            |
-| model-value / v-model           | 选中项绑定值                                                                                 | string                          | —                                                              | —            |
-| debounce                        | 获取输入建议的防抖延时                                                                       | number                          | —                                                              | 300          |
-| placement                       | 菜单弹出位置                                                                                 | string                          | top / top-start / top-end / bottom / bottom-start / bottom-end | bottom-start |
-| fetch-suggestions               | 获取输入建议的方法， 仅当你的输入建议数据 resolve 时，通过调用 `callback(data:[]) ` 来返回它 | Function(queryString, callback) | —                                                              | —            |
-| popper-class                    | Autocomplete 下拉列表的类名                                                                  | string                          | —                                                              | —            |
-| trigger-on-focus                | 是否在输入框 focus 时显示建议列表                                                            | boolean                         | —                                                              | true         |
-| name                            | 原生属性 name 属性                                                                           | string                          | —                                                              | —            |
-| select-when-unmatched           | 在输入没有任何匹配建议的情况下，按下回车是否触发 `select` 事件                               | boolean                         | —                                                              | false        |
-| label                           | 输入框关联的 label 文字                                                                      | string                          | —                                                              | —            |
-| prefix-icon                     | 输入框头部图标                                                                               | string / Component              | —                                                              | —            |
-| suffix-icon                     | 输入框尾部图标                                                                               | string / Component              | —                                                              | —            |
-| hide-loading                    | 是否隐藏远程加载时的加载图标                                                                 | boolean                         | —                                                              | false        |
-| popper-append-to-body（已废弃） | 是否将下拉列表插入至 body 元素。 在下拉列表的定位出现问题时，可将该属性设置为 false          | boolean                         | -                                                              | false        |
-| teleported                      | 是否将下拉列表插入至 body 元素                                                               | boolean                         | true / false                                                   | true         |
-| highlight-first-item            | 是否默认高亮远程搜索结果的第一项                                                             | boolean                         | —                                                              | false        |
-
-## Autocomplete Slots
-
-| 名称    | 说明           |
-| ------- | -------------- |
-| prefix  | 输入框头部内容 |
-| suffix  | 输入框尾部内容 |
-| prepend | 输入框前置内容 |
-| append  | 输入框后置内容 |
-
-## Autocomplete Scoped Slot
-
-| 名称 | 说明                                               |
-| ---- | -------------------------------------------------- |
-| —    | 自定义输入建议的内容。 自定义标签，参数为 { item } |
-
-## Autocomplete Events
-
-| 事件名 | 说明                  | 参数                      |
-| ------ | --------------------- | ------------------------- |
-| select | 点击选中建议项时触发  | 选中的建议项              |
-| change | 在 Input 值改变时触发 | (value: string \| number) |
-
-## Autocomplete Methods
-
-| 方法名 | 说明              | 参数 |
-| ------ | ----------------- | ---- |
-| focus  | 使 input 获取焦点 | —    |
