@@ -315,5 +315,43 @@
         "text": "Divider 分割线"
       }
     ]
+  },
+  "bgy": {
+    "text": "Bgy 碧桂园",
+    "children": [
+      {
+        "link": "/bgy-anchor",
+        "text": "BgyAnchor 锚点组件"
+      },
+      {
+        "link": "/bgy-tree-transfer",
+        "text": "BgyTreeTransfer 树形穿梭框"
+      },
+      {
+        "link": "/toolbar",
+        "text": "Toolbar 顶部工具栏"
+      },
+      {
+        "link": "/complete-menu",
+        "text": "CompleteMenu 左侧菜单导航"
+      },
+      {
+        "link": "/query-form",
+        "text": "QueryForm 筛选表单"
+      },
+      {
+        "link": "/bgy-upload",
+        "text": "BgyUpload 附件上传"
+      }
+    ]
+  },
+  "render": {
+    "text": "Render 系列",
+    "children": [
+      {
+        "link": "/table-render",
+        "text": "TableRender"
+      }
+    ]
   }
 }
