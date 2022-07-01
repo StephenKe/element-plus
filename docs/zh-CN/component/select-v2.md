@@ -149,7 +149,7 @@ select-v2/remote-search
 | popper-append-to-body(deprecated) | 是否将弹出框插入至 body 元素 当弹出框的位置出现问题时，你可以尝试将该属性设置为 false。                | boolean                            | -                   | false         |
 | teleported                        | 该下拉菜单是否使用 teleport 插入 body 元素                                                             | boolean                            | true / false        | true          |
 | persistent                        | 当下拉选择器未被激活并且`persistent`设置为`false`，选择器会被删除。                                    | boolean                            | true / false        | true          |
-| popper-options                    | 自定义[popper.js](https://popper.js.org/documentation.html)参数                                        | object                             | -                   | -             |
+| popper-options                    | 自定义 popper 选项，更多请参考 [popper.js](https://popper.js.org/docs/v2/)                             | object                             | -                   | -             |
 | automatic-dropdown                | 对于不可过滤的 Select 组件，此属性决定是否在输入框获得焦点后自动弹出选项菜单                           | boolean                            | -                   | false         |
 | height                            | 下拉菜单的高度，每一个子选项的高度是 34px                                                              | number                             | -                   | 170           |
 | scrollbar-always-on               | 控制是否总是展示滚动条                                                                                 | boolean                            | -                   | false         |
