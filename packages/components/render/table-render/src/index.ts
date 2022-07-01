@@ -1,16 +1,15 @@
-//@ts-nocheck
 import { buildProps, definePropType } from '@element-plus/utils'
 import { paginationEmits } from '@element-plus/components/pagination/src/pagination'
 import type { ExtractPropTypes } from 'vue'
 import type {
   PaginationEmits,
   ButtonProps,
-  ItemRenderProps,
+  FormItemProps,
 } from '@element-plus/components'
 import type tableColumnProps from '@element-plus/components/table/src/table-column/defaults'
-import type { HttpRequestOptions, CrudHttpRequestOptions } from './request.type'
-import type { TruthResolver, TruthOrResolver } from '@element-plus/utils'
+import type { TableApiConfig } from './request.type'
 import type { ComponentSize } from '@element-plus/constants'
+import type { TruthResolver, TruthOrResolver } from '@element-plus/utils'
 
 export interface Pagination {
   pageSize?: number
@@ -43,13 +42,13 @@ export type TableRenderButtonProps = ButtonProps & {
    *
    * 返回 boolean 或 返回 boolean 值的函数
    */
-  visible?: TruthOrResolver<TableRenderButtonProps>
+  visible?: TruthOrResolver
   /**
    * 控制是否禁用
    *
    * 返回 boolean 或 返回 boolean 值的函数
    */
-  disabled?: TruthResolver<TableRenderButtonProps>
+  disabled?: TruthResolver
   /**
    * 按钮点击事件
    */
@@ -78,9 +77,9 @@ export type TableRenderButtonProps = ButtonProps & {
 
 export type TableRenderColumn = ExtractPropTypes<typeof tableColumnProps> & {
   /**
-   * 自定义表头的内容
+   * 表头插槽列设置此属性，为 true 时，则使用 prop 作为 插槽名，为 字符串时，则值作为插槽名
    */
-  // header: (column: TableColumnCtx<T>, $index: number) => VNode | string
+  headerSlot?: string | boolean
 
   /**
    * 插槽列设置此属性，为 true 时，则使用 prop 作为 插槽名，为 字符串时，则值作为插槽名
@@ -96,48 +95,15 @@ export type TableRenderColumn = ExtractPropTypes<typeof tableColumnProps> & {
   onClick?: (...args: any) => void
 }
 
-export interface TableRenderMapProps {
-  /**
-   * 当前页
-   */
-  currentPage: string
-  /**
-   * 每页显示n条记录
-   */
-  pageSize: string
-  /**
-   * 接口返回的总记录数
-   */
-  total: string
-  /**
-   * 接口返回的分页数据集
-   */
-  records: string
-}
-
-export const DEFAULT_PROPS: TableRenderMapProps = {
-  currentPage: 'page',
-  pageSize: 'size',
-  total: 'data.total',
-  records: 'data.data',
-}
-
 /**
  * TableRender props
  */
 export const tableRenderProps = buildProps({
   /**
-   * 字段映射配置
-   */
-  props: {
-    type: definePropType<TableRenderMapProps>(Object),
-    default: () => DEFAULT_PROPS,
-  },
-  /**
    * 网络请求配置
    */
-  requests: {
-    type: definePropType<HttpRequestOptions | CrudHttpRequestOptions>(Object),
+  api: {
+    type: definePropType<TableApiConfig>(Object),
     required: true,
   },
   /**
@@ -242,14 +208,14 @@ export const tableRenderProps = buildProps({
    * 长度为0，则不展示搜索区
    */
   searchItem: {
-    type: definePropType<ItemRenderProps[]>(Array),
+    type: definePropType<FormItemProps[]>(Array),
     default: () => [],
   },
   /**
    * 表单字段
    */
   formItem: {
-    type: definePropType<ItemRenderProps[]>(Array),
+    type: definePropType<FormItemProps[]>(Array),
     default: () => [],
   },
   /**
@@ -376,7 +342,6 @@ export const tableEmits = [
  * TableRender emits
  */
 export const tableRenderEmits = [
-  'search-expanded',
   'search-reset',
   'search-submit',
   'validate-fields-error',

@@ -1,14 +1,155 @@
-//@ts-nocheck
 import { buildProps, definePropType } from '@element-plus/utils'
 import { UPDATE_MODEL_EVENT } from '@element-plus/constants'
+import { buttonProps } from '@element-plus/components/button/src/button'
 import type { ExtractPropTypes } from 'vue'
 import type { ComponentSize } from '@element-plus/constants'
-import type { ItemRenderProps } from '@element-plus/components/render/item-render'
+import type { TruthOrResolver } from '@element-plus/utils'
+import type { FormItemRule } from '@element-plus/tokens'
+import type {
+  ItemRenderProps,
+  ItemSplitRenderProps,
+} from '@element-plus/components'
+
+export const formButtonProps = buildProps({
+  ...buttonProps,
+  label: String,
+} as const)
+
+export const formItemProps = buildProps({
+  /**
+   * 默认值
+   */
+  defaultValue: {
+    type: definePropType<object | string | number | boolean | Array<any>>([
+      Object,
+      String,
+      Number,
+      Boolean,
+      Array,
+    ]),
+  },
+  /**
+   * 属性值
+   * type 为 slot 时，prop 将作为插槽名
+   * split 为 true，则该属性可以给数组 [开始字段prop, 结束字段prop]
+   */
+  prop: {
+    type: definePropType<string | string[]>([String, Array]),
+    required: true,
+  },
+  /**
+   * 配合 label 属性使用，表示是否显示 label 后面的冒号,默认 true
+   */
+  colon: {
+    type: Boolean,
+    default: true,
+  },
+  /**
+   * 展示文字
+   */
+  label: {
+    type: String,
+    default: '',
+  },
+  /**
+   * label 字段标签宽度，例如 '50px'。 可以使用 auto
+   */
+  labelWidth: {
+    type: definePropType<string | number>([String, Number]),
+    default: '90px',
+  },
+  /**
+   * 跨度，值不能大于 rowSize
+   * 可以设置为 1.5 这样的小数值，计数器步长为 0.5
+   */
+  colSpan: {
+    type: Number,
+    default: 1,
+    validator(val: number) {
+      return val >= 1 && val % 0.5 === 0
+    },
+  },
+  /**
+   * 校验规则
+   */
+  rules: {
+    type: definePropType<FormItemRule | FormItemRule[]>([Array, Object]),
+  },
+  /**
+   * 是否展示
+   * 默认 true
+   */
+  visible: {
+    type: definePropType<TruthOrResolver>([Boolean, Function]),
+    default: true,
+  },
+  /**
+   * 字段 placeholder 提示信息
+   * 分离输入框时才使用数组形式
+   */
+  placeholder: {
+    type: definePropType<string | string[]>([String, Array]),
+  },
+  /**
+   * 是否禁用
+   * 默认 false
+   */
+  disabled: {
+    type: definePropType<TruthOrResolver>([Boolean, Function]),
+    default: false,
+  },
+  /**
+   * 对其他字段的影响
+   * 暂只支持 select 框，下拉框值改变值影响其他字段值
+   * 示例：[{
+   *  prop: 'systemId',
+   *  type: 'select',
+   *  optionProps: { label: 'name', value: 'id' },
+   *  options: [
+   *    { id: 1001, name: '一体化财务', code: 'financial' },
+   *    { id: 1002, name: '权限平台', code: 'authority' },
+   *    { id: 1003, name: '业务中台', code: 'middle' },
+   *  ],
+   *  effect: {
+   *    systemName: 'name',  // 下拉选项中的 name 字段填充到 prop 为 systemName 的字段
+   *    systemCode: 'code'  // 下拉选项中的 code 字段填充到 prop 为 systemCode 的字段
+   *  }
+   * }, {
+   *  prop: 'systemCode',
+   *  disabled: true,
+   *  label: '系统编码'
+   * }, {
+   *  prop: 'systemName',
+   *  disabled: true,
+   *  label: '系统名称'
+   * }]
+   */
+  effect: {
+    type: definePropType<Record<string, string>>(Object),
+  },
+  /**
+   * 输入字段最大长度限制
+   * input 默认 30，textarea 默认 200
+   */
+  maxlength: Number,
+  /**
+   * 区间框是否分离
+   * 默认 false
+   * 注意：如果为 true ，则 prop，placeholder，defaultValue 必须为数组
+   */
+  split: Boolean,
+} as const)
+
+export type FormButtonProps = ExtractPropTypes<typeof formButtonProps>
+
+export type FormItemProps = ItemRenderProps &
+  ItemSplitRenderProps &
+  ExtractPropTypes<typeof formItemProps>
 
 /**
  * 表单属性
  */
-export const renderFormProps = buildProps({
+export const formProps = buildProps({
   /**
    * v-model 值
    */
@@ -20,7 +161,7 @@ export const renderFormProps = buildProps({
    * 表单字段
    */
   formItem: {
-    type: definePropType<Array<ItemRenderProps>>(Array),
+    type: definePropType<Array<FormItemProps>>(Array),
     default: () => [],
   },
   /**
@@ -48,6 +189,7 @@ export const renderFormProps = buildProps({
   },
   /**
    * 配合 label 属性使用，表示是否显示 label 后面的冒号,默认 true
+   * 优先级低于 formItem 内的 colon
    */
   colon: {
     type: Boolean,
@@ -64,42 +206,55 @@ export const renderFormProps = buildProps({
     },
   },
   /**
-   * 重置按钮展示文案
+   * 展示字段数量
+   * 默认 -1 表示全部展示
    */
-  resetText: {
-    type: String,
-    default: '重置',
+  expandSize: {
+    type: Number,
+    default: -1,
   },
   /**
-   * 提交按钮展示文案
+   * 提交按钮配置
+   * 为 Boolean 类型: 为 false 时，则表示不展示此按钮，为 true 时展示，且使用内置默认按钮
+   * 为 Object 类型: 可配置按钮 size，type 等属性
    */
-  submitText: {
-    type: String,
-    default: '提交',
-  },
-  /**
-   * 重置按钮是否展示
-   */
-  resetVisible: {
-    type: Boolean,
+  submitButton: {
+    type: definePropType<FormButtonProps | boolean>([Object, Boolean]),
     default: true,
   },
   /**
-   * 提交按钮是否展示
+   * 重置按钮配置
+   * 为 Boolean 类型: 为 false 时，则表示不展示此按钮，为 true 时展示，且使用内置默认按钮
+   * 为 Object 类型: 可配置按钮 size，type 等属性
    */
-  submitVisible: {
-    type: Boolean,
+  resetButton: {
+    type: definePropType<FormButtonProps | boolean>([Object, Boolean]),
     default: true,
   },
+  /**
+   * 清空按钮配置
+   * 为 Boolean 类型: 为 false 时，则表示不展示此按钮，为 true 时展示，且使用内置默认按钮
+   * 为 Object 类型: 可配置按钮 size，type 等属性
+   */
+  clearButton: {
+    type: definePropType<FormButtonProps | boolean>([Object, Boolean]),
+    default: false,
+  },
+  /**
+   * 提交前的额外校验工作，根据返回值 Boolean 决定是否提交成功
+   */
+  beforeSubmit: Function,
 } as const)
 
-export type RenderFormProps = ExtractPropTypes<typeof renderFormProps>
+export type FormProps = ExtractPropTypes<typeof formProps>
 
-export const renderFormEmits = [
-  'on-reset',
-  'on-submit',
-  'validateFieldsError',
+export const formEmits = [
+  'clear',
+  'reset',
+  'submit',
+  'validate-fields-error',
+  'select-change',
   UPDATE_MODEL_EVENT,
 ]
 
-export type RenderFormEmits = typeof renderFormEmits
+export type FormEmits = typeof formEmits
