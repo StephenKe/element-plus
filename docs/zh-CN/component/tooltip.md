@@ -19,7 +19,7 @@ tooltip/basic
 
 ## 主题
 
-Tooltip 组件提供了两个不同的主题：`dark`和`light`。
+Tooltip 组件内置了两个主题：`dark`和`light`。
 
 :::tip
 
@@ -151,7 +151,7 @@ tooltip/animations
 | offset                                   | 出现位置的偏移量                                                                                                                        | number         | —                                                                                                         | 0                                                       |
 | transition                               | 动画名称                                                                                                                                | string         | —                                                                                                         | el-fade-in-linear                                       |
 | visible-arrow (will deprecate in 2.1.0 ) | 是否显示箭头。 想了解更多信息，请查看 [ElPopper](https://github.com/element-plus/element-plus/tree/dev/packages/components/popper) 页面 | boolean        | —                                                                                                         | true                                                    |
-| popper-options                           | [popper.js](https://popper.js.org/documentation.html) 参数                                                                              | Object         | refer to [popper.js](https://popper.js.org/documentation.html) doc                                        | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+| popper-options                           | [popper.js](https://popper.js.org/docs/v2/) 参数                                                                                        | Object         | 请参考 [popper.js](https://popper.js.org/docs/v2/) 文档                                                   | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | show-after                               | 延迟出现，单位毫秒                                                                                                                      | number         | —                                                                                                         | 0                                                       |
 | show-arrow                               | tooltip 的内容是否有箭头                                                                                                                | boolean        | true / false                                                                                              | true                                                    |
 | hide-after                               | 延迟关闭，单位毫秒                                                                                                                      | number         | —                                                                                                         | 200                                                     |
