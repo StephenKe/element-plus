@@ -225,6 +225,7 @@ import {
   reactive,
   shallowRef,
 } from 'vue'
+import type { DefineComponent } from 'vue'
 import debounce from 'lodash/debounce'
 import {
   Star,
@@ -249,7 +250,7 @@ import CompleteMenuToolbar from './complete-menu-toolbar.vue'
 import { completeMenuProps, completeMenuEmits } from './complete-menu'
 import type { CompleteMenuDataItem } from './complete-menu'
 
-export default defineComponent({
+const ElCompleteMenu: DefineComponent = defineComponent({
   name: 'ElCompleteMenu',
 
   components: {
@@ -573,4 +574,5 @@ export default defineComponent({
     }
   },
 })
+export default ElCompleteMenu
 </script>
