@@ -34,7 +34,9 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import { defineComponent, ref, computed, markRaw, watch } from 'vue'
+import type { DefineComponent } from 'vue'
 import {
   Star,
   Menu,
@@ -44,7 +46,7 @@ import {
 } from '@element-plus/icons-vue'
 import { ElIcon, ElTooltip } from '@element-plus/components'
 
-export default defineComponent({
+const ElCompleteMenuToolbar: DefineComponent = defineComponent({
   components: {
     Star,
     Menu,
@@ -143,4 +145,5 @@ export default defineComponent({
     }
   },
 })
+export default ElCompleteMenuToolbar
 </script>
