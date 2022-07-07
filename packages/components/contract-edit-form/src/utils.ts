@@ -1,3 +1,4 @@
+//@ts-nocheck
 import cloneDeep from 'lodash/cloneDeep'
 import { ElMessage } from '@element-plus/components'
 import { contractDefaultData } from './dataStructure'

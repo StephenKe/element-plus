@@ -1,4 +1,4 @@
-import { buildProps } from '@element-plus/utils/props'
+import { buildProps } from '@element-plus/utils'
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { IUser } from './interface'
 

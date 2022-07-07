@@ -1,4 +1,4 @@
-import { withInstall } from '@element-plus/utils/with-install'
+import { withInstall } from '@element-plus/utils'
 import ContractForm from './src/contract-form.vue'
 import ContractMainInfo from './src/components/TabMainInfo.vue'
 import ContractEditForm from './src/components/ContractEditForm.vue'

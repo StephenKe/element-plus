@@ -1,3 +1,4 @@
+//@ts-nocheck
 import request from '@element-plus/utils/request'
 
 // 通用的搜索帮助接口

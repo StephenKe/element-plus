@@ -1,3 +1,4 @@
+//@ts-nocheck
 // 利润中心搜索帮助弹窗配置
 export const getProfitCenterDiaConfigs = (field) => {
   const dialogTitle = '选择利润中心'
