@@ -1,4 +1,5 @@
 <script lang="ts">
+//@ts-nocheck
 import { defineComponent, ref, watch, h, withDirectives } from 'vue'
 import {
   ElDialog,

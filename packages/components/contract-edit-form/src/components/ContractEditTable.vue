@@ -353,6 +353,7 @@
 </template>
 
 <script lang="ts">
+//@ts-nocheck
 import { defineComponent, ref, computed, inject, watch } from 'vue'
 import dayjs from 'dayjs'
 import { Search, SortUp, SortDown } from '@element-plus/icons-vue'

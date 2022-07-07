@@ -136,6 +136,7 @@
 </template>
 
 <script lang="ts">
+//@ts-nocheck
 import { defineComponent, computed, watch } from 'vue'
 import { Search } from '@element-plus/icons-vue'
 import {

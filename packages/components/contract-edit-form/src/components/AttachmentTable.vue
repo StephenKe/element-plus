@@ -136,6 +136,7 @@
 </template>
 
 <script lang="ts">
+//@ts-nocheck
 import { defineComponent, onMounted, ref, inject } from 'vue'
 import dayjs from 'dayjs'
 import {

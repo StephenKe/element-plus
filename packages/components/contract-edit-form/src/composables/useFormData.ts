@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { computed } from 'vue'
 import { ElMessage } from '@element-plus/components'
 import { getContractDetails } from '../requests'

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import type { Ref } from 'vue'
 import type {
   CommonFunc,

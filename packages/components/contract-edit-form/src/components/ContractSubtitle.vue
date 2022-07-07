@@ -16,6 +16,7 @@
 </template>
 
 <script lang="ts">
+//@ts-nocheck
 import { defineComponent, useSlots } from 'vue'
 import { useNamespace } from '@element-plus/hooks'
 

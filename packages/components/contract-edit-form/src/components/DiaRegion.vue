@@ -1,4 +1,5 @@
 <script lang="ts">
+//@ts-nocheck
 import { defineComponent, ref, h } from 'vue'
 import {
   ElConfigProvider,

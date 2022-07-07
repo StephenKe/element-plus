@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { ref, computed } from 'vue'
 import { ElMessage } from '@element-plus/components'
 import { randomId } from '../utils'

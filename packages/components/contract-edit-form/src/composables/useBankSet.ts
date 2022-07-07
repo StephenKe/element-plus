@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { cloneDeep } from 'lodash'
 import { ElMessage } from '@element-plus/components'
 import { commonSearchHelp } from '../requests'

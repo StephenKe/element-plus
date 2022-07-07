@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { computed } from 'vue'
 import type { Ref } from 'vue'
 import type { ContractStore } from '../interface'

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import type { Config } from './interface'
 import type { ContractEditData } from './interface/contractEdit'
 

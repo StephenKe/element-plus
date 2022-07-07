@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { computed } from 'vue'
 import { arrDistinctByProp } from '../utils'
 import { getContractFormConfigs, getContractReasonEditable } from '../requests'

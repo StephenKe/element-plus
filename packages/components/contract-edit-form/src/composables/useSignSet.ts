@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { ElMessage } from '@element-plus/components'
 import { swapArray } from '../utils'
 import type { Ref } from 'vue'
