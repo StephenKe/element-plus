@@ -31,7 +31,7 @@ space/vertical-layout
 
 通过调整 `size` 的值来控制间距的大小
 
-您可以用内置大小 `small`, `默认`, `large`, 这些大小对应于 `4px`, `8px`, `12px`, `16px`. 默认的间距大小为 `small`，也就是 `8px`。
+通过 `size` 控制组件大小 `small`, `default`, `large`, 分别对应 `8px`, `12px`, `16px`的间距. 默认的间距大小为 `small`，也就是 `8px`。
 
 您也可以通过自定义的 size 来控制大小， 参见下一个部分。
 

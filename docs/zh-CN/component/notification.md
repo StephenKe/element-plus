@@ -78,7 +78,7 @@ Element Plus 为 `app.config.globalProperties` 添加了全局方法 `$notify`�
 ## 单独引用
 
 ```javascript
-import { ElNotification } from 'element-plus'
+import { ElNotification } from 'cs-element-plus'
 ```
 
 你可以在对应的处理函数内调用 `ElNotification(options)` 来呼出通知栏。 我们也提前定义了多个 type 的单独调用方法，如 `ElNotification.success(options)`。 当你需要关闭页面上所有的通知栏的时候，可以调用 `ElNotification.closeAll()` 来关闭所有的实例。
@@ -97,7 +97,7 @@ import { ElNotification } from 'element-plus'
 
 ```ts
 import { getCurrentInstance } from 'vue'
-import { ElNotification } from 'element-plus'
+import { ElNotification } from 'cs-element-plus'
 
 // 在你的 setup 方法中
 const { appContext } = getCurrentInstance()!

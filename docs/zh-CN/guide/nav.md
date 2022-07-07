@@ -43,20 +43,20 @@ lang: zh-CN
 
 ### 二级类目
 
-Sidebar displays up to two levels of navigation. Breadcrumbs are recommended in combination of second level navigation, making it easier for the users to locate and navigate.
+侧栏中最多可显示两级导航； 侧栏中最多可显示两级导航； 当使用二级导航时，我们建议搭配使用面包屑，方便用户定位自己的位置和快速返回。
 
 <L2Categories />
 
 ### 三级类目
 
-Suitable for complicated utility websites. The left sidebar holds first level navigation, and the middle column displays second level navigation or other utility options.
+适用于较复杂的工具型后台。 适用于较复杂的工具型后台，左侧栏为一级导航，中间栏可显示其对应的二级导航，也可放置其他的工具型选项。
 
 <L3Categories />
 
 ## 顶部导航
 
-Conforms to the normal browsing order from top to bottom, which makes things more natural. The navigation amount and text length are limited to the width of the top.
+顺应了从上至下的正常浏览顺序，方便浏览信息； 顶部宽度限制了导航的数量和文本长度。
 
-Suitable for sites with few navigation and large chunks.
+适用于导航较少，页面篇幅较长的网站。
 
 <TopNavigationExample />
