@@ -80,7 +80,7 @@ Element Plus 为 `app.config.globalProperties` 添加了全局方法 `$message`�
 ## 单独引用
 
 ```ts
-import { ElMessage } from 'element-plus'
+import { ElMessage } from 'cs-element-plus'
 ```
 
 此时调用方法为 `ElMessage(options)`。 我们也为每个 type 定义了各自的方法，如 `ElMessage.success(options)`。 并且可以调用 `ElMessage.closeAll()` 手动关闭所有实例。
@@ -99,7 +99,7 @@ import { ElMessage } from 'element-plus'
 
 ```ts
 import { getCurrentInstance } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage } from 'cs-element-plus'
 
 // 在你的 setup 方法中
 const { appContext } = getCurrentInstance()!
