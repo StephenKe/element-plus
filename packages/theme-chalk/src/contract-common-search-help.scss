@@ -1,0 +1,13 @@
+@use 'mixins/mixins' as *;
+@use 'common/var' as *;
+@use 'mixins/var' as *;
+@use 'mixins/utils' as *;
+@use 'mixins/config' as *;
+
+@include b(contract-common-search-help) {
+  @include e(first-radio) {
+    .#{$namespace}-radio__label {
+      display: none;
+    }
+  }
+}
