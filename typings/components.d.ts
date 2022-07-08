@@ -100,6 +100,7 @@ declare module '@vue/runtime-core' {
     ElQueryForm: typeof import('../packages/element-plus')['ElQueryForm']
     ElBgyUpload: typeof import('../packages/element-plus')['ElBgyUpload']
     ElTableRender: typeof import('../packages/element-plus')['ElTableRender']
+    ElContractEditForm: typeof import('../packages/element-plus')['ElContractEditForm']
   }
 
   interface ComponentCustomProperties {
