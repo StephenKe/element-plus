@@ -28,11 +28,11 @@
         "link": "/guide/i18n"
       },
       {
-        "text": "从 Element UI 升级",
-        "link": "/guide/migration"
+        "text": "从 Element Plus 升级",
+        "link": "/guide/migration1"
       },
       {
-        "text": "从 Element/Bgy Plus 升级",
+        "text": "从 Bgy Plus 升级",
         "link": "/guide/migration2"
       },
       {

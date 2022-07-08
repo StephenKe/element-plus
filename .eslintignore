@@ -13,3 +13,5 @@ packages/components/custom-menu/*
 packages/components/query-form/*
 packages/components/bgy-upload/*
 packages/components/render/*
+packages/components/contract-edit-form/*
+packages/utils/request.ts

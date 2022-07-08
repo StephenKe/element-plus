@@ -117,7 +117,7 @@ message-box/draggable
 
 ## 全局方法
 
-如果你完整引入了 Element，它会为 `app.config.globalProperties` 添加如下全局方法：`$msgbox`、 `$alert`、 `$confirm` 和 `$prompt`。 因此在 Vue instance 中可以采用本页面中的方式调用 `MessageBox`。 调用参数为：
+如果你完整引入了 Cs Element Plus，它会为 `app.config.globalProperties` 添加如下全局方法：`$msgbox`、 `$alert`、 `$confirm` 和 `$prompt`。 因此在 Vue instance 中可以采用本页面中的方式调用 `MessageBox`。 调用参数为：
 
 - `$msgbox(options)`
 - `$alert(message, title, options)` 或 `$alert(message, options)`
@@ -130,7 +130,7 @@ message-box/draggable
 
 ```ts
 import { getCurrentInstance } from 'vue'
-import { ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'cs-element-plus'
 
 // 在你的 setup 方法中
 const { appContext } = getCurrentInstance()!
@@ -145,7 +145,7 @@ ElMessageBox.alert('Hello world!', 'Title', {}, appContext)
 如果你需要按需引入 `MessageBox`，那你可以像示例代码这样来引入。
 
 ```ts
-import { ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'cs-element-plus'
 ```
 
 那么对应于上述四个全局方法的调用方法依次为：`ElMessageBox`, `ElMessageBox.alert`, `ElMessageBox.confirm` 和 `ElMessageBox.prompt`. The parameters are the same as above.

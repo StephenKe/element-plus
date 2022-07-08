@@ -31,12 +31,12 @@
                 />
               </el-col>
               <el-col :span="selectable ? 13 : 14">
-                <el-link
+                <el-button
                   :icon="Link"
-                  :underline="false"
+                  type="text"
                   class="filename"
                   :style="{ marginBottom: selectable ? '-13px' : '3px' }"
-                  >{{ file.name }}</el-link
+                  >{{ file.name }}</el-button
                 >
               </el-col>
               <el-col :span="4" class="upload-status">
@@ -45,52 +45,52 @@
               <el-col :span="6">
                 <!-- 已上传和上传失败才有操作 -->
                 <template v-if="['success', 'fail'].includes(file.status)">
-                  <el-link
+                  <el-button
                     v-if="
                       !file.operationButtons ||
                       file.operationButtons.includes('delete')
                     "
-                    :underline="false"
+                    type="text"
                     :style="{ marginBottom: selectable ? '-13px' : '3px' }"
                     @click="handleRemove(file)"
                   >
                     删除
-                  </el-link>
-                  <el-link
+                  </el-button>
+                  <el-button
                     v-if="
                       file.status === 'fail' &&
                       (!file.operationButtons ||
                         file.operationButtons.includes('reupload'))
                     "
-                    :underline="false"
+                    type="text"
                     :style="{ marginBottom: selectable ? '-13px' : '3px' }"
                     @click="handleReUpload(file)"
                   >
                     重新上传
-                  </el-link>
+                  </el-button>
                   <template v-else>
-                    <el-link
+                    <el-button
                       v-if="
                         !file.operationButtons ||
                         file.operationButtons.includes('download')
                       "
-                      :underline="false"
+                      type="text"
                       :style="{ marginBottom: selectable ? '-13px' : '3px' }"
                       @click="handlePreview(file)"
                     >
                       预览
-                    </el-link>
-                    <el-link
+                    </el-button>
+                    <el-button
                       v-if="
                         !file.operationButtons ||
                         file.operationButtons.includes('download')
                       "
-                      :underline="false"
+                      type="text"
                       :style="{ marginBottom: selectable ? '-13px' : '3px' }"
                       @click="handleDownload(file)"
                     >
                       下载
-                    </el-link>
+                    </el-button>
                   </template>
                 </template>
               </el-col>
@@ -113,9 +113,9 @@
         <el-table-column v-if="selectable" type="selection" width="45" />
         <el-table-column label="文件名" show-overflow-tooltip>
           <template #default="{ row }">
-            <el-link :icon="Link" :underline="false" class="filename">
+            <el-button :icon="Link" type="text" class="filename">
               {{ row.name }}
-            </el-link>
+            </el-button>
           </template>
         </el-table-column>
         <!-- 默认插槽 -->
@@ -136,48 +136,48 @@
           <!-- 已上传和上传失败才有操作 -->
           <template #default="{ row }">
             <template v-if="['success', 'fail'].includes(row.status)">
-              <el-link
+              <el-button
                 v-if="
                   !row.operationButtons ||
                   row.operationButtons.includes('delete')
                 "
-                :underline="false"
+                type="text"
                 @click="handleRemove(row)"
               >
                 删除
-              </el-link>
-              <el-link
+              </el-button>
+              <el-button
                 v-if="
                   row.status === 'fail' &&
                   (!row.operationButtons ||
                     row.operationButtons.includes('reupload'))
                 "
-                :underline="false"
+                type="text"
                 @click="handleReUpload(row)"
               >
                 重新上传
-              </el-link>
+              </el-button>
               <template v-else>
-                <el-link
+                <el-button
                   v-if="
                     !row.operationButtons ||
                     row.operationButtons.includes('preview')
                   "
-                  :underline="false"
+                  type="text"
                   @click="handlePreview(row)"
                 >
                   预览
-                </el-link>
-                <el-link
+                </el-button>
+                <el-button
                   v-if="
                     !row.operationButtons ||
                     row.operationButtons.includes('download')
                   "
-                  :underline="false"
+                  type="text"
                   @click="handleDownload(row)"
                 >
                   下载
-                </el-link>
+                </el-button>
               </template>
             </template>
           </template>

@@ -1,6 +1,6 @@
 {
   "name": "cs-element-plus",
-  "version": "2.2.8",
+  "version": "2.2.8-beta1.0",
   "description": "基于 Vue 3，面向设计师和开发者的组件库，在 Element Plus 的基础上新增碧桂园 bgy 组件，且实时同步 Element Plus 最新版本",
   "keywords": [
     "element-plus",
@@ -48,6 +48,7 @@
     "lib/components/*/style/*"
   ],
   "peerDependencies": {
+    "axios": "^0.27.2",
     "vue": "^3.2.0"
   },
   "dependencies": {
@@ -59,6 +60,7 @@
     "@types/lodash-es": "^4.17.6",
     "@vueuse/core": "^8.7.5",
     "async-validator": "^4.2.5",
+    "axios": "^0.27.2",
     "dayjs": "^1.11.3",
     "escape-html": "^1.0.3",
     "lodash": "^4.17.21",
