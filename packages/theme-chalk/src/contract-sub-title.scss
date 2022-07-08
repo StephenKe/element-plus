@@ -1,0 +1,37 @@
+@use 'mixins/mixins' as *;
+@use 'common/var' as *;
+@use 'mixins/var' as *;
+@use 'mixins/utils' as *;
+@use 'mixins/config' as *;
+
+@include b(contract-sub-title) {
+  @include set-component-css-var('contract-edit-form', $contractEditForm);
+  padding: var(--el-contract-edit-form-sub-title-padding);
+  height: var(--el-contract-edit-form-sub-title-height);
+  z-index: 7;
+  background-color: var(--el-contract-edit-form-background-color);
+  margin-bottom: var(--el-contract-edit-form-margin-padding);
+  transform: translateZ(0);
+  transition: all 0.25s;
+
+  @include e(main) {
+    color: var(--el-contract-edit-form-sub-title-main-color);
+    line-height: var(--el-contract-edit-form-sub-title-main-height);
+    height: var(--el-contract-edit-form-sub-title-main-height);
+    @include flex-center-between;
+  }
+
+  @include e(text) {
+    font-size: var(--el-contract-edit-form-font-size);
+    height: var(--el-contract-edit-form-sub-title-text-height);
+    line-height: var(--el-contract-edit-form-sub-title-text-height);
+    border-left: var(--el-contract-edit-form-sub-title-text-border-width) solid
+      var(--el-contract-edit-form-sub-title-left-border-color);
+    padding-left: var(--el-contract-edit-form-sub-title-text-padding);
+    color: var(--el-contract-edit-form-text-color);
+  }
+
+  @include e(border) {
+    border-bottom: 1px solid var(--el-contract-edit-form-sub-title-border-color);
+  }
+}

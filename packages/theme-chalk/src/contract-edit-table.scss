@@ -1,0 +1,57 @@
+@use 'mixins/mixins' as *;
+@use 'common/var' as *;
+@use 'mixins/var' as *;
+@use 'mixins/utils' as *;
+@use 'mixins/config' as *;
+
+@include b(contract-edit-table) {
+  @include set-component-css-var('contract-edit-form', $contractEditForm);
+  @include e(required-col) {
+    &::before {
+      margin-right: 4px;
+      content: '*';
+      color: var(--el-contract-edit-form-reqired-color);
+    }
+  }
+
+  @include e(zbodytype-tips) {
+    position: absolute;
+    left: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9;
+    background: #409eff;
+    color: #fff;
+    padding: 0 4px;
+    border-radius: 10px;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    opacity: 0.8;
+  }
+
+  @include e(form-item) {
+    margin-bottom: 0 !important;
+
+    @include m(checkbox-center) {
+      .#{$namespace}-form-item__content {
+        justify-content: center;
+      }
+    }
+
+    @include m(view) {
+      .#{$namespace}-form-item__content {
+        line-height: var(--el-contract-edit-form-mini-line-height);
+      }
+    }
+
+    .#{$namespace}-form-item__content {
+      margin-left: 0 !important;
+
+      .#{$namespace}-select,
+      .#{$namespace}-date-editor.#{$namespace}-input {
+        width: 100%;
+      }
+    }
+  }
+}
