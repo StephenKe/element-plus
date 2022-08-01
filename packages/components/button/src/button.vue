@@ -1,6 +1,5 @@
 <template>
   <button
-    v-if="props.type !== 'text'"
     ref="_ref"
     :class="[
       ns.b(),
@@ -39,18 +38,11 @@
       <slot />
     </span>
   </button>
-  <el-link v-else-if="icon || $slots.icon" :icon="icon" :underline="false">
-    <slot />
-  </el-link>
-  <el-link v-else :underline="false">
-    <slot />
-  </el-link>
 </template>
 
 <script lang="ts" setup>
 import { Text, computed, inject, ref, useSlots } from 'vue'
 import { ElIcon } from '@element-plus/components/icon'
-import { ElLink } from '@element-plus/components/link'
 import {
   useDeprecated,
   useDisabled,

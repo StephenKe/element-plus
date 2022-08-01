@@ -120,7 +120,7 @@ cascader/filterable
 
 可以自定义备选项的节点内容
 
-:::demo 你可以通过 `scoped slot` 自定义节点的内容。 使用 scoped slot 会传入两个参数`node`和`data`，分别表示当前节点的 Node 对象和当前节点的数据。
+:::demo 你可以通过 `scoped slot` 自定义节点的内容。 您可以访问 scope 中的 `node` 和 `data` 属性，分别表示当前节点的 Node 对象和当前节点的数据。
 
 cascader/custom-content
 
@@ -159,6 +159,7 @@ cascader/panel
 | teleported                  | 是否在弹出内容时启用动画                                                                                                                           | boolean                 | true / false                | true   |
 | popper-append-to-body(弃用) | 是否将弹出的内容直接插入到 body 元素。 在弹出内容的边框定位出现问题时，可将该属性设置为 false                                                      | boolean                 | -                           | true   |
 | tag-type                    | 标签类型                                                                                                                                           | string                  | success/info/warning/danger | info   |
+| validate-event              | 输入时是否触发表单的校验                                                                                                                           | boolean                 | -                           | true   |
 
 ## Cascader 事件
 
