@@ -5,7 +5,7 @@ lang: zh-CN
 
 # Checkbox 多选框
 
-一组备选项中进行多选
+在一组备选项中进行多选。
 
 ## 基础用法
 
@@ -89,6 +89,7 @@ checkbox/with-border
 | name                  | 原生 name 属性                                                        | string                             | —                       | —      |
 | checked               | 当前是否勾选                                                          | boolean                            | —                       | false  |
 | indeterminate         | 设置 indeterminate 状态，只负责样式控制                               | boolean                            | —                       | false  |
+| validate-event        | 输入时是否触发表单的校验                                              | boolean                            | -                       | true   |
 
 ## Checkbox 事件
 
@@ -104,16 +105,17 @@ checkbox/with-border
 
 ## Checkbox-Group 属性
 
-| 属性                  | 说明                                              | 类型    | 可选值                  | 默认值  |
-| --------------------- | ------------------------------------------------- | ------- | ----------------------- | ------- |
-| model-value / v-model | 绑定值                                            | array   | —                       | []      |
-| size                  | 多选框组尺寸                                      | string  | large / default / small | —       |
-| disabled              | 是否禁用                                          | boolean | —                       | false   |
-| min                   | 可被勾选的 checkbox 的最小数量                    | number  | —                       | —       |
-| max                   | 可被勾选的 checkbox 的最大数量                    | number  | —                       | —       |
-| label                 | label for screen reader                           | string  | —                       | —       |
-| text-color            | font color when button is active                  | string  | —                       | #ffffff |
-| fill                  | border and background color when button is active | string  | —                       | #409EFF |
+| 属性                  | 说明                               | 类型    | 可选值                  | 默认值  |
+| --------------------- | ---------------------------------- | ------- | ----------------------- | ------- |
+| model-value / v-model | 绑定值                             | array   | —                       | []      |
+| size                  | 多选框组尺寸                       | string  | large / default / small | —       |
+| disabled              | 是否禁用                           | boolean | —                       | false   |
+| min                   | 可被勾选的 checkbox 的最小数量     | number  | —                       | —       |
+| max                   | 可被勾选的 checkbox 的最大数量     | number  | —                       | —       |
+| label                 | 为屏幕阅读器准备的标签             | string  | —                       | —       |
+| text-color            | 当按钮为活跃状态时的字体颜色       | string  | —                       | #ffffff |
+| fill                  | 当按钮为活跃状态时的边框和背景颜色 | string  | —                       | #409EFF |
+| validate-event        | 输入时是否触发表单的校验           | boolean | -                       | true    |
 
 ## Checkbox-Group 事件
 

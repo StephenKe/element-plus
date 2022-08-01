@@ -155,6 +155,7 @@ select-v2/remote-search
 | scrollbar-always-on               | 控制是否总是展示滚动条                                                                                 | boolean                            | -                   | false         |
 | remote                            | 是否从服务器搜索数据                                                                                   | boolean                            | —                   | false         |
 | remote-method                     | 当输入值发生变化时被调用的函数。 其参数是当前输入值。 只有当 `filterable` 设置为 true 时才会生效。     | function(keyword: string)          | —                   | —             |
+| validate-event                    | 输入时是否触发表单的校验                                                                               | boolean                            | -                   | true          |
 
 <span style="display: none;">
 <!-- | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |

@@ -107,15 +107,15 @@ input/various-size
 
 :::
 
-## Limit length
+## 输入长度限制
 
-:::demo `maxlength` and `minlength` attributes of input, they declare a limit on the number of characters a user can input. The "number of characters" is measured using JavaScript string length.Setting the `maxlength` prop for a text or textarea type of Input can limit the length of input value, allows you to show word count by setting `show-word-limit` to `true` at the same time.
+:::demo 使用 `maxlength` 和 `minlength` 属性, 来控制输入内容的最大字数和最小字数。 "字符数"使用 JavaScript 字符串长度来衡量。 为文本或文本输入类型设置 `maxlength` prop 可以限制输入值的长度。 允许你通过设置 `show-word-limit` 到 `true` 来显示剩余字数。
 
 input/length-limiting
 
 :::
 
-## Input Attributes
+## Input 属性
 
 | 属性                 | 说明                                                                                                           | 类型                                     | 可选值                                                                                                                               | 默认值 |
 | -------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------ |
@@ -149,26 +149,26 @@ input/length-limiting
 | validate-event       | 输入时是否触发表单的校验                                                                                       | boolean                                  | -                                                                                                                                    | true   |
 | input-style          | input 元素或 textarea 元素的 style                                                                             | object                                   | -                                                                                                                                    | {}     |
 
-## Input slots
+## Input 插槽
 
-| 名称    | 说明                                    |
-| ------- | --------------------------------------- |
-| prefix  | 输入框头部内容，只对 `type="text"` 有效 |
-| suffix  | 输入框尾部内容，只对 `type="text"` 有效 |
-| prepend | 输入框前置内容，只对 `type="text"` 有效 |
-| append  | 输入框后置内容，只对 `type="text"` 有效 |
+| 名称    | 说明                                          |
+| ------- | --------------------------------------------- |
+| prefix  | 输入框头部内容，只对非 `type="textarea"` 有效 |
+| suffix  | 输入框尾部内容，只对非 `type="textarea"` 有效 |
+| prepend | 输入框前置内容，只对非 `type="textarea"` 有效 |
+| append  | 输入框后置内容，只对非 `type="textarea"` 有效 |
 
-## Input Events
+## Input 事件
 
-| 事件名 | 说明                                          | 参数                      |
-| ------ | --------------------------------------------- | ------------------------- |
-| blur   | 在 Input 失去焦点时触发                       | (event: Event)            |
-| focus  | 在 Input 获得焦点时触发                       | (event: Event)            |
-| change | 仅在输入框失去焦点或用户按下回车时触发        | (value: string \| number) |
-| input  | 在 Input 值改变时触发                         | (value: string \| number) |
-| clear  | 在点击由 `clearable` 属性生成的清空按钮时触发 | —                         |
+| 事件名 | 说明                                                          | 参数                      |
+| ------ | ------------------------------------------------------------- | ------------------------- |
+| blur   | 在 Input 失去焦点时触发                                       | (event: Event)            |
+| focus  | 在 Input 获得焦点时触发                                       | (event: Event)            |
+| change | 仅当 modelValue 改变时，当输入框失去焦点或用户按 Enter 时触发 | (value: string \| number) |
+| input  | 在 Input 值改变时触发                                         | (value: string \| number) |
+| clear  | 在点击由 `clearable` 属性生成的清空按钮时触发                 | —                         |
 
-## Input Methods
+## Input 方法
 
 | 方法   | 说明                | 参数 |
 | ------ | ------------------- | ---- |

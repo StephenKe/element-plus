@@ -17,6 +17,12 @@ tree-select/basic
 
 :::
 
+:::tip
+
+由于 `render-after-expand` 属性是默认开启的，所选择的标签名可能不会及时更新显示，您可以把该属性设置为 false 来显示正确的名称
+
+:::
+
 ## 选择任意级别
 
 当属性 `check-strictly=true` 时，任何节点都可以被选择，否则只有子节点可被选择。
@@ -24,6 +30,12 @@ tree-select/basic
 :::demo
 
 tree-select/check-strictly
+
+:::
+
+:::tip
+
+当使用 `show-checkbox`时，由于 `check-on-click-node` 默认值是 false，这时候只能通过 checkbox 来选中，当然您也可以将其设置成 true，这样点击整个 node 都可以用来完成选择
 
 :::
 
