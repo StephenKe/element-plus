@@ -13,7 +13,8 @@ import {
   nextTick,
 } from 'vue'
 import { More } from '@element-plus/icons-vue'
-import { Resize } from '@element-plus/directives'
+// import { Resize } from '@element-plus/directives'
+import { useResizeObserver } from '@vueuse/core'
 import ElIcon from '@element-plus/components/icon'
 import Menubar from './utils/menu-bar'
 import {
@@ -333,7 +334,7 @@ export default defineComponent({
 
     const useVNodeResize = (vnode: VNode) =>
       props.mode === Mode.HORIZONTAL
-        ? withDirectives(vnode, [[Resize, handleResize]])
+        ? withDirectives(vnode, [[useResizeObserver, handleResize]])
         : vnode
     return () => {
       let slot = slots.default?.() ?? []
