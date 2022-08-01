@@ -1,5 +1,46 @@
 ## Changelog
 
+### 2.2.11
+
+_2022-07-27_
+
+#### Features
+
+- Image Component add show event (#8920 by @wydingez)
+
+#### Bug fixes
+
+- Theme-chalk [table-v2] long text does not wrap (#8986 by @tolking)
+- Components [checkbox] fix type error (#8937 by @Tsong-LC)
+- Components [select] sync the tooltip component change (#8998 by @tolking)
+- Build add target (#9018 by @sxzz)
+- Menu horizontal mode menu drag causes browser crash (#9027 by @xiaoxian521)
+- Components [carousel] computed interval prop (#9022 by @btea)
+- Components [tooltip] related components are controlled (#9019 by @chenxch)
+- Components [time-picker] fix clear for range mode (#8961 by @freedomlang)
+- Hooks [use-lockscreen] fix  namespace (#8711 by @gjfei)
+- Components [table] `clearFilter` not work (#8966 by @holazz)
+- Theme-chalk [picker] adjust range picker input height (#8879 by @holazz)
+- Components [dropdown] fix style (#9034 by @holazz)
+- Components [table] fix maxHeight doesn't consider footer height (#9011 by @plainheart)
+- Element-plus fix type error (#8982 by @holazz)
+- Directives [mousewheel] fix type error (#8880 by @holazz)
+- Theme-chalk [rate] fix vertical offset (#8959 by @Tsong-LC)
+- Time-picker clicking on prefix does not open the panel (#9044 by @xiaoxian521)
+- Components [slider] disabled slider button can still be focused (#9004 by @tolking)
+- Components [cascader] pass forced param to syncMenuState (#8794 by @nieyuyao)
+- Hooks [use-escape-keydown] fix memory leak (#8005 by @nhpupu) (#8060)
+
+#### Refactors
+
+- Components [checkbox] use JSX in Unit test (#9009 by @holazz)
+- Utils drop off/on/once, use EventListener instead (#8960 by @Tsong-LC)
+- Components [color-picker] use JSX in Unit test (#9033 by @Tsong-LC)
+
+#### Other
+
+- Style(components): [table] prettier format, no code changes (#8318 by @Tsong-LC)
+
 ### 2.2.10
 
 _2022-07-22_
@@ -94,16 +135,12 @@ _2022-07-08_
 - Components [date-picker] disabled year not selectable (#8414 by @Tsong-LC)
 - Components [steps] fix type error (#8627 by @ryuhangyeong)
 - Components [dropdown] fix A11y when tooltip show (#8655 by @shooterRao)
-- Components [message] fix visible null (#8796 by @StephenKe)
-- Components [button] fix deploy Mse undefined (by @StephenKe)
-- Components [contract] fix scss (by @StephenKe)
 - Revert(components): [radio] revert input id (#8677 by @chenxch)
 
 #### Refactors
 
 - Components [tabs] add deprecated mark to activeName (#8590 by @tolking)
 - Components [steps] use JSX in Unit test (#8259 by @Tsong-LC)
-- Components [button] rm el-link (by @StephenKe)
 
 ### 2.2.8
 
@@ -374,7 +411,6 @@ _2022-05-23_
 #### Features
 
 - Dialog expose dialogContentRef (#7633 by @zhoucan38)
-- 同步 bgy-plus 组件[BgyAnchor][BgyTreeTransfer][Toolbar][CompleteMenu][QueryForm][BgyUpload][TableRender]
 
 #### Bug fixes
 

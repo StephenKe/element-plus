@@ -17,17 +17,25 @@ menu/basic
 
 :::
 
+## 左右
+
+:::demo 您可以将菜单项放置在左边或右边。
+
+menu/left-and-right
+
+:::
+
 ## 侧栏
 
 垂直菜单，可内嵌子菜单。
 
-:::demo 通过 el-menu-item-group 组件可以实现菜单进行分组，分组名可以通过 title 属性直接设定，也可以通过具名 slot 来设定。
+:::demo 通过`el-menu-item-group`组件可以实现菜单进行分组，分组名可以通过`title`属性直接设定，也可以通过具名 slot 来设定。
 
 menu/vertical
 
 :::
 
-## 可折叠的菜单
+## Collapse 折叠面板
 
 垂直导航菜单可以被折叠
 
@@ -44,9 +52,9 @@ menu/collapse
 | mode                | 菜单展示模式                                                                         | string  | horizontal / vertical | vertical |
 | collapse            | 是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）                                 | boolean | —                     | false    |
 | ellipsis            | 是否省略多余的子项（仅在横向模式生效）                                               | boolean | —                     | true     |
-| background-color    | 菜单的背景色（仅支持 hex 格式）                                                      | string  | —                     | #ffffff  |
-| text-color          | 菜单的文字颜色（仅支持 hex 格式）                                                    | string  | —                     | #303133  |
-| active-text-color   | 当前激活菜单的文字颜色（仅支持 hex 格式）                                            | string  | —                     | #409EFF  |
+| background-color    | 菜单的背景颜色（十六进制格式）（已被废弃，使用`--bg-color`）                         | string  | —                     | #ffffff  |
+| text-color          | 文字颜色（十六进制格式）（已被废弃，使用`--text-color`）                             | string  | —                     | #303133  |
+| active-text-color   | 活动菜单项的文本颜色（十六进制格式）（已被废弃，使用`--active-color`）               | string  | —                     | #409EFF  |
 | default-active      | 默认激活菜单的 index                                                                 | string  | —                     | —        |
 | default-openeds     | 默认打开的 sub-menu 的 index 的数组                                                  | Array   | —                     | —        |
 | unique-opened       | 是否只保持一个子菜单的展开                                                           | boolean | —                     | false    |
@@ -92,6 +100,7 @@ menu/collapse
 | 插槽名 | 说明           | 子标签                                |
 | ------ | -------------- | ------------------------------------- |
 | —      | 自定义默认内容 | SubMenu / Menu-Item / Menu-Item-Group |
+| title  | 自定义标题内容 | —                                     |
 
 ## Menu-Item 属性
 
@@ -112,6 +121,7 @@ menu/collapse
 | 插槽名 | 说明           |
 | ------ | -------------- |
 | —      | 自定义默认内容 |
+| title  | 自定义标题内容 |
 
 ## Menu-Item-Group 属性
 
@@ -121,6 +131,7 @@ menu/collapse
 
 ## Menu-Item-Group 插槽
 
-| 插槽名 | 说明         | 子标签    |
-| ------ | ------------ | --------- |
-| —      | 默认插槽内容 | Menu-Item |
+| 插槽名 | 说明             | 子标签    |
+| ------ | ---------------- | --------- |
+| —      | 默认插槽内容     | Menu-Item |
+| title  | 自定义组标题内容 | —         |
