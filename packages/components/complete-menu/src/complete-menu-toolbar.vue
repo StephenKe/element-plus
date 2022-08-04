@@ -1,5 +1,10 @@
 <template>
-  <div class="el-complete-menu__top">
+  <div
+    :class="{
+      'el-complete-menu__top': true,
+      'is-collapse': collapse,
+    }"
+  >
     <div v-show="!collapsed">
       <el-tooltip v-for="tool in toolbar" :key="tool.key" placement="top">
         <template #content>{{ tool.tip }}</template>
@@ -145,5 +150,6 @@ const ElCompleteMenuToolbar: DefineComponent = defineComponent({
     }
   },
 })
+
 export default ElCompleteMenuToolbar
 </script>

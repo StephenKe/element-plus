@@ -70,14 +70,7 @@
     <el-scrollbar class="el-complete-menu__bottom">
       <el-custom-menu
         :collapse="collapse"
-        :router="$props.router"
-        :collapse-transition="$props.collapseTransition"
-        :unique-opened="$props.uniqueOpened"
-        :default-openeds="$props.defaultOpeneds"
-        :default-active="$props.defaultActive"
-        :active-text-color="$props.activeTextColor"
-        :text-color="$props.textColor"
-        :background-color="$props.backgroundColor"
+        v-bind="$attrs"
         @select="handMenuSelect"
         @open="handleOpen"
         @close="handleClose"
@@ -101,8 +94,9 @@
               <el-custom-sub-menu
                 v-if="sed.children?.length"
                 :index="sed.index"
-                :is-menu-popup="true"
+                :is-menu-popup="$props.menuTrigger === 'hover'"
                 :popper-append-to-body="true"
+                :menu-trigger="$props.menuTrigger"
               >
                 <template #title>
                   <span :style="spanPaddingStyle">
@@ -112,6 +106,7 @@
                     <span>{{ sed.label }}</span>
                   </span>
                 </template>
+                <!-- 三级菜单 -->
                 <template v-for="third in sed.children" :key="third.index">
                   <el-custom-menu-item :index="third.index">
                     <template #title>
@@ -252,7 +247,6 @@ import type { CompleteMenuDataItem } from './complete-menu'
 
 const ElCompleteMenu: DefineComponent = defineComponent({
   name: 'ElCompleteMenu',
-
   components: {
     ElIcon,
     ElSelect,
@@ -353,7 +347,7 @@ const ElCompleteMenu: DefineComponent = defineComponent({
     })
     // 菜单项 span padding 样式
     const spanPaddingStyle = {
-      paddingLeft: '20px',
+      paddingLeft: '10px',
     }
 
     // 获取所有一级菜单
@@ -390,7 +384,9 @@ const ElCompleteMenu: DefineComponent = defineComponent({
     // 下拉菜单筛选函数
     const selectFilterMenus = (val?: string) => {
       if (!val) menuData.value = props.data.slice(0)
-      else menuData.value = props.data.filter((menu) => menu.index === val)
+      else
+        menuData.value =
+          props.data.filter((menu) => menu.index === val)[0]?.children || []
     }
 
     // 根据 value 匹配菜单数据
@@ -574,5 +570,6 @@ const ElCompleteMenu: DefineComponent = defineComponent({
     }
   },
 })
+
 export default ElCompleteMenu
 </script>

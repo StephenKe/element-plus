@@ -10,6 +10,11 @@ import type {
   PreviewInfo,
 } from './upload.type'
 
+function isIos() {
+  const u = window.navigator.userAgent
+  return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+}
+
 function getError(
   action: string,
   option: ElUploadRequestOptions,
@@ -108,7 +113,7 @@ export default function upload(option: ElUploadRequestOptions) {
 }
 
 // 一体化移除文件
-export function ythRemove(action: string) {
+export function ythRemove(action: string, headers: Headers) {
   if (typeof XMLHttpRequest === 'undefined') {
     return
   }
@@ -127,8 +132,6 @@ export function ythRemove(action: string) {
     }
   }
   xhr.open(option.method, action, true)
-  // TODO:补充 headers
-  const headers = {}
   for (const item in headers) {
     if (hasOwn(headers, item) && headers[item] !== null) {
       xhr.setRequestHeader(item, headers[item])
@@ -139,7 +142,11 @@ export function ythRemove(action: string) {
 }
 
 // 一体化预览
-export function ythPreview(action: string, params: PreviewInfo) {
+export function ythPreview(
+  action: string,
+  params: PreviewInfo,
+  headers: Headers
+) {
   if (typeof XMLHttpRequest === 'undefined') {
     return
   }
@@ -156,15 +163,17 @@ export function ythPreview(action: string, params: PreviewInfo) {
       console.error(getError(action, option, xhr))
       return false
     }
-    console.log(xhr.response)
     const responseJson =
       typeof xhr.response === 'string' ? JSON.parse(xhr.response) : xhr.response
-    responseJson.data && window.open(responseJson.data, '_blank')
+    if (responseJson.data && window) {
+      if (isIos()) {
+        window.location.href = responseJson.data
+      } else {
+        window.open(responseJson.data, '_blank')
+      }
+    }
   }
   xhr.open(option.method, action, true)
-  const headers = {
-    'Content-Type': 'application/json;charset=UTF-8',
-  }
   for (const item in headers) {
     if (hasOwn(headers, item) && headers[item] !== null) {
       xhr.setRequestHeader(item, headers[item])
@@ -175,8 +184,21 @@ export function ythPreview(action: string, params: PreviewInfo) {
 }
 
 // 一体化下载文件
-export function ythDownload(downloadUrl: string, file: UploadFile) {
+export function ythDownload(
+  downloadUrl: string,
+  file: UploadFile,
+  headers: Headers
+) {
   if (typeof XMLHttpRequest === 'undefined') {
+    return
+  }
+  // const fileId = file.response?.data?.id
+  // console.log('------ ythDownload ----')
+  // console.log(file)
+  const fileId = file.response?.data?.editionId
+  const action = downloadUrl?.replace('/FILE_ID', `/${fileId}`)
+  if (!file.name && window) {
+    window.open(action, '_blank')
     return
   }
   const option = {
@@ -195,12 +217,8 @@ export function ythDownload(downloadUrl: string, file: UploadFile) {
 
     downloadBlob(new Blob([xhr.response]), file.name)
   }
-  const fileId = file.response?.data?.id
-  const action = downloadUrl?.replace('/FILE_ID', `/${fileId}`)
   xhr.open(option.method, action, true)
   xhr.responseType = 'blob'
-  // TODO:补充 headers
-  const headers = {}
   for (const item in headers) {
     if (hasOwn(headers, item) && headers[item] !== null) {
       xhr.setRequestHeader(item, headers[item])

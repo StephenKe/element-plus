@@ -1,7 +1,7 @@
 import {
   buildProps,
   definePropType,
-  mutable,
+  // mutable,
   isString,
   isObject,
   isArray,
@@ -49,33 +49,11 @@ export const completeMenuProps = buildProps({
     type: definePropType<Array<CompleteMenuDataItem>>(Array),
     default: () => [],
   },
-  // 菜单的背景色（仅支持 hex 格式）
-  backgroundColor: {
+  // 三级菜单触发方式
+  menuTrigger: {
     type: String,
-    default: '#fff',
-  },
-  // 菜单的文字颜色（仅支持 hex 格式）
-  textColor: String,
-  // 当前激活菜单的文字颜色（仅支持 hex 格式）
-  activeTextColor: String,
-  // 默认激活菜单的 index
-  defaultActive: {
-    type: String,
-    default: '',
-  },
-  // 默认打开的 sub-menu 的 index 的数组
-  defaultOpeneds: {
-    type: definePropType<string[]>(Array),
-    default: () => mutable([] as const),
-  },
-  // 是否只保持一个子菜单的展开
-  uniqueOpened: Boolean,
-  // 是否启用 vue-router 模式。 启用该模式会在激活导航时以 index 作为 path 进行路由跳转
-  router: Boolean,
-  // 是否开启折叠动画
-  collapseTransition: {
-    type: Boolean,
-    default: true,
+    values: ['hover', 'click'],
+    default: 'click',
   },
 })
 

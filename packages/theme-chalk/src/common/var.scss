@@ -925,6 +925,22 @@ $tree: map.merge(
   $tree
 );
 
+// bgy-tree-select
+$bgyTreeSelect: () !default;
+$bgyTreeSelect: map.merge(
+  (
+    'border-color-hover': var(--el-border-color-hover),
+    'input-focus-border-color': var(--el-color-primary),
+    'disabled-border': var(--el-disabled-border-color),
+    'font-size': var(--el-font-size-base),
+    'close-hover-color': var(--el-text-color-secondary),
+    'input-color': var(--el-text-color-placeholder),
+    'multiple-input-color': var(--el-text-color-regular),
+    'input-font-size': var(--el-font-size-base),
+  ),
+  $bgyTreeSelect
+);
+
 // Dropdown
 $dropdown: () !default;
 $dropdown: map.merge(

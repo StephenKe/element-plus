@@ -119,5 +119,11 @@ export default {
       confirmButtonText: '确定',
       cancelButtonText: '取消',
     },
+    treeSelect: {
+      loading: '加载中',
+      noMatch: '无匹配数据',
+      noData: '无数据',
+      placeholder: '请选择',
+    },
   },
 }
