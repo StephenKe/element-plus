@@ -18,7 +18,8 @@ lang: zh-CN
 ## 组件修改
 
 1. ` <button type="text" />` 组件推荐使用 `Link` 组件,文字按钮使用了` <button type="text" />`这种方式仍然兼容,但后续文字按钮需使用`Link`组件,详情见组件文档关于 `Button` 组件文字按钮的 `warining` 和 `Link` 组件文档
-2. 原`TreeSelect`树形选择组件需要使用新的`TreeSelect`组件(原因: API 不一致),详情见组件文档`TreeSelect`组件
+2. 原 bgy-plus 的 `TreeSelect` 树形选择组件需要使用新的`BgyTreeSelect`,而 `TreeSelect` 组件是官方 element-plus 的,详情见组件文档 `TreeSelect`组件
+3. `Message` 组件如有报错请把 Vue 版本升至 `3.2.32` 以上,详见[官方 issue](https://github.com/element-plus/element-plus/issues/8796)
 
 <style scoped>
   details {
