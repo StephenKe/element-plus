@@ -1,3 +1,4 @@
+//@ts-nocheck
 // 下载 blob 文件
 export const downloadBlob = (blob: Blob, fileName: string) => {
   const url = window.URL.createObjectURL(blob)
@@ -7,4 +8,12 @@ export const downloadBlob = (blob: Blob, fileName: string) => {
   link.click()
   document.body.appendChild(link)
   URL.revokeObjectURL(url) // 释放内存
+}
+
+export const getValueByPath = (obj, paths = ''): unknown => {
+  let ret: unknown = obj
+  paths.split('.').map((path) => {
+    ret = ret?.[path]
+  })
+  return ret
 }

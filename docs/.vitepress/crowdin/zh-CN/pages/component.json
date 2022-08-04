@@ -328,6 +328,10 @@
         "text": "BgyTreeTransfer 树形穿梭框"
       },
       {
+        "link": "/bgy-tree-select",
+        "text": "BgyTreeSelect 树形选择"
+      },
+      {
         "link": "/toolbar",
         "text": "Toolbar 顶部工具栏"
       },

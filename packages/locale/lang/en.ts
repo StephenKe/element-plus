@@ -155,5 +155,11 @@ export default {
       confirmButtonText: 'Yes',
       cancelButtonText: 'No',
     },
+    treeSelect: {
+      loading: 'Loading',
+      noMatch: 'No matching data',
+      noData: 'No data',
+      placeholder: 'Select',
+    },
   },
 }
