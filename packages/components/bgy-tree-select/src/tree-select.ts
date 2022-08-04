@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { ArrowUp, CircleClose } from '@element-plus/icons-vue'
 import { isValidComponentSize, buildProps } from '@element-plus/utils'
 import { CHANGE_EVENT, UPDATE_MODEL_EVENT } from '@element-plus/constants'

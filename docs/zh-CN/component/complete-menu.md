@@ -45,22 +45,23 @@ complete-menu/control-collapse
 
 ## 属性
 
-| 属性               | 说明                                                                                         | 类型    | 可选值     | 默认值 |
-| ------------------ | -------------------------------------------------------------------------------------------- | ------- | ---------- | ------ |
-| data               | 层级菜单数据（详见下方 data 数据结构）                                                       | array   | —          | —      |
-| collapse           | 导航菜单是否折叠                                                                             | boolean | true/false | false  |
-| collectable        | 菜单是否可收藏                                                                               | boolean | true/false | false  |
-| collectedData      | 已收藏的菜单数据（末级菜单，数据结构同 data，但不包含子菜单），仅 collectable 为 true 时可用 | array   | —          | —      |
-| commonUsed         | 是否开启常用分类                                                                             | boolean | true/false | false  |
-| commonUsedData     | 常用的菜单数据（末级菜单，数据结构同 data，但不包含子菜单），仅 commonUsed 为 true 时可用    | array   | —          | —      |
-| backgroundColor    | 菜单的背景色（仅支持 hex 格式），现仅能设置层级菜单部分背景                                  | string  | —          | —      |
-| textColor          | 菜单的文字颜色（仅支持 hex 格式），现仅能设置层级菜单部分文字颜色                            | string  | —          | —      |
-| activeTextColor    | 当前激活菜单的文字颜色（仅支持 hex 格式）                                                    | string  | —          | —      |
-| defaultActive      | 默认激活菜单的 index                                                                         | string  | —          | —      |
-| defaultOpeneds     | 默认打开的 sub-menu 的 index 的数组                                                          | array   | —          | —      |
-| uniqueOpened       | 是否只保持一个子菜单的展开                                                                   | boolean | true/false | —      |
-| router             | 是否启用 vue-router 模式。 启用该模式会在激活导航时以 index 作为 path 进行路由跳转           | boolean | true/false | —      |
-| collapseTransition | 是否开启折叠动画                                                                             | boolean | true/false | true   |
+| 属性               | 说明                                                                                         | 类型    | 可选值        | 默认值 |
+| ------------------ | -------------------------------------------------------------------------------------------- | ------- | ------------- | ------ |
+| data               | 层级菜单数据（详见下方 data 数据结构）                                                       | array   | —             | —      |
+| collapse           | 导航菜单是否折叠                                                                             | boolean | true/false    | false  |
+| collectable        | 菜单是否可收藏                                                                               | boolean | true/false    | false  |
+| collectedData      | 已收藏的菜单数据（末级菜单，数据结构同 data，但不包含子菜单），仅 collectable 为 true 时可用 | array   | —             | —      |
+| commonUsed         | 是否开启常用分类                                                                             | boolean | true/false    | false  |
+| commonUsedData     | 常用的菜单数据（末级菜单，数据结构同 data，但不包含子菜单），仅 commonUsed 为 true 时可用    | array   | —             | —      |
+| backgroundColor    | 菜单的背景色（仅支持 hex 格式），现仅能设置层级菜单部分背景                                  | string  | —             | —      |
+| textColor          | 菜单的文字颜色（仅支持 hex 格式），现仅能设置层级菜单部分文字颜色                            | string  | —             | —      |
+| activeTextColor    | 当前激活菜单的文字颜色（仅支持 hex 格式）                                                    | string  | —             | —      |
+| defaultActive      | 默认激活菜单的 index                                                                         | string  | —             | —      |
+| defaultOpeneds     | 默认打开的 sub-menu 的 index 的数组                                                          | array   | —             | —      |
+| uniqueOpened       | 是否只保持一个子菜单的展开                                                                   | boolean | true/false    | —      |
+| router             | 是否启用 vue-router 模式。 启用该模式会在激活导航时以 index 作为 path 进行路由跳转           | boolean | true/false    | —      |
+| collapseTransition | 是否开启折叠动画                                                                             | boolean | true/false    | true   |
+| menu-trigger       | 三级菜单弹窗触发方式                                                                         | string  | hover / click | click  |
 
 ## data 数据结构
 

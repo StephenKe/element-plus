@@ -6,13 +6,13 @@ export const YTH_PROJECT = 'yth'
 // 单个附件上传
 export const UPLOAD_URL = '/integration-api/platform-file/file/upload/query'
 // TODO:批量附件上传
-export const MULTI_UPLOAD_URL =
-  '/integration-api/platform-file/file/upload/query'
+// export const MULTI_UPLOAD_URL =
+//   '/integration-api/platform-file/file/upload/query'
 // 删除单个附件
 export const REMOVE_URL = '/integration-api/platform-file/file/FILE_ID'
 // TODO:批量删除
-export const MULTI_REMOVE_URL = '/integration-api/platform-file/file/FILE_ID'
-// TODO:预览地址
+// export const MULTI_REMOVE_URL = '/integration-api/platform-file/file/FILE_ID'
+// 预览地址
 export const PREVIEW_URL = '/integration-api/platform-file/file/preview'
 // 单个附件下载
 export const DOWNLOAD_URL =

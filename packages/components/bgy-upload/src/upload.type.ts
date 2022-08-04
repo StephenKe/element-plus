@@ -21,7 +21,7 @@ export type UploadFile = {
 export interface PreviewInfo {
   bip: string
   name: string
-  tenantKey: string
+  tenantKey?: string
 }
 
 export interface ElFile extends File {
@@ -76,8 +76,12 @@ export interface IUseHandlersProps {
   downloadUrl: string
   requestDomain: string
   previewInfo: PreviewInfo
+  previewUrl: string
+  headers?: Headers
   beforeUpload?: FileHandler
   beforeRemove?: FileHandler<Promise<any> | boolean>
+  beforeDownload?: FileHandler<Promise<any> | boolean>
+  beforePreview?: FileHandler<Promise<any> | boolean>
   onRemove?: FileHandler
   onChange?: FileHandler
   onPreview?: FileHandler

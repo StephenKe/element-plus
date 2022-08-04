@@ -39,7 +39,7 @@ export function getFullUrl(domain: string, urlProp: string): string {
 
 export default (props: IUseHandlersProps) => {
   const uploadFiles = ref<UploadFile[]>([])
-  const uploadRef = ref<UploadRef>(null)
+  const uploadRef = ref<UploadRef | null>(null)
   // 来源系统是否为“一体化项目”
   const isYth = ref<boolean>(props.sourceSystem === YTH_PROJECT)
   // 已选文件列表
@@ -48,7 +48,7 @@ export default (props: IUseHandlersProps) => {
   let tempIndex = 1
 
   function abort(file: UploadFile) {
-    uploadRef.value.abort(file)
+    uploadRef.value!.abort(file)
   }
 
   function clearFiles(
@@ -61,18 +61,18 @@ export default (props: IUseHandlersProps) => {
 
   function handleError(err: Error, rawFile: ElFile) {
     const file = getFile(rawFile, uploadFiles.value)
-    file.status = 'fail'
+    file!.status = 'fail'
     // 上传失败不进行删除
     // uploadFiles.value.splice(uploadFiles.value.indexOf(file), 1)
-    props.onError(err, file, uploadFiles.value)
-    props.onChange(file, uploadFiles.value)
+    props.onError?.(err, file!, uploadFiles.value)
+    props.onChange?.(file!, uploadFiles.value)
   }
 
   function handleProgress(ev: ElUploadProgressEvent, rawFile: ElFile) {
     const file = getFile(rawFile, uploadFiles.value)
-    props.onProgress(ev, file, uploadFiles.value)
-    file.status = 'uploading'
-    file.percentage = ev.percent || 0
+    props.onProgress?.(ev, file!, uploadFiles.value)
+    file!.status = 'uploading'
+    file!.percentage = ev.percent || 0
   }
 
   function handleSuccess(res: any, rawFile: ElFile) {
@@ -80,13 +80,13 @@ export default (props: IUseHandlersProps) => {
     if (file) {
       file.status = 'success'
       file.response = res
-      props.onSuccess(res, file, uploadFiles.value)
-      props.onChange(file, uploadFiles.value)
+      props.onSuccess?.(res, file, uploadFiles.value)
+      props.onChange?.(file, uploadFiles.value)
     }
   }
 
   function handleRestart(file: UploadFile) {
-    uploadRef.value.reupload(file.raw)
+    uploadRef.value?.reupload(file.raw)
   }
 
   function handleStart(rawFile: ElFile) {
@@ -103,13 +103,13 @@ export default (props: IUseHandlersProps) => {
     if (props.listType === 'picture-card' || props.listType === 'picture') {
       try {
         file.url = URL.createObjectURL(rawFile)
-      } catch (err) {
+      } catch (err: any) {
         console.error('[Element Error][Upload]', err)
-        props.onError(err, file, uploadFiles.value)
+        props.onError?.(err, file, uploadFiles.value)
       }
     }
     uploadFiles.value.push(file)
-    props.onChange(file, uploadFiles.value)
+    props.onChange?.(file, uploadFiles.value)
   }
 
   // 附件移除处理函数
@@ -126,7 +126,8 @@ export default (props: IUseHandlersProps) => {
       abort(file)
       const fileList = uploadFiles.value
       fileList.splice(fileList.indexOf(file), 1)
-      const fileId = file.response?.data?.id
+      // const fileId = file.response?.data?.id
+      const fileId = file.response?.data?.editionId
       if (!fileId) {
         debugWarn('BgyUpload(一体化)', '无法获取文件 ID，请检查文件数据')
         return
@@ -134,7 +135,7 @@ export default (props: IUseHandlersProps) => {
       const action = props.removeUrl.replace('/FILE_ID', `/${fileId}`)
       // 一体化项目执行文件中台删除
       const url = getFullUrl(props.requestDomain, action)
-      isYth.value && action && ythRemove(url)
+      isYth.value && action && ythRemove(url, props.headers)
       // 执行自定义 on-remove 函数
       props.onRemove && props.onRemove(file, fileList)
       revokeObjectURL()
@@ -160,19 +161,35 @@ export default (props: IUseHandlersProps) => {
     if (!file) {
       return
     }
-    // 一体化项目文件中台预览
-    const url = getFullUrl(props.requestDomain, PREVIEW_URL)
-    const { bip, name, tenantKey } = props.previewInfo
-    const params = Object.assign({}, props.previewInfo, {
-      fileId: file.response?.data?.id,
-      tenantKey,
-      bip,
-      name,
-    })
-    console.log(file.response?.data, params)
-    isYth.value && ythPreview(url, params)
-
-    props.onPreview && props.onPreview(file, uploadFiles.value)
+    const doPreview = () => {
+      // 一体化项目文件中台预览
+      const url = getFullUrl(props.requestDomain, props.previewUrl)
+      const { bip, name } = props.previewInfo
+      const params = Object.assign({}, props.previewInfo, {
+        // fileId: file.response?.data?.id,
+        editionId: file.response?.data?.editionId,
+        // tenantKey,
+        bip,
+        name,
+      })
+      isYth.value && ythPreview(url, params, props.headers)
+      // 执行自定义预览函数
+      props.onPreview && props.onPreview(file, uploadFiles.value)
+    }
+    if (!props.beforePreview) {
+      doPreview()
+    } else if (typeof props.beforePreview === 'function') {
+      const before = props.beforePreview(file, uploadFiles.value)
+      if (before instanceof Promise) {
+        before
+          .then((confirm) => {
+            confirm && doPreview()
+          })
+          .catch(NOOP)
+      } else if (before !== false) {
+        doPreview()
+      }
+    }
   }
 
   // 附件下载处理函数
@@ -181,10 +198,26 @@ export default (props: IUseHandlersProps) => {
       return
     }
     // 一体化项目文件中台下载
-    const url = getFullUrl(props.requestDomain, props.downloadUrl)
-    isYth.value && ythDownload(url, file)
-    // 执行自定义下载函数
-    props.onDownload && props.onDownload(file, uploadFiles.value)
+    const doDownload = () => {
+      const url = getFullUrl(props.requestDomain, props.downloadUrl)
+      isYth.value && ythDownload(url, file, props.headers)
+      // 执行自定义下载函数
+      props.onDownload && props.onDownload(file, uploadFiles.value)
+    }
+    if (!props.beforeDownload) {
+      doDownload()
+    } else if (typeof props.beforeDownload === 'function') {
+      const before = props.beforeDownload(file, uploadFiles.value)
+      if (before instanceof Promise) {
+        before
+          .then((confirm) => {
+            confirm && doDownload()
+          })
+          .catch(NOOP)
+      } else if (before !== false) {
+        doDownload()
+      }
+    }
   }
 
   // list 勾选 change 处理函数
