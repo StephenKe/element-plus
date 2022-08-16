@@ -50,6 +50,7 @@ color-picker/sizes
 | color-format          | 写入 v-model 的颜色的格式 | string  | hsl / hsv / hex / rgb   | hex (当 show-alpha 为 false) / rgb (当 show-alpha 为 true) |
 | popper-class          | ColorPicker 下拉框的类名  | string  | —                       | —                                                          |
 | predefine             | 预定义颜色                | array   | —                       | —                                                          |
+| validate-event        | 输入时是否触发表单的校验  | boolean | -                       | true                                                       |
 
 ## 事件
 

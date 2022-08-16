@@ -31,13 +31,9 @@
                 />
               </el-col>
               <el-col :span="selectable ? 13 : 14">
-                <el-link
-                  :icon="Link"
-                  :underline="false"
-                  class="filename"
-                  :style="{ marginBottom: selectable ? '-13px' : '3px' }"
-                  >{{ file.name }}</el-link
-                >
+                <el-button :icon="Link" type="text" class="filename">{{
+                  file.name
+                }}</el-button>
               </el-col>
               <el-col :span="4" class="upload-status">
                 {{ viewStatus(file) }}
@@ -45,52 +41,48 @@
               <el-col :span="6">
                 <!-- 已上传和上传失败才有操作 -->
                 <template v-if="['success', 'fail'].includes(file.status)">
-                  <el-link
+                  <el-button
                     v-if="
                       !file.operationButtons ||
                       file.operationButtons.includes('delete')
                     "
-                    :underline="false"
-                    :style="{ marginBottom: selectable ? '-13px' : '3px' }"
+                    type="text"
                     @click="handleRemove(file)"
                   >
                     删除
-                  </el-link>
-                  <el-link
+                  </el-button>
+                  <el-button
                     v-if="
                       file.status === 'fail' &&
                       (!file.operationButtons ||
                         file.operationButtons.includes('reupload'))
                     "
-                    :underline="false"
-                    :style="{ marginBottom: selectable ? '-13px' : '3px' }"
+                    type="text"
                     @click="handleReUpload(file)"
                   >
                     重新上传
-                  </el-link>
+                  </el-button>
                   <template v-else>
-                    <el-link
+                    <el-button
                       v-if="
                         !file.operationButtons ||
                         file.operationButtons.includes('download')
                       "
-                      :underline="false"
-                      :style="{ marginBottom: selectable ? '-13px' : '3px' }"
+                      type="text"
                       @click="handlePreview(file)"
                     >
                       预览
-                    </el-link>
-                    <el-link
+                    </el-button>
+                    <el-button
                       v-if="
                         !file.operationButtons ||
                         file.operationButtons.includes('download')
                       "
-                      :underline="false"
-                      :style="{ marginBottom: selectable ? '-13px' : '3px' }"
+                      type="text"
                       @click="handleDownload(file)"
                     >
                       下载
-                    </el-link>
+                    </el-button>
                   </template>
                 </template>
               </el-col>
@@ -104,7 +96,9 @@
       </el-row>
     </template>
     <template v-if="listContainerType === 'table'">
+      <!-- PC 端 -->
       <el-table
+        v-if="terminalType === 'pc'"
         class="el-bgy-upload-list__table"
         :data="files"
         border
@@ -113,9 +107,9 @@
         <el-table-column v-if="selectable" type="selection" width="45" />
         <el-table-column label="文件名" show-overflow-tooltip>
           <template #default="{ row }">
-            <el-link :icon="Link" :underline="false" class="filename">
+            <el-button :icon="Link" type="text" class="filename">
               {{ row.name }}
-            </el-link>
+            </el-button>
           </template>
         </el-table-column>
         <!-- 默认插槽 -->
@@ -136,48 +130,106 @@
           <!-- 已上传和上传失败才有操作 -->
           <template #default="{ row }">
             <template v-if="['success', 'fail'].includes(row.status)">
-              <el-link
+              <el-button
                 v-if="
                   !row.operationButtons ||
                   row.operationButtons.includes('delete')
                 "
-                :underline="false"
+                type="text"
                 @click="handleRemove(row)"
               >
                 删除
-              </el-link>
-              <el-link
+              </el-button>
+              <el-button
                 v-if="
                   row.status === 'fail' &&
                   (!row.operationButtons ||
                     row.operationButtons.includes('reupload'))
                 "
-                :underline="false"
+                type="text"
                 @click="handleReUpload(row)"
               >
                 重新上传
-              </el-link>
+              </el-button>
               <template v-else>
-                <el-link
+                <el-button
                   v-if="
                     !row.operationButtons ||
                     row.operationButtons.includes('preview')
                   "
-                  :underline="false"
+                  type="text"
                   @click="handlePreview(row)"
                 >
                   预览
-                </el-link>
-                <el-link
+                </el-button>
+                <el-button
                   v-if="
                     !row.operationButtons ||
                     row.operationButtons.includes('download')
                   "
-                  :underline="false"
+                  type="text"
                   @click="handleDownload(row)"
                 >
                   下载
-                </el-link>
+                </el-button>
+              </template>
+            </template>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- 移动端 -->
+      <el-table
+        v-if="terminalType === 'mobile'"
+        class="el-bgy-upload-list__table el-bgy-upload-list--mobile"
+        :data="files"
+        border
+        @selection-change="handleTableSelectionChange"
+      >
+        <el-table-column v-if="selectable" type="selection" width="45" />
+        <slot></slot>
+        <el-table-column label="文件名" show-overflow-tooltip>
+          <template #default="{ row }">
+            <el-button :icon="Link" type="text" class="filename">
+              {{ row.name }}
+            </el-button>
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="100px">
+          <!-- 已上传和上传失败才有操作 -->
+          <template #default="{ row }">
+            <template v-if="['success', 'fail'].includes(row.status)">
+              <el-button
+                v-if="
+                  !row.operationButtons ||
+                  row.operationButtons.includes('delete')
+                "
+                type="text"
+                @click="handleRemove(row)"
+              >
+                删除
+              </el-button>
+              <el-button
+                v-if="
+                  row.status === 'fail' &&
+                  (!row.operationButtons ||
+                    row.operationButtons.includes('reupload'))
+                "
+                type="text"
+                @click="handleReUpload(row)"
+              >
+                重新上传
+              </el-button>
+              <template v-else>
+                <el-button
+                  v-if="
+                    !row.operationButtons ||
+                    row.operationButtons.includes('preview')
+                  "
+                  type="text"
+                  @click="handlePreview(row)"
+                >
+                  预览
+                </el-button>
               </template>
             </template>
           </template>
@@ -221,7 +273,8 @@ export default defineComponent({
     ElProgress,
     ElTable,
     ElTableColumn,
-    ElLink,
+    // ElForm,
+    // ElFormItem,
     // ElIcon,
     // Delete,
     // Close,
@@ -278,6 +331,11 @@ export default defineComponent({
     selectable: {
       type: Boolean,
       default: false,
+    },
+    // 终端类型
+    terminalType: {
+      type: String,
+      values: ['pc', 'mobile'],
     },
   },
   emits: ['remove', 'selection-change'],

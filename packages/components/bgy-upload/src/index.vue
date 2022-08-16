@@ -23,6 +23,7 @@ import useHandlers, { getFullUrl } from './useHandlers'
 import {
   UPLOAD_URL,
   YTH_PROJECT,
+  PREVIEW_URL,
   REMOVE_URL,
   DOWNLOAD_URL,
   MULTI_DOWNLOAD_URL,
@@ -204,15 +205,36 @@ export default defineComponent({
       type: Object as PropType<PreviewInfo>,
       default: () => ({}),
     },
-    // 文件中台删除接口
+    // 自定义预览接口
+    previewUrl: {
+      type: String,
+      default: PREVIEW_URL,
+    },
+    // 自定义删除接口
     removeUrl: {
       type: String,
       default: REMOVE_URL,
     },
-    // 文件中台下载接口
+    // 自定义下载接口
     downloadUrl: {
       type: String,
       default: DOWNLOAD_URL,
+    },
+    // 下载前
+    beforeDownload: {
+      type: Function as PFileHandler<boolean>,
+      default: NOOP,
+    },
+    // 预览前
+    beforePreview: {
+      type: Function as PFileHandler<boolean>,
+      default: NOOP,
+    },
+    // 终端类型
+    terminalType: {
+      type: String,
+      values: ['pc', 'mobile'],
+      default: 'pc',
     },
   },
   setup(props) {
@@ -268,7 +290,7 @@ export default defineComponent({
         props.requestDomain,
         MULTI_DOWNLOAD_URL.replace('FILEIDS', fileIds.join(','))
       )
-      window.open(url, '_blank')
+      window && window.open(url, '_blank')
     }
 
     return {
@@ -300,6 +322,7 @@ export default defineComponent({
         UploadList,
         {
           disabled: this.uploadDisabled,
+          terminalType: this.terminalType,
           listType: this.listType,
           listContainerType: this.listContainerType,
           files: this.uploadFiles,

@@ -1,0 +1,77 @@
+@use 'mixins/mixins' as *;
+@use 'common/var' as *;
+@use 'mixins/var' as *;
+@use 'mixins/utils' as *;
+@use 'mixins/config' as *;
+
+@include b(contract-tab-main-info) {
+  @include set-component-css-var('contract-edit-form', $contractEditForm);
+  position: relative;
+  height: var(--el-contract-edit-form-pane-height);
+
+  @include e(scrollbar) {
+    height: var(--el-contract-edit-form-pane-height);
+    overflow-y: auto;
+    margin-right: var(--el-contract-edit-form-scrollbar-m-r);
+    background-color: var(--el-contract-edit-form-background-color);
+    transition: all 0.5s;
+  }
+
+  @include e(contentbox) {
+    padding-bottom: var(--el-contract-edit-form-contentbox-padding);
+
+    .attach-wrap {
+      position: relative;
+
+      .head-btn-bar {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 9;
+        height: 40px;
+        line-height: 40px;
+      }
+    }
+  }
+
+  @include e(form-body) {
+    padding: var(--el-contract-edit-form-contentbox-padding);
+  }
+
+  @include e(form-item) {
+    @include m(mini-lineH) {
+      .#{$namespace}-form-item__label {
+        line-height: var(--el-contract-edit-form-mini-line-height);
+      }
+    }
+  }
+
+  @include e(anchor) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: var(--el-contract-edit-form-anchor-width);
+    transition: all 0.5s;
+
+    .bgy-anchor {
+      width: var(--el-contract-edit-form-anchor-width) !important;
+    }
+  }
+
+  @include e(collapsebtn) {
+    margin-left: var(--el-contract-edit-form-collapsebtn-margin);
+    padding: 3px;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  @include m(collapsed) {
+    @include e(scrollbar) {
+      margin-right: var(--el-contract-edit-form-anchor-margin);
+    }
+
+    @include e(anchor) {
+      transform: translateX(95%);
+    }
+  }
+}

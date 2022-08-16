@@ -93,8 +93,8 @@ datetime-picker/default-time
 | 事件名          | 说明                                                                                                     | 回调参数                      |
 | --------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | change          | 用户确认选定的值时触发                                                                                   | value                         |
-| blur            | 在组件 Input 失去焦点时触发                                                                              | instance                      |
-| focus           | 在组件 Input 获得焦点时触发                                                                              | instance                      |
+| blur            | 在组件 Input 失去焦点时触发                                                                              | `(e: FocusEvent)`             |
+| focus           | 在组件 Input 获得焦点时触发                                                                              | `(e: FocusEvent)`             |
 | calendar-change | 如果用户没有选择日期，那默认展示当前日的月份。 选中日历日期后会执行的回调，只有当 `datetimerange` 才生效 | [Date, Date]                  |
 | visible-change  | 当 DateTimePicker 的下拉列表出现/消失时触发                                                              | 出现时为 true，隐藏时为 false |
 

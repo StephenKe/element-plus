@@ -111,3 +111,5 @@ export interface ElFormItemContext {
   clearValidate(): void
 }
 export const elFormKey: InjectionKey<ElFormContext> = Symbol('elForm')
+export const elFormItemKey: InjectionKey<ElFormItemContext> =
+  Symbol('elFormItem')

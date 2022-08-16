@@ -61,13 +61,14 @@
     "@types/lodash-es": "^4.17.6",
     "@vueuse/core": "^8.7.5",
     "async-validator": "^4.2.5",
+    "axios": "^0.27.2",
     "dayjs": "^1.11.3",
     "escape-html": "^1.0.3",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "lodash-unified": "^1.0.2",
     "memoize-one": "^6.0.0",
-    "normalize-wheel-es": "^1.1.2"
+    "normalize-wheel-es": "^1.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",

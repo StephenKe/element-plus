@@ -102,14 +102,15 @@ bgy-upload/customurl
 | request-domain      | 一体化接口请求域名，若为空则默认与系统域名一致（涉及接口：预览，删除，下载，批量下载）                                                                                                                                                                                           | string                             | —              |
 | remove-url          | 文件删除接口                                                                                                                                                                                                                                                                     | string                             | —              | /integration-api/platform-file/file/FILE_ID          |
 | download-url        | 文件下载接口                                                                                                                                                                                                                                                                     | string                             | —              | /integration-api/platform-file/file/download/FILE_ID |
+| terminal-type       | 终端类型，用于控制附件列表显示（仅 list-container-type="table" 有效）                                                                                                                                                                                                            | string                             | pc/mobile      | pc                                                   |
 
 ## 插槽
 
-| 名称   | 描述                   | 参数                      |
-| ------ | ---------------------- | ------------------------- |
-| —      | 触发附件上传的触发器   | -                         |
-| tip    | 提示说明文字           | -                         |
-| attach | 上传的每项文件后的内容 | file ( #file = { file } ) |
+| 名称   | 描述                                                                                            | 参数                      |
+| ------ | ----------------------------------------------------------------------------------------------- | ------------------------- |
+| —      | 触发附件上传的触发器                                                                            | -                         |
+| tip    | 提示说明文字                                                                                    | -                         |
+| attach | 上传的每项文件后的内容/当 terminal-type="mobile" 时插槽结构只能传 el-table-column type="expand" | file ( #file = { file } ) |
 
 ## 方法
 

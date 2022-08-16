@@ -11,26 +11,26 @@ const homeLang = computed(() => homeLocale[lang.value])
     <div class="footer-main">
       <h4>{{ homeLang['10'] }}</h4>
       <a
-        href="https://github.com/element-plus/element-plus"
+        href="https://git.bgy.com.cn/pt00057/cs-element-plus"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['11'] }}
       </a>
       <a
-        href="https://github.com/element-plus/element-plus/releases"
+        href="https://git.bgy.com.cn/pt00057/cs-element-plus/-/releases"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['12'] }}
       </a>
-      <a
+      <!-- <a
         href="https://element.eleme.io/"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['13'] }}
-      </a>
+      </a> -->
       <a
         :href="`/${lang}/guide/theming`"
         class="footer-main-link"
@@ -42,34 +42,34 @@ const homeLang = computed(() => homeLocale[lang.value])
 
     <div class="footer-main">
       <h4>{{ homeLang['19'] }}</h4>
-      <a
+      <!-- <a
         href="https://gitter.im/element-en/Lobby"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['15'] }}
-      </a>
+      </a> -->
       <a
-        href="https://github.com/element-plus/element-plus/issues"
+        href="https://git.bgy.com.cn/pt00057/cs-element-plus/issues"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['16'] }}
       </a>
       <a
-        href="https://github.com/element-plus/element-plus/blob/dev/.github/CONTRIBUTING.en-US.md"
+        href="https://git.bgy.com.cn/pt00057/cs-element-plus/blob/dev/CONTRIBUTING.md"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['17'] }}
       </a>
-      <a
+      <!-- <a
         href="https://segmentfault.com/t/element-plus"
         class="footer-main-link"
         target="_blank"
       >
         {{ homeLang['18'] }}
-      </a>
+      </a> -->
     </div>
   </footer>
 </template>

@@ -17,7 +17,7 @@ lang: zh-CN
 // main.ts
 import { createApp } from 'vue'
 import ElementPlus from 'cs-element-plus'
-import 'element-plus/dist/index.css'
+import 'cs-element-plus/dist/index.css'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -46,10 +46,10 @@ app.mount('#app')
 
 #### 自动导入 <el-tag type="primary" style="vertical-align: middle;" effect="dark" size="small">推荐</el-tag>
 
-首先你需要安装`unplugin-vue-components` 和 `unplugin-auto-import`这两款插件
+首先你需要安装`cs-unplugin-vue-components` 和 `unplugin-auto-import`这两款插件
 
 ```shell
-npm install -D unplugin-vue-components unplugin-auto-import
+npm install -D cs-unplugin-vue-components unplugin-auto-import
 ```
 
 然后把下列代码插入到你的 `Vite` 或 `Webpack` 的配置文件中
@@ -59,17 +59,17 @@ npm install -D unplugin-vue-components unplugin-auto-import
 ```ts
 // vite.config.ts
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'cs-unplugin-vue-components/vite'
+import { CsElementPlusResolver } from 'cs-unplugin-vue-components/resolvers'
 
 export default {
   plugins: [
     // ...
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [CsElementPlusResolver()],
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [CsElementPlusResolver()],
     }),
   ],
 }
@@ -80,65 +80,67 @@ export default {
 ```js
 // webpack.config.js
 const AutoImport = require('unplugin-auto-import/webpack')
-const Components = require('unplugin-vue-components/webpack')
-const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+const Components = require('cs-unplugin-vue-components/webpack')
+const {
+  CsElementPlusResolver,
+} = require('cs-unplugin-vue-components/resolvers')
 
 module.exports = {
   // ...
   plugins: [
     AutoImport({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [CsElementPlusResolver()],
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [CsElementPlusResolver()],
     }),
   ],
 }
 ```
 
-想了解更多打包 ([Rollup](https://rollupjs.org/), [Vue CLI](https://cli.vuejs.org/)) 和配置工具，请参考 [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components#installation) 和 [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import#install)。
+想了解更多打包 ([Rollup](https://rollupjs.org/), [Vue CLI](https://cli.vuejs.org/)) 和配置工具，请参考 [cs-unplugin-vue-components](https://git.bgy.com.cn/pt00057/cs-unplugin-vue-components/blob/develop/README.md) 和 [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import#install)。
 
-### 手动导入
+<!-- ### 手动导入 -->
 
-Element Plus 提供了基于 ES Module 开箱即用的 [Tree Shaking](https://webpack.js.org/guides/tree-shaking/) 功能。
+<!-- Element Plus 提供了基于 ES Module 开箱即用的 [Tree Shaking](https://webpack.js.org/guides/tree-shaking/) 功能。 -->
 
-但是你需要安装 [unplugin-element-plus](https://github.com/element-plus/unplugin-element-plus) 来导入样式。 请参考 [文档](https://github.com/element-plus/unplugin-element-plus#readme) 了解如何配置它。
+<!-- 但是你需要安装 [unplugin-element-plus](https://github.com/element-plus/unplugin-element-plus) 来导入样式。 请参考 [文档](https://github.com/element-plus/unplugin-element-plus#readme) 了解如何配置它。 -->
 
-> App.vue
+<!-- > App.vue -->
 
-```html
-<template>
-  <el-button>I am ElButton</el-button>
-</template>
-<script>
+<!-- ```html -->
+<!-- <template> -->
+  <!-- <el-button>I am ElButton</el-button> -->
+<!-- </template> -->
+<!-- <script>
   import { ElButton } from 'cs-element-plus'
   export default {
     components: { ElButton },
   }
-</script>
-```
+</script> -->
+<!-- ``` -->
 
-```ts
-// vite.config.ts
-import ElementPlus from 'unplugin-element-plus/vite'
+<!-- ```ts -->
+<!-- // vite.config.ts -->
+<!-- import ElementPlus from 'unplugin-element-plus/vite' -->
 
-export default {
-  plugins: [ElementPlus()],
-}
-```
+<!-- export default { -->
+  <!-- plugins: [ElementPlus()], -->
+<!-- } -->
+<!-- ``` -->
 
-:::warning
+<!-- :::warning -->
 
-如果您使用 `unplugin-element-plus` 并且只使用组件 API，您需要手动导入样式。
+<!-- 如果您使用 `unplugin-element-plus` 并且只使用组件 API，您需要手动导入样式。 -->
 
-示例︰
+<!-- 示例︰ -->
 
-```ts
-import 'cs-element-plus/es/components/message/style/css'
-import { ElMessage } from 'cs-element-plus'
-```
+<!-- ```ts -->
+<!-- import 'cs-element-plus/es/components/message/style/css' -->
+<!-- import { ElMessage } from 'cs-element-plus' -->
+<!-- ``` -->
 
-:::
+<!-- ::: -->
 
 <!-- ## 快捷搭建项目模板 -->
 

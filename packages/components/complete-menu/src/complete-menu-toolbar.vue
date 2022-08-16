@@ -1,5 +1,10 @@
 <template>
-  <div class="el-complete-menu__top">
+  <div
+    :class="{
+      'el-complete-menu__top': true,
+      'is-collapse': collapse,
+    }"
+  >
     <div v-show="!collapsed">
       <el-tooltip v-for="tool in toolbar" :key="tool.key" placement="top">
         <template #content>{{ tool.tip }}</template>
@@ -34,7 +39,9 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import { defineComponent, ref, computed, markRaw, watch } from 'vue'
+import type { DefineComponent } from 'vue'
 import {
   Star,
   Menu,
@@ -44,7 +51,7 @@ import {
 } from '@element-plus/icons-vue'
 import { ElIcon, ElTooltip } from '@element-plus/components'
 
-export default defineComponent({
+const ElCompleteMenuToolbar: DefineComponent = defineComponent({
   components: {
     Star,
     Menu,
@@ -143,4 +150,6 @@ export default defineComponent({
     }
   },
 })
+
+export default ElCompleteMenuToolbar
 </script>

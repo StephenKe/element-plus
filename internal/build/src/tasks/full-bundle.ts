@@ -55,7 +55,12 @@ async function buildFullEntry(minify: boolean) {
     }),
   ]
   if (minify) {
-    plugins.push(minifyPlugin({ sourceMap: true }))
+    plugins.push(
+      minifyPlugin({
+        target,
+        sourceMap: true,
+      })
+    )
   }
 
   const bundle = await rollup({
@@ -76,6 +81,7 @@ async function buildFullEntry(minify: boolean) {
       name: PKG_CAMELCASE_NAME,
       globals: {
         vue: 'Vue',
+        axios: 'axios',
       },
       sourcemap: minify,
       banner,

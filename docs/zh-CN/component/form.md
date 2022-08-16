@@ -110,9 +110,9 @@ form/size-control
 
 :::
 
-## Accessibility
+## 可访问性
 
-When only a single input (or related control such as select or checkbox) is inside of a `el-form-item`, the form item's label will automatically be attached to that input. However, if multiple inputs are inside of the `el-form-item`, the form item will be assigned the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) role of [group](https://www.w3.org/TR/wai-aria/#group) instead. In this case, it is your responsibility to assign assistive labels to the individual inputs.
+当在 `el-form-item`内只有一个输入框(或相关的控制，如选择或复选框)， 将自动使用表单标签(form-item-label)。 然而，如果同时有多个输入框在 `el-form-item`内， 表单项将被分配为 [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) [组](https://www.w3.org/TR/wai-aria/#group) 的角色。 在这种情况下，需要手动给每个 input 指定访问标签。
 
 :::demo
 
@@ -120,7 +120,7 @@ form/accessibility
 
 :::
 
-## Form API
+## 表单 API
 
 ### Form 属性
 
@@ -138,7 +138,8 @@ form/accessibility
 | `status-icon`             | 是否在输入框中显示校验结果反馈图标                                                          | `boolean`                         | `false`   |
 | `validate-on-rule-change` | 是否在 `rules` 属性改变后立即触发一次验证                                                   | `boolean`                         | `true`    |
 | `size`                    | 用于控制该表单内组件的尺寸                                                                  | `'large' \| 'default' \| 'small'` | —         |
-| `disabled`                | 是否禁用该表单内的所有组件。 如果设置为 `true`, 它将覆盖内部分已禁用 `` prop。              | `boolean`                         | `false`   |
+| `disabled`                | 是否禁用该表单内的所有组件。 如果设置为 `true`, 它将覆盖内部组件的 `disabled` 属性          | `boolean`                         | `false`   |
+| `scroll-to-error`         | 当校验失败时，滚动到第一个错误表单项                                                        | `boolean`                         | `false`   |
 
 ### Form 方法
 
@@ -162,7 +163,7 @@ form/accessibility
 | ------ | -------------- | -------- |
 | -      | 自定义默认内容 | FormItem |
 
-## Form Item API
+## 表单项目 API
 
 ### Form Item 属性
 

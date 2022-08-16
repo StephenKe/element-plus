@@ -121,6 +121,7 @@ ElNotification({}, appContext)
 | on-click                 | 点击 Notification 时的回调函数                                                                | function             | —                                           | —             |
 | offset                   | 相对屏幕顶部的偏移量 偏移的距离，在同一时刻，所有的 Notification 实例应当具有一个相同的偏移量 | number               | —                                           | 0             |
 | appendTo                 | 设置通知栏在 DOM 中的  亲元素                                                                 | string / HTMLElement | -                                           | document.body |
+| zIndex                   | 初始 zIndex                                                                                   | number               | -                                           | 0             |
 
 ## Notification 方法
 

@@ -119,7 +119,7 @@ tooltip/singleton
 
 ## 受控模式
 
-Tooltip 可以通过父组件使用 `v-model:visible` 来控制它的显示与关闭。
+Tooltip 可以通过父组件使用 `:visible` 来控制它的显示与关闭。
 
 :::demo
 
@@ -164,6 +164,7 @@ tooltip/animations
 | trigger                                  | 如何触发 tooltip (来显示)                                                                                                               | string         | hover / click / focus / contextmenu                                                                       | hover                                                   |
 | virtual-triggering                       | 用来标识虚拟触发是否被启用                                                                                                              | boolean        | —                                                                                                         | false                                                   |
 | virtual-ref                              | 表明 tooltip 绑定到哪个 html 元素                                                                                                       | HTMLElement    | —                                                                                                         | —                                                       |
+| trigger-keys                             | 当鼠标点击或者聚焦在触发元素上时， 可以定义一组键盘按键并且通过它们来控制 Tooltip 的显示                                                | Array          | —                                                                                                         | `['Enter','Space']`                                     |
 
 ## 插槽
 

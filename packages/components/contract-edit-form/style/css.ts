@@ -1,0 +1,7 @@
+import '@element-plus/components/base/style/css'
+import '@element-plus/theme-chalk/el-contract-edit-form.css'
+import '@element-plus/theme-chalk/el-contract-edit-table.css'
+import '@element-plus/theme-chalk/el-contract-sub-title.css'
+import '@element-plus/theme-chalk/el-contract-common-search-help.css'
+import '@element-plus/theme-chalk/el-contract-tab-main-info.css'
+import '@element-plus/theme-chalk/el-contract-form.css'

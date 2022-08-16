@@ -1,25 +1,25 @@
 ---
-title: Virtualized Table
+title: Virtualized Table 虚拟化表格
 lang: zh-CN
 ---
 
-# Virtualized Table <VersionTag version="beta" />
+# Virtualized Table 虚拟化表格 <VersionTag version="beta" />
 
-Along with the evolutionary web development, table component has always been the most popular component in our web apps especially for dashboards, data analysis. For [Table V1](./table.md), with even just 1000 records of data, it can be very annoying when using it, because the poor performance.
+在前端开发领域，表格一直都是一个高频出现的组件，尤其是在中后台和数据分析场景。 但是，对于 [Table V1](./table.md)来说，当一屏里超过 1000 条数据记录时，就会出现卡顿等性能问题，体验不是很好。
 
-With Virtualized Table, you can render massive chunks of data in a blink of an eye.
+通过虚拟化表格组件，超大数据渲染将不再是一个头疼的问题。
 
 :::tip
 
-This component is **still under testing**, use at your own risk. if you found any bug or issue please report it at [GitHub](https://github.com/element-plus/element-plus/issues) for us to fix. Also there were some APIs which was not mentioned in this documentation, some of them were not fully developed yet, so that we are not mentioning them here.
+该组件**仍在测试中**，生产环境使用可能有风险。 若您发现了 bug 或问题，请于 [GitHub](https://github.com/element-plus/element-plus/issues) 报告给我们以便修复。 同时，有一些 API 并未在此文档中提及，因为部分还没有开发完全，因此我们不在此提及。
 
-**Even though** Virtualized Table is efficient, but when the data load is too big, your **network**, **memory size** can be the bottle neck of your app. So keep in mind that Virtualized Table is never the ultimate solution for everything, consider paginate your data, add filters etc.
+**即使**虚拟化的表格是高效的，但是当数据负载过大时，**网络**和**内存容量**也会成为您应用程序的瓶颈。 因此请牢记，虚拟化表格永远不是最完美的解决方案，请考虑数据分页、过滤器等优化方案。
 
 :::
 
 ## 基础用法
 
-Let's render a basic case of Virtualized Table with 10 columns by 1000 rows, to demonstrate how performant it is.
+让我们简单渲染一个拥有 1000 行 10 列的虚拟化表格组件，来展示其极佳的性能。
 
 :::demo
 
@@ -27,15 +27,15 @@ table-v2/basic
 
 :::
 
-## Auto resizer
+## 自动调整大小
 
-When you do not feel like you want to pass the `width` and `height` property to the table, you can use the `AutoResizer` component to wrap the table component and it will update the width and height for you automatically.
+如果您不想手动设置表格的 `width` 和 `height` ，可以使用 `AutoResizer` 组件包裹表格组件，这将会自动更新表格的宽度和高度。
 
-Resize your browser to see how it works.
+尝试调整您的浏览器大小来看看它是如何工作的。
 
 :::tip
 
-Make sure the parent node of `AutoResizer` **HAS A FIXED HEIGHT**, because the height value was set to `100%` by default. You may also set it via passing through `style` attribute to `AutoResizer`.
+由于`AutoResizer` 组件的默认高度是 `100%`， 所以请确保 该组件的父元素**被设置了一个固定的高度** 也可以通过 设置`style` 属性为 `AutoResizer`指定高度。
 
 :::
 
@@ -45,9 +45,9 @@ table-v2/auto-resizer
 
 :::
 
-## Customize Cell Renderer
+## 自定义单元格渲染
 
-Of course, you can render the table cell per your needs, here is a simple example of how to customize your cell.
+您可以自由定制表格单元格的渲染内容，下面是一个简单例子。
 
 :::demo
 
@@ -55,9 +55,9 @@ table-v2/cell-templating
 
 :::
 
-## Table with selections
+## 带有筛选框的表格
 
-Using customized cell renderer to allow selection for your table.
+使用自定义的单元格渲染来给表格组件添加筛选能力。
 
 :::demo
 
@@ -65,9 +65,9 @@ table-v2/selection
 
 :::
 
-## Inline editing
+## 可编辑单元格
 
-Just like selections we demonstrated above, you can use the same method to enable inline editing.
+类似上面添加筛选框的方法，我们可以用同样的方法实现可编辑单元格
 
 :::demo
 
@@ -75,11 +75,11 @@ table-v2/inline-editing
 
 :::
 
-## Table with status
+## 带状态的表格
 
-You can highlight your table content to distinguish between "success, information, warning, danger" and other states.
+可将表格内容 highlight 显示，方便区分「成功、信息、警告、危险」等内容。
 
-Use `row-class-name` to customize how the row looks. In this case, every 10th row will be highlighted with `bg-blue-200` class, every 5th row will be highlighted with `bg-red-100` class.
+可以通过指定 Table 组件的 row-class-name 属性来为 Table 中的某一行添加 class， 表明该行处于某种状态。 每 10 行会自动添加 `bg-blue-200` 类名，每 5 行会添加 `bg-red-100` 类名。
 
 :::demo
 
@@ -87,11 +87,11 @@ table-v2/row-class
 
 :::
 
-## Table with sticky rows
+## 表格行的粘性布局
 
-You can make some rows stick to the top of the table, and that can be very easily achieved by using `fixed-data` attribute.
+您可以简单地使用 `fixed-data` 属性来实现将某些行固定到表格的头部。
 
-You can add dynamically set the sticky row with scroll events like this example did.
+您可以使用滚动事件动态地设置粘性行，见此示例。
 
 :::demo
 
@@ -99,11 +99,11 @@ table-v2/sticky-rows
 
 :::
 
-## Table with fixed columns
+## 固定列表格
 
-For some reason, you want to make the columns stick on the left and right, you can do that by adding special attributes for table.
+出于某些原因，您可能会让一些列固定在表格的左侧和右侧。您可以通过为表格添加特殊属性来实现。
 
-You can set the column's attribute `fixed` to `true` (representing `FixedDir.LEFT`) or `FixedDir.LEFT` or `FixedDir.RIGHT`
+您可以设置该行的` fixed` 属性为 `true` （代表`FixedDir.LEFT`）、`FixedDir.LEFT` 或 `FixedDir.RIGHT`
 
 :::demo
 
@@ -111,15 +111,15 @@ table-v2/fixed-columns
 
 :::
 
-## Grouping header
+## 表头分组
 
-By customizing your header renderer you can group your header like this example did.
+正如这个示例，通过自定义表头渲染以将表头分组。
 
 :::tip
 
-In this case we used `JSX` feature which is not supported in the playground, you may try them out in your local environment or online IDEs such as `codesandbox`.
+在这种形况下，我们使用`JSX`特性（该功能在 playground 中不被支持，您可以在您的本地环境或在线 IDE （如 codesandbox ）中使用）
 
-It is recommended that you write your table component in JSX, since it contains VNode manipulations.
+建议您使用 JSX 使用您的表格组件，因为它包含 VNode 操作。
 
 :::
 
@@ -129,9 +129,9 @@ table-v2/grouping-header
 
 :::
 
-## Filter
+## 过滤器
 
-Virtualized Table providers customizing header renderers for rendering customized header, then we can use that to render filters
+虚拟化表格可以提供自定义的表头渲染，因此我们可以使用这个来过滤渲染。
 
 :::demo
 
@@ -139,9 +139,9 @@ table-v2/filter
 
 :::
 
-## Sortable
+## 可排序表格
 
-You can sort the table with sort state.
+您可以使用排序状态来对表格进行排序。
 
 :::demo
 
@@ -149,9 +149,9 @@ table-v2/sort
 
 :::
 
-## Controlled Sort
+## 受控的排序
 
-You can define multiple sortable column when you need it. Keep in mind that if you define multiple sortable columns, the UI might seem strange to your users since the it is unclear which column is being sorted.
+您可以在需要时定义多个可排序的列。 请记住，当您在定义了多个可排序的列时， UI 可能会显得有些奇怪，因为用户不知道哪一列被排序。
 
 :::demo
 
@@ -159,9 +159,19 @@ table-v2/controlled-sort
 
 :::
 
-## Colspan
+## 高亮显示鼠标悬停单元格
 
-Virtualized table did not use built-in `table` element, so that `colspan` and `rowspan` is a little bit different than [TableV1](./table.md). With customized row renderer, we can still do that. In this case, you'll learn how to do that.
+当数据列表很大时，有时候会忘记正在访问的行和列，使用这个属性可以给予你这个帮助。
+
+:::demo
+
+table-v2/cross-hovering
+
+:::
+
+## 横跨列
+
+虚拟化表格没有使用内置的 `table` 元素，故 `colspan` 和 `rowspan` 与 [TableV1](./table.md) 比较略有不同。 通过定制的行渲染器，我们仍然可以实现这个需求。 在如下例子，你会学习如何做到这一点。
 
 :::demo
 
@@ -169,9 +179,9 @@ table-v2/colspan
 
 :::
 
-## Rowspan
+## 纵跨行
 
-Since we have [Colspan](#colspan) of course we have row span as well, it is a little bit different than colspan but the idea is basically the same.
+既然我们有 [Colspan](#横跨列) 当然我们也有纵跨的列。它与 colspan 略有不同，但是原理相似。
 
 :::demo
 
@@ -179,9 +189,9 @@ table-v2/rowspan
 
 :::
 
-## Rowspan and Colspan together
+## 同时跨行和跨列
 
-We can combine rowspan and colspan together to meet your business goal!
+我们当然可以同时使用横跨列与纵跨行来满足您的业务需求！
 
 :::demo
 
@@ -189,9 +199,9 @@ table-v2/spans
 
 :::
 
-## Tree data
+## 树形数据
 
-Virtual Table can also render data like tree, you can expand/collapse the tree node by clicking the arrow icon.
+虚拟化表格当然可以渲染树形数据，您可以通过点击箭头图标来展开/折叠树节点。
 
 :::demo
 
@@ -199,13 +209,13 @@ table-v2/tree-data
 
 :::
 
-## Dynamic height rows
+## 动态高度行
 
-Virtual Table can also render rows with dynamic height, when you have data without knowing how big the content it would be, you might want to use this feature for rendering a dynamic height row. You must pass down `estimated-row-height` to enable this feature, and the closer the estimated height is, the smoother the rendering will be.
+虚拟表格也支持渲染动态高度的单元格。当不知道一条数据具体的展示高度时，不妨使用动态渲染高度来解决。 通过设置预估行高度 `estimated-row-height` 来启用此 功能，估计值越接近，渲染效果将会越平滑。
 
 :::tip
 
-The height of each row is dynamically measured while rendering the rows, so that the UI **might be** bouncing if you are trying to render a large amount of data.
+每行的实际渲染高度是在渲染时动态测量的， 如果您尝试渲染大量数据，渲染界面 **可能** 会出现抖动。
 
 :::
 
@@ -215,9 +225,9 @@ table-v2/dynamic-height
 
 :::
 
-## Detail view
+## 可展开的附加信息
 
-With dynamic height rendering, we can use that to render detail view in the table.
+通过动态高度渲染，我们可以在表格中显示可展开的更多附加信息。
 
 :::demo
 
@@ -225,9 +235,9 @@ table-v2/detailed-view
 
 :::
 
-## Customized Footer
+## 自定义页脚
 
-Rendering a customized footer when you want to show a concluding message or information.
+自定义表格 footer， 通常用来展示一些汇总数据和信息。
 
 :::demo
 
@@ -235,9 +245,9 @@ table-v2/footer
 
 :::
 
-## Customized Empty Renderer
+## 自定义空元素渲染器
 
-Render customized empty element
+渲染自定义的空元素
 
 :::demo
 
@@ -245,9 +255,9 @@ table-v2/empty
 
 :::
 
-## Overlay
+## 浮动遮罩层
 
-Render an overlay above the table when you want to show a loading indicator or something else.
+当您想要显示加载指示器之类的浮动元素，可以通过渲染一个浮动在表格之上的遮罩层来实现。
 
 :::demo
 
@@ -255,92 +265,120 @@ table-v2/overlay
 
 :::
 
-## TableV2 Attributes
+## 手动滚动
 
-| Attribute                 | Description                                                                                                                | Type                                                 | Default   |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | --------- |
-| cache                     | Number of rows rendered in advance for boosting the performance                                                            | Number                                               | 2         |
-| estimated-row-height      | The estimated row height for rendering dynamic height rows                                                                 | Number                                               | -         |
-| header-class              | Customized class name passed to header wrapper                                                                             | String/Function\<[HeaderClassGetter](#typings)\>     | -         |
-| header-props              | Customized props name passed to header component                                                                           | Object/Function\<[HeaderPropsGetter](#typings)\>     | -         |
-| header-cell-props         | Customized props name passed to header cell component                                                                      | Object/Function\<[HeaderCellPropsGetter](#typings)\> | -         |
-| header-height             | The height of entire header, when it's array, it will render as many header rows as the given array's length               | Number/Array\<Number\>                               | 50        |
-| footer-height             | The height of the footer element, when presented, it will be part of the calculation of the table's height.                | Number                                               | 0         |
-| row-class                 | Customized class name passed to row wrapper                                                                                | String/Function\<[RowClassGetter](#typings)\>        | -         |
-| row-key                   | The key of each row, if not provided, it will be the index of the row                                                      | String/Symbol/Number                                 | id        |
-| row-props                 | Customized props name passed to row component                                                                              | Object/Function\<[RowPropsGetter](#typings)\>        | -         |
-| row-height                | The height of each row, used for calculating the total height of the table                                                 | Number                                               | 50        |
-| columns                   | An array of column definitions.                                                                                            | Array\<[Column](#column-attribute)\>                 | -         |
-| data                      | An array of data to be rendered in the table.                                                                              | Array\<[Data](#typings)\>                            | []        |
-| data-getter               | An method which helps customizing the how to fetch the data from the data source.                                          | Function                                             | -         |
-| fixed-data                | Data for rendering rows above the main content and below the header                                                        | Array\<[Data](#typings)\>                            | -         |
-| expand-column-key         | The column key indicates which row is expandable                                                                           | String                                               | -         |
-| expanded-row-keys         | An array of keys for expanded rows, can be used with `v-model`                                                             | Array\<[KeyType](#typings)\>                         | -         |
-| default-expanded-row-keys | An array of keys for default expanded rows, **NON REACTIVE**                                                               | Array\<[KeyType](#typings)\>                         | -         |
-| class                     | Class name for the the virtual table, will be applied to all three tables (left, right, main)                              | String/Array/Object                                  | -         |
-| fixed                     | Flag indicates the table column's width is a fixed or flexible.                                                            | Boolean                                              | false     |
-| width \*                  | Width for the table, required                                                                                              | Number                                               | -         |
-| height \*                 | Height for the table, required                                                                                             | Number                                               | -         |
-| max-height                | Maximum height for the table                                                                                               | Number                                               | -         |
-| h-scrollbar-size          | Indicates the horizontal scrollbar's size for the table, used to prevent the horizontal and vertical scrollbar to collapse | Number                                               | 6         |
-| v-scrollbar-size          | Indicates the horizontal scrollbar's size for the table, used to prevent the horizontal and vertical scrollbar to collapse | Number                                               | 6         |
-| scrollbar-always-on       | If true, the scrollbar will always be shown instead of when mouse is placed above the table                                | Boolean                                              | false     |
-| sort-by                   | Sort indicator                                                                                                             | Object\<[SortBy](#typings)\>                         | {}        |
-| sort-state                | Multiple sort indicator                                                                                                    | Object\<[SortState](#typings)\>                      | undefined |
-
-## TableV2 Slots
-
-| Name        | Params                          |
-| ----------- | ------------------------------- |
-| cell        | [CellSlotProps](#typings)       |
-| header      | [HeaderSlotProps](#typings)     |
-| header-cell | [HeaderCellSlotProps](#typings) |
-| row         | [RowSlotProps](#typings)        |
-| footer      | -                               |
-| empty       | -                               |
-| overlay     | -                               |
-
-## Table Methods
-
-| Event Name           | Description                                   | Parameters                               |
-| -------------------- | --------------------------------------------- | ---------------------------------------- |
-| column-sort          | Invoked when column sorted                    | Object\<ColumnSortParam\>                |
-| expanded-rows-change | Invoked when expanded rows changed            | `Array<KeyType>`                         |
-| end-reached          | Invoked when the end of the table is reached  | -                                        |
-| scroll               | Invoked after scrolled                        | Object\<[ScrollParams](#typings)\>       |
-| rows-rendered        | Invoked when rows are rendered                | Object\<[RowsRenderedParams](#typings)\> |
-| row-event-handlers   | A collection of handlers attached to each row | Object\<[RowEventHandlers](#typings)\>   |
+使用 Table V2 暴露的方法进行手动或编程式滚动指定偏移或行。
 
 :::tip
 
-Note that these are `JavaScript` Objects, so that you **CANNOT USE** kebab-case for these attributes
+`scrollToRow` 的第二个参数代表滚动策略，计算了要滚动的位置，其默认值是 `auto`。 如果你想要表格滚动到某个特定位置，可以额外配置。 可用的选项是 `"auto" | "center" | "end" | "start" | "smart"`
+
+`smart` 和`auto` 之间的区别是， `auto` 是 `smart` 滚动策略的子集。
 
 :::
 
-## Column Attribute
+:::demo
 
-| Attribute      | Description                                                               | Type                                                                                                                                                             | Default |
-| -------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| align          | Alignment of the table cell content                                       | [Alignment](https://github.com/element-plus/element-plus/blob/b92b22932758f0ddea98810ae248f6ca62f77e25/packages/components/table-v2/src/constants.ts#L6)         | left    |
-| class          | Class name for the column                                                 | String                                                                                                                                                           | -       |
-| fixed          | Fixed direction of the column                                             | Boolean/[FixedDir](https://github.com/element-plus/element-plus/blob/b92b22932758f0ddea98810ae248f6ca62f77e25/packages/components/table-v2/src/constants.ts#L11) | false   |
-| flexGrow       | CSSProperties flex grow, Only useful when not this is not a fixed table   | Number                                                                                                                                                           | 0       |
-| flexShrink     | CSSProperties flex shrink, Only useful when not this is not a fixed table | Number                                                                                                                                                           | 1       |
-| headerClass    | Used for customizing header column class                                  | String                                                                                                                                                           | -       |
-| hidden         | Whether the column is invisible                                           | Boolean                                                                                                                                                          | -       |
-| style          | Customized style for column cell, will be merged with grid cell           | CSSProperties                                                                                                                                                    | -       |
-| sortable       | Indicates whether the column is sortable                                  | Boolean                                                                                                                                                          | -       |
-| title          | The default text rendered in header cell                                  | String                                                                                                                                                           | -       |
-| maxWidth       | Maximum width for the column                                              | String                                                                                                                                                           | -       |
-| minWidth       | Minimum width for the column                                              | String                                                                                                                                                           | -       |
-| width \*       | Width for the column **Required**                                         | Number                                                                                                                                                           | -       |
-| cellRenderer   | Customized Cell renderer                                                  | VueComponent/(props: [CellRenderProps](#renderer-typings)) => VNode                                                                                              | -       |
-| headerRenderer | Customized Header renderer                                                | VueComponent/(props: [HeaderRenderProps](#renderer-typings)) => VNode                                                                                            | -       |
+table-v2/manual-scroll
 
-## Typings
+:::
+
+## TableV2 属性
+
+| 属性                      | 描述说明                                                              | 类型                                              | 默认值    |
+| ------------------------- | --------------------------------------------------------------------- | ------------------------------------------------- | --------- |
+| cache                     | 为了更好的渲染效果预先多加载的行数                                    | Number                                            | 2         |
+| estimated-row-height      | 渲染动态的单元格的预估高度                                            | Number                                            | -         |
+| header-class              | header 部分的自定义 class 名                                          | String/Function\<[HeaderClassGetter](#类型)\>     | -         |
+| header-props              | header 部分的自定义 props 名                                          | Object/Function\<[HeaderPropsGetter](#类型)\>     | -         |
+| header-cell-props         | header cell 部分的自定义 props 名                                     | Object/Function\<[HeaderCellPropsGetter](#类型)\> | -         |
+| header-height             | header 部分的高度。当传入数组时, 将会渲染和数组长度一样多的 header 行 | Number/Array\<Number\>                            | 50        |
+| footer-height             | footer 部分的高度，当传入值时，这部分将被计算入 table 的高度里        | Number                                            | 0         |
+| row-class                 | row wrapper 部分的自定义 class 名                                     | String/Function\<[RowClassGetter](#类型)\>        | -         |
+| row-key                   | 每行的 key 值，如果不提供，将使用索引 index 代替                      | String/Symbol/Number                              | id        |
+| row-props                 | row component 部分的自定义 class 名                                   | Object/Function\<[RowPropsGetter](#类型)\>        | -         |
+| row-height                | 每行的高度, 用于计算表的总高度                                        | Number                                            | 50        |
+| cell-props                | 每个单元格 cell 的自定义 props (除了 header cell 以外)                | Object/Function\<[CellPropsGetter](#类型)\>       | -         |
+| columns                   | 列 column 的配置数组                                                  | Array\<[Column](#column-attribute)\>              | -         |
+| data                      | 要在表中渲染的数据数组                                                | Array\<[Data](#类型)\>                            | []        |
+| data-getter               | 自定义数据源转换成表格消费的数据格式的处理函数                        | Function                                          | -         |
+| fixed-data                | 渲染行在表格主内容上方和 header 下方区域的数据                        | Array\<[Data](#类型)\>                            | -         |
+| expand-column-key         | 列的 key 来标记哪个行可以被展开                                       | String                                            | -         |
+| expanded-row-keys         | 存放行展开状态的 key 的数组，可以和 `v-model` 搭配使用                | Array\<[KeyType](#类型)\>                         | -         |
+| default-expanded-row-keys | 默认展开的行的 key 的数组, **这个数据不是响应式的**                   | Array\<[KeyType](#类型)\>                         | -         |
+| class                     | 表格的类名称，将应用于表格的全部的三个部分 (左、右、主)               | String/Array/Object                               | -         |
+| fixed                     | 单元格宽度是自适应还是固定                                            | Boolean                                           | false     |
+| width \*                  | 表的宽度，必填                                                        | Number                                            | -         |
+| height \*                 | 表的高度，必填                                                        | Number                                            | -         |
+| max-height                | 表格的最大高度                                                        | Number                                            | -         |
+| h-scrollbar-size          | 配置表格的水平滚动条大小，防止水平和垂直滚动条重叠。                  | Number                                            | 6         |
+| v-scrollbar-size          | 配置表格的水平滚动条大小，防止水平和垂直滚动条重叠。                  | Number                                            | 6         |
+| scrollbar-always-on       | 如果开启，滚动条将一直显示，反之只会在鼠标经过时显示。                | Boolean                                           | false     |
+| sort-by                   | 排序方式                                                              | Object\<[SortBy](#类型)\>                         | {}        |
+| sort-state                | 多个排序                                                              | Object\<[SortState](#类型)\>                      | undefined |
+
+## TableV2 插槽
+
+| 插槽名      | 参数                         |
+| ----------- | ---------------------------- |
+| cell        | [CellSlotProps](#类型)       |
+| header      | [HeaderSlotProps](#类型)     |
+| header-cell | [HeaderCellSlotProps](#类型) |
+| row         | [RowSlotProps](#类型)        |
+| footer      | -                            |
+| empty       | -                            |
+| overlay     | -                            |
+
+## Table 事件
+
+| 事件名               | 描述                             | 参数                                  |
+| -------------------- | -------------------------------- | ------------------------------------- |
+| column-sort          | 列排序时调用                     | Object\<ColumnSortParam\>             |
+| expanded-rows-change | 行展开状态改变时触发             | `Array<KeyType>`                      |
+| end-reached          | 到达表格末尾时触发               | -                                     |
+| scroll               | 表格被用户滚动后触发             | Object\<[ScrollParams](#类型)\>       |
+| rows-rendered        | 当行被渲染后触发                 | Object\<[RowsRenderedParams](#类型)\> |
+| row-event-handlers   | 当行被添加了 EventHandler 时触发 | Object\<[RowEventHandlers](#类型)\>   |
+
+## Table 方法
+
+| 事件名       | 描述                                                 | 参数                                                                       |
+| ------------ | ---------------------------------------------------- | -------------------------------------------------------------------------- |
+| scrollTo     | Scroll to a given position                           | `{ scrollLeft?: number, scrollTop?: number}`                               |
+| scrollToLeft | Scroll to a given horizontal position                | `scrollLeft: number`                                                       |
+| scrollToTop  | Scroll to a given vertical position                  | `scrollTop: number`                                                        |
+| scrollToRow  | scroll to a given row with specified scroll strategy | `row: number, strategy?: "auto" \|"center" \| "end" \| "start" \| "smart"` |
+
+:::tip
+
+请注意：这些是 `JavaScript` 对象，所以您 **不能使用** 短横线命名法（kebab-case）来处理这些属性
+
+:::
+
+## Column 属性
+
+| 属性           | 描述                                         | 类型                                                                                                                          | 默认值 |
+| -------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------ |
+| align          | 表格单元格内容对齐方式                       | [Alignment](https://git.bgy.com.cn/pt00057/cs-element-plus/blob/dev/packages/components/table-v2/src/constants.ts#L6)         | left   |
+| class          | 列的类名                                     | String                                                                                                                        | -      |
+| fixed          | 固定列位置                                   | Boolean/[FixedDir](https://git.bgy.com.cn/pt00057/cs-element-plus/blob/dev/packages/components/table-v2/src/constants.ts#L11) | false  |
+| flexGrow       | CSS 属性 flex grow, 仅当不是固定表时才生效   | Number                                                                                                                        | 0      |
+| flexShrink     | CSS 属性 flex shrink, 仅当不是固定表时才生效 | Number                                                                                                                        | 1      |
+| headerClass    | 自定义 header 头部类名                       | String                                                                                                                        | -      |
+| hidden         | 此列是否不可见                               | Boolean                                                                                                                       | -      |
+| style          | 自定义列单元格的类名，将会与 gird 单元格合并 | CSSProperties                                                                                                                 | -      |
+| sortable       | 设置列是否可排序                             | Boolean                                                                                                                       | -      |
+| title          | Header 头部单元格中的默认文本                | String                                                                                                                        | -      |
+| maxWidth       | 列的最大宽度                                 | String                                                                                                                        | -      |
+| minWidth       | 列的最小宽度                                 | String                                                                                                                        | -      |
+| width \*       | 列的宽度 **必填**                            | Number                                                                                                                        | -      |
+| cellRenderer   | 自定义单元格渲染器                           | VueComponent/(props: [CellRenderProps](#类型)) => VNode                                                                       | -      |
+| headerRenderer | 自定义头部渲染器                             | VueComponent/(props: [HeaderRenderProps](#类型)) => VNode                                                                     | -      |
+
+## 类型
 
 <details>
-<summary>Show Type Declarations</summary>
+<summary>显示类型声明</summary>
 
 ```ts
 type HeaderClassGetter = (param: {
@@ -372,6 +410,15 @@ type RowPropsGetter = (param: {
   rowData: any
   rowIndex: number
 }) => Record<string, any>
+
+type CellPropsGetter = (param: {
+  column: Column<any>
+  columns: Column<any>[]
+  columnIndex: number
+  cellData: any
+  rowData: any
+  rowIndex: number
+}) => void
 
 type CellRenderProps<T> = {
   cellData: T
@@ -464,12 +511,12 @@ type SortState = Record<KeyType, SortOrder>
 
 </details>
 
-## FAQs
+## 常见问题
 
-#### How do I render a list with checkbox in the first column?
+#### 如何在第一列中渲染带复选框的列表？
 
-Since you are allowed to define your own cell renderer, you can do what the example [Customize Cell Renderer](#customize-cell-renderer) did to render `checkbox` yourselves, and maintaining the state by yourselves.
+由于可以自己定义单元格渲染器，您可以根据示例 [自定义单元格渲染器](#自定义单元格渲染) 代码来渲染 `checkbox`，并自行管理其状态。
 
-#### Why virtualized table provides less features than [TableV1](./table.md)
+#### 为什么虚拟化表提供的功能较 [TableV1](./table.md) 少？
 
-For virtualized table, we intend to provide less feature and let our users to implement their own features per demand. Integrating too many features makes the code hard to maintain and for most users the basic features are enough. Some key features were not developed yet. We would love to hear from you. Join [Discord](https://discord.link/ElementPlus) to stay tuned.
+对于虚拟化表，我们打算减少一些功能，让用户根据需求自行实现。 整合过多的功能会让组件的代码变得难以维护，且对于大多数用户来说，基础功能就已足够。 一些主要的功能尚未开发。 我们很希望听从您的意见。 加入 [Discord 频道](https://discord.link/ElementPlus) 来跟上我们最新的进展！

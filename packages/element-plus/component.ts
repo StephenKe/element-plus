@@ -113,6 +113,8 @@ import {
 import { ElQueryForm } from '@element-plus/components/query-form'
 import { ElBgyUpload } from '@element-plus/components/bgy-upload'
 import { ElTableRender } from '@element-plus/components/render'
+import { ElContractEditForm } from '@element-plus/components/contract-edit-form'
+import { ElBgyTreeSelect } from '@element-plus/components/bgy-tree-select'
 import type { Plugin } from 'vue'
 
 export default [
@@ -221,4 +223,6 @@ export default [
   ElQueryForm,
   ElBgyUpload,
   ElTableRender,
+  ElContractEditForm,
+  ElBgyTreeSelect,
 ] as Plugin[]
