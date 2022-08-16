@@ -7,7 +7,7 @@ import {
   isSelectableFlags,
   isRangeFlags,
 } from './FieldFlags'
-import type { FormItemProps } from '@element-plus/components'
+import type { FormRenderItemProps } from '@element-plus/components'
 import type { FormItemRule } from '@element-plus/tokens'
 import type { SelectFieldProps } from '../item-render/src/index'
 
@@ -16,7 +16,7 @@ import type { SelectFieldProps } from '../item-render/src/index'
  * @param item 字段
  * @returns 返回处理后的字段
  */
-function setDefaultProps(item: FormItemProps): FormItemProps {
+function setDefaultProps(item: FormRenderItemProps): FormRenderItemProps {
   // 默认为 text
   if (!item.type) {
     item.type = FieldFlags.text
@@ -38,7 +38,7 @@ function setDefaultProps(item: FormItemProps): FormItemProps {
     }
   } else if (item.type & FieldFlags.select) {
     // 如果是下拉选择框
-    const selectItem = item as FormItemProps & SelectFieldProps
+    const selectItem = item as FormRenderItemProps & SelectFieldProps
     selectItem.options = selectItem.options ?? []
   }
 
@@ -67,9 +67,9 @@ function setDefaultProps(item: FormItemProps): FormItemProps {
  * @param item 字段
  */
 function setDefaultValue(
-  item: FormItemProps,
+  item: FormRenderItemProps,
   formData = ref({})
-): FormItemProps {
+): FormRenderItemProps {
   // 如果是区间类型字段
   if (isRangeFlags(item.type)) {
     if (isArray(item.prop) && item.prop.length) {
@@ -98,9 +98,9 @@ function setDefaultValue(
  * @param item 字段
  */
 function setRules(
-  item: FormItemProps,
+  item: FormRenderItemProps,
   formRules = reactive({})
-): FormItemProps {
+): FormRenderItemProps {
   if (!isArray(item.rules) && isObject(item.rules)) {
     // rules为对象时
     item.rules = [item.rules as FormItemRule]
@@ -131,7 +131,10 @@ function setRules(
  * @param item 字段
  * @returns 返回处理后的字段
  */
-function buildRules(item: FormItemProps, rangeLabel = ''): FormItemRule[] {
+function buildRules(
+  item: FormRenderItemProps,
+  rangeLabel = ''
+): FormItemRule[] {
   return (item.rules as Array<FormItemRule>).map((rule: FormItemRule) => {
     // 未设置触发方式，则默认为 blur & change
     if (!rule.trigger) {

@@ -28,11 +28,11 @@ import {
   ElSwitch,
   ElDatePicker,
   ElInputNumber,
+  formRenderItemProps,
 } from '@element-plus/components'
 import { UPDATE_MODEL_EVENT } from '@element-plus/constants'
 import { isUndefined } from '@element-plus/utils'
 import { FieldFlags, isRangeFlags, isDateFlags } from '../../shared/FieldFlags'
-import { formItemProps } from '../../form-render/src/index'
 import fieldText from './field-text.vue'
 import fieldDate from './field-date.vue'
 import fieldNumber from './field-number.vue'
@@ -42,12 +42,6 @@ import fieldSwitch from './field-switch.vue'
 import { itemRenderProps } from './index'
 import type { ItemRenderProps } from './index'
 import type { SetupContext } from 'vue'
-
-// 非以下几个属性外，其他属性排除掉
-const excludeProps = Object.keys(formItemProps).filter(
-  (key: string) =>
-    !['disabled', 'maxlength', 'placeholder', 'prop'].includes(key)
-)
 
 export default defineComponent({
   name: 'ElItemRender',
@@ -85,6 +79,14 @@ export default defineComponent({
 
     // 字段类型
     const type = computed<string>(() => FieldFlags[typeFlag.value] as string)
+
+    // 非以下几个属性外，其他属性排除掉
+    const excludeProps = computed(() =>
+      Object.keys(formRenderItemProps).filter(
+        (key: string) =>
+          !['disabled', 'maxlength', 'placeholder', 'prop'].includes(key)
+      )
+    )
 
     // 其他未在 props 里声明的属性，通过 v-bind 传递给子组件
     const otherProps = computed(() => {

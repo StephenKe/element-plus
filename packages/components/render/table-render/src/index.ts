@@ -4,12 +4,13 @@ import type { ExtractPropTypes } from 'vue'
 import type {
   PaginationEmits,
   ButtonProps,
-  FormItemProps,
+  FormRenderItemProps,
 } from '@element-plus/components'
 import type tableColumnProps from '@element-plus/components/table/src/table-column/defaults'
 import type { TableApiConfig } from './request.type'
 import type { ComponentSize } from '@element-plus/constants'
 import type { TruthResolver, TruthOrResolver } from '@element-plus/utils'
+import type { CardInstance } from '@element-plus/components'
 
 export interface Pagination {
   pageSize?: number
@@ -34,21 +35,19 @@ export enum DialogType {
   Drawer = 'drawer',
 }
 
-export type Shadow = 'always' | 'hover' | 'never' | 'none'
-
 export type TableRenderButtonProps = ButtonProps & {
   /**
    * 控制是否展示
    *
    * 返回 boolean 或 返回 boolean 值的函数
    */
-  visible?: TruthOrResolver
+  visible?: TruthOrResolver<any>
   /**
    * 控制是否禁用
    *
    * 返回 boolean 或 返回 boolean 值的函数
    */
-  disabled?: TruthResolver
+  disabled?: TruthResolver<any>
   /**
    * 按钮点击事件
    */
@@ -118,7 +117,7 @@ export const tableRenderProps = buildProps({
    * none: 从不出现，且无边框
    */
   shadow: {
-    type: definePropType<Shadow>(String),
+    type: definePropType<CardInstance['shadow']>(String),
     default: 'none',
   },
   /**
@@ -208,14 +207,14 @@ export const tableRenderProps = buildProps({
    * 长度为0，则不展示搜索区
    */
   searchItem: {
-    type: definePropType<FormItemProps[]>(Array),
+    type: definePropType<FormRenderItemProps[]>(Array),
     default: () => [],
   },
   /**
    * 表单字段
    */
   formItem: {
-    type: definePropType<FormItemProps[]>(Array),
+    type: definePropType<FormRenderItemProps[]>(Array),
     default: () => [],
   },
   /**

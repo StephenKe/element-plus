@@ -13,7 +13,7 @@ export const cardProps = buildProps({
   },
   shadow: {
     type: String,
-    values: ['always', 'hover', 'never'],
+    values: ['always', 'hover', 'never', 'none'],
     default: 'always',
   },
 } as const)

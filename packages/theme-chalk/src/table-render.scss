@@ -1,0 +1,115 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+
+@include b(table-render) {
+  // 内部 card
+  @include b(card) {
+    @include when(none-shadow) {
+      border: none;
+    }
+    @include e(body) {
+      padding: 10px;
+    }
+  }
+
+  // 搜索区域
+  @include b(table-render-search) {
+    .el-form {
+      display: flex;
+      flex-flow: row wrap;
+      &-item {
+        &__label {
+          padding-right: 0px;
+        }
+        &__content {
+          .el-select,
+          .el-input.el-date-editor,
+          .el-range-editor {
+            width: 100%;
+          }
+          .range-stage {
+            display: flex;
+            flex: 1;
+            .separator {
+              margin: 0 5px;
+            }
+            .el-input {
+              display: flex;
+              flex: 1;
+            }
+          }
+        }
+        &:last-child {
+          flex: 1 0 auto;
+          .el-form-item__content {
+            justify-content: flex-end;
+          }
+        }
+      }
+      &.el-form--inline {
+        .el-form-item {
+          margin-right: 0;
+        }
+      }
+      .v-enter-active,
+      .v-leave-active {
+        transition: all 0.3s linear;
+        height: 32px;
+        opacity: 1;
+      }
+      .v-enter-from,
+      .v-leave-to {
+        height: 0;
+        opacity: 0;
+      }
+    }
+  }
+
+  // 数据区域
+  @include b(table-render-view) {
+    margin-top: 10px;
+
+    // 操作栏
+    @include b(table-render-action) {
+      margin-bottom: 10px;
+      align-items: center;
+      @include e(right) {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+    // 表格
+    @include b(table-render-table) {
+    }
+
+    // 状态栏
+    @include b(table-render-status) {
+      margin-top: 10px;
+      align-items: center;
+      @include e(right) {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  // 弹窗
+  @include b(table-render-dialog) {
+    .el-dialog__header {
+      position: relative;
+      &:after {
+        content: '';
+        height: 1px;
+        background: #e3e3e3;
+        width: calc(100% - 40px);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        position: absolute;
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { buildProps, definePropType } from '@element-plus/utils'
 import { provideGlobalConfig, useSizeProp } from '@element-plus/hooks'
 
 import type { ExtractPropTypes } from 'vue'
+import type { AxiosInstance } from 'axios'
 import type { ExperimentalFeatures } from '@element-plus/tokens'
 import type { Language } from '@element-plus/locale'
 import type { ButtonConfigContext } from '@element-plus/components/button'
@@ -46,6 +47,10 @@ export const configProviderProps = buildProps({
   namespace: {
     type: String,
     default: 'el',
+  },
+
+  axios: {
+    type: definePropType<AxiosInstance>(Function),
   },
 } as const)
 export type ConfigProviderProps = ExtractPropTypes<typeof configProviderProps>

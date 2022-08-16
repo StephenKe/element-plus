@@ -9,7 +9,7 @@
         :size="size"
         :label-width="labelWidth"
         :expand-size="expandSize"
-        :submit-button="{ label: '查询' }"
+        :submit-button="submitButton"
         @submit="handleSearchSubmit"
       >
       </el-form-render>
@@ -295,7 +295,7 @@ import {
   ElMessage,
   ElMessageBox,
   ElLoading,
-  // ElFormRender,
+  ElFormRender,
   ElItemRender,
   ElItemSplitRender,
   ElDropdown,
@@ -309,20 +309,25 @@ import { merge } from 'lodash'
 import { isBoolean, isNumber } from '@element-plus/utils'
 import tableProps from '@element-plus/components/table/src/table/defaults'
 import { paginationEmits } from '@element-plus/components/pagination/src/pagination'
-import ElFormRender from '../../form-render'
-import { FieldFlags } from '../../shared/FieldFlags'
-import { useApi, usePagination } from './hooks'
+// import ElFormRender from '../../form-render'
+import { FieldFlags } from '@element-plus/components/render/shared'
+import {
+  useApi,
+  usePagination,
+} from '@element-plus/components/render/table-render/src/hooks'
 import {
   tableRenderProps,
   tableRenderEmits,
   tableEmits,
   ActionType,
-} from './index'
+} from '@element-plus/components/render/table-render/src'
+import type { ValidateFieldsError } from 'async-validator'
+import type { FormButtonProps } from '@element-plus/components'
 import type {
   TableRenderProps,
   TableRenderColumn,
   TableRenderButtonProps,
-} from './index'
+} from '@element-plus/components/render/table-render/src'
 
 const COMPONENT_NAME = 'ElTableRender'
 const tableDebugWarn = _.curry(debugWarn)(COMPONENT_NAME)
@@ -400,7 +405,7 @@ export default defineComponent({
         }
       }
     })
-    const editFormData = ref({})
+    const editFormData = ref<Record<string, any>>({})
     const triggerReset = () => {
       editFormRef.value?.onReset()
       dialogVisible.value = false
@@ -411,7 +416,7 @@ export default defineComponent({
       editFormRef.value?.onSubmit()
     }
     // 表单提交
-    const handleSubmit = (formData, stopLoading) => {
+    const handleSubmit = (formData: any, stopLoading: Function) => {
       const isUpdate = key.value in formData
       const caller = isUpdate ? updateApi : insertApi
       caller(formData)
@@ -426,7 +431,7 @@ export default defineComponent({
           stopLoading()
         })
     }
-    const handleValidateFieldsError = (fields) => {
+    const handleValidateFieldsError = (fields: ValidateFieldsError) => {
       loading.value = false
       emit('validate-fields-error', fields)
     }
@@ -444,6 +449,9 @@ export default defineComponent({
     // search
     const formRef = ref<InstanceType<typeof ElFormRender>>()
     const searchFormData = ref({})
+    const submitButton = computed<FormButtonProps>(
+      () => ({ label: '查询' } as FormButtonProps)
+    )
 
     // 表单查询重置
     const handleSearchReset = () => {
@@ -472,7 +480,7 @@ export default defineComponent({
     // el-table attrs
     const tableAttrs = computed(() => {
       const mergeAttrsAndProps = merge(props, attrs)
-      const tblAttrs = {}
+      const tblAttrs: Record<string, any> = {}
       for (const key in mergeAttrsAndProps) {
         const camelizeKey = camelize(key)
         if (camelizeKey in tableProps) {
@@ -910,6 +918,7 @@ export default defineComponent({
       // 查询区
       formRef,
       searchFormData,
+      submitButton,
       triggerSearch,
       handleSearchReset,
       handleSearchSubmit,

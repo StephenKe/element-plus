@@ -132,17 +132,25 @@ import {
   ElButton,
   ElItemRender,
   ElItemSplitRender,
+  // formRenderProps,
+  formRenderEmits,
 } from '@element-plus/components'
+import { formRenderProps } from './index'
 import { merge } from 'lodash'
 import { isBoolean } from '@element-plus/utils'
-import { FieldFlags, isRangeFlags, useForm } from '../../shared'
-import { EVENTBUS_SELECT_OPTIONS } from '../../shared/constants'
-import { formProps, formEmits } from './index'
+import {
+  FieldFlags,
+  isRangeFlags,
+  useForm,
+  EVENTBUS_SELECT_OPTIONS,
+} from '@element-plus/components/render/shared'
 import type { ValidateFieldsError } from 'async-validator'
-import type { FormProps, FormItemProps, FormButtonProps } from './index'
-import type { Callback } from '@element-plus/components/form/src/form.vue'
-import type { SelectFieldProps } from '../../item-render/src/index'
-import type { ValidateFieldCallback } from '@element-plus/tokens'
+import type {
+  FormRenderProps,
+  FormRenderItemProps,
+  FormButtonProps,
+} from '@element-plus/components'
+import type { SelectFieldProps } from '@element-plus/components/render/item-render/src/index'
 
 export default defineComponent({
   name: 'ElFormRender',
@@ -157,9 +165,9 @@ export default defineComponent({
     ArrowUp,
   },
   inheritAttrs: false,
-  props: formProps,
-  emits: formEmits,
-  setup(props: FormProps, { emit, expose }) {
+  props: formRenderProps,
+  emits: formRenderEmits,
+  setup(props: FormRenderProps, { emit, expose }) {
     const bus = useEventBus(EVENTBUS_SELECT_OPTIONS)
     const ns = useNamespace('form-render')
     /**
@@ -185,7 +193,7 @@ export default defineComponent({
     /**
      * 表单字段列表
      */
-    const formItemList = ref<FormItemProps[]>([])
+    const formItemList = ref<FormRenderItemProps[]>([])
     /**
      * 表单校验规则
      */
@@ -193,8 +201,8 @@ export default defineComponent({
     /**
      * 展示的表单字段列表
      */
-    const showFormItem = computed<FormItemProps[]>(() =>
-      formItemList.value.filter((item: FormItemProps) => {
+    const showFormItem = computed<FormRenderItemProps[]>(() =>
+      formItemList.value.filter((item: FormRenderItemProps) => {
         if (isBoolean(item.visible)) return item.visible
         if (isFunction(item.visible))
           return item.visible.call(item, formData.value)
@@ -253,7 +261,7 @@ export default defineComponent({
     /**
      * 字段样式
      */
-    const formItemStyle = (col: FormItemProps) => {
+    const formItemStyle = (col: FormRenderItemProps) => {
       // 跨度值不能大于 rowSize
       const colSpan = Math.min(col.colSpan || 1, props.rowSize)
       return {
@@ -269,7 +277,10 @@ export default defineComponent({
     /**
      * 影响其他字段
      */
-    const handleEffect = (val, item: FormItemProps & SelectFieldProps) => {
+    const handleEffect = (
+      val: any,
+      item: FormRenderItemProps & SelectFieldProps
+    ) => {
       for (const toProp in item.effect) {
         const fromProp = item.effect[toProp]
         if (fromProp) {
@@ -281,11 +292,11 @@ export default defineComponent({
       }
     }
 
-    const handleChange = (val, item: FormItemProps) => {
+    const handleChange = (val: any, item: FormRenderItemProps) => {
       emit('select-change', val, item)
       // 如果是 select 框，并且配置了 effect 属性
       if (item.type & FieldFlags.select && item.effect) {
-        handleEffect(val, item as FormItemProps & SelectFieldProps)
+        handleEffect(val, item as FormRenderItemProps & SelectFieldProps)
       }
     }
 
@@ -312,10 +323,12 @@ export default defineComponent({
     /**
      * 从 showFormItem 中找到最靠前的字段
      */
-    const findTopInvalidFormItem = (fieldProps: string[]): FormItemProps =>
+    const findTopInvalidFormItem = (
+      fieldProps: string[]
+    ): FormRenderItemProps =>
       showFormItem.value!.find((item) =>
         fieldProps.includes(item.prop as string)
-      ) as FormItemProps
+      ) as FormRenderItemProps
 
     const handleValidate = async (
       isValid?: boolean,
@@ -368,7 +381,7 @@ export default defineComponent({
     bus.on((target, val) => {
       const item = formItemList.value.find(
         (e) => e.prop === target
-      ) as FormItemProps & SelectFieldProps
+      ) as FormRenderItemProps & SelectFieldProps
       if (item) {
         item.options = val
         handleEffect(formData.value[item.prop as string], item)
@@ -383,17 +396,11 @@ export default defineComponent({
       trailing: false,
     })
 
-    // el-form 方法，暴露出去（组件库由于是fork较早之前版本，所以有些落后了）
-    const validate = computed<
-      | ((callback?: Callback | undefined) => Promise<boolean> | undefined)
-      | undefined
-    >(() => formRef.value?.validate)
+    // el-form 方法，暴露出去
+    const validate = computed(() => formRef.value?.validate)
 
-    // el-form 方法，暴露出去（组件库由于是fork较早之前版本，所以有些落后了）
-    const validateField = computed<
-      | ((props: string | string[], cb: ValidateFieldCallback) => void)
-      | undefined
-    >(() => formRef.value?.validateField)
+    // el-form 方法，暴露出去
+    const validateField = computed(() => formRef.value?.validateField)
 
     expose({
       onClear,
