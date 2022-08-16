@@ -23,6 +23,22 @@ export const toolbarProps = buildProps({
   },
   // 我要提问页面地址
   questionPageUrl: String,
+  // 头像下拉选项
+  avatarOptList: {
+    type: Array<AvatarOptItem>,
+    default: () => [
+      {
+        key: 'changePwd',
+        text: '修改密码',
+        event: 'changePwd',
+      },
+      {
+        key: 'logout',
+        text: '注销',
+        event: 'logout',
+      },
+    ],
+  },
 })
 
 // 头像下拉框数据结构类型

@@ -16,6 +16,8 @@
       </div>
       <!-- 用于延展背景 -->
       <div class="el-toolbar__left--placeholder" />
+      <!-- 默认插槽 -->
+      <slot />
     </div>
     <!-- 右侧按钮 -->
     <div class="el-toolbar__right">
@@ -99,22 +101,8 @@ export default defineComponent({
     QuestionFilled,
   },
   props: toolbarProps,
-  emits: ['changePwd', 'logout', 'showMessage', 'logoClick'],
+  emits: ['showMessage', 'logoClick'],
   setup(props, { emit }) {
-    // 头像下拉操作列表
-    const avatarOptList: Array<AvatarOptItem> = [
-      {
-        key: 'changePwd',
-        text: '修改密码',
-        event: 'changePwd',
-      },
-      {
-        key: 'logout',
-        text: '注销',
-        event: 'logout',
-      },
-    ]
-
     // logo 点击时间
     const logoClickHandler = () => {
       emit('logoClick')
@@ -130,12 +118,11 @@ export default defineComponent({
       emit('showMessage')
     }
 
-    const handleAvatarCommand = (command) => {
+    const handleAvatarCommand = (command: string) => {
       emit(command)
     }
 
     return {
-      avatarOptList,
       logoClickHandler,
       handleHelpClick,
       handleMessageClick,
