@@ -8,6 +8,7 @@ coverage
 ssr-testing/cases/*
 packages/components/bgy-anchor/*
 packages/components/bgy-tree-transfer/*
+packages/components/bgy-tree/*
 packages/components/bgy-tree-select/*
 packages/components/complete-menu/*
 packages/components/custom-menu/*

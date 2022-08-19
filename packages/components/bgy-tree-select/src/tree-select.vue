@@ -15,6 +15,7 @@
       effect="light"
       pure
       trigger="click"
+      :disabled="selectDisabled"
       transition="el-zoom-in-top"
       :gpu-acceleration="false"
       persistent
@@ -194,7 +195,7 @@
             <div v-if="!isArray(data)" class="tree-header">
               {{ data[treeLabelProp] }}
             </div>
-            <el-tree
+            <el-bgy-tree
               ref="treeRef"
               :data="isArray(data) ? data : data[treeChildrenProp]"
               :node-key="nodeKey"
@@ -237,7 +238,7 @@
               <template v-if="$slots.treeNode" #default="{ node, data }">
                 <slot name="treeNode" :node="node" :data="data"></slot>
               </template>
-            </el-tree>
+            </el-bgy-tree>
           </el-scrollbar>
           <!-- 空数据样式 -->
           <template v-if="emptyText && (isEmpty(data) || loading)">
@@ -272,7 +273,7 @@ import ElTooltip from '@element-plus/components/tooltip'
 import ElScrollbar from '@element-plus/components/scrollbar'
 import ElTag from '@element-plus/components/tag'
 import ElIcon from '@element-plus/components/icon'
-import ElTree from '@element-plus/components/tree'
+import ElBgyTree from '@element-plus/components/bgy-tree'
 import {
   isEmpty,
   isArray,
@@ -300,7 +301,7 @@ const BgyTreeSelect: any = defineComponent({
     ElTag,
     ElIcon,
     ElTreeSelectMenu,
-    ElTree,
+    ElBgyTree,
   },
   props: treeSelectProps,
   emits: treeSelectEmits,

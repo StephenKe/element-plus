@@ -102,6 +102,7 @@ declare module '@vue/runtime-core' {
     ElTableRender: typeof import('../packages/element-plus')['ElTableRender']
     ElContractEditForm: typeof import('../packages/element-plus')['ElContractEditForm']
     ElContractOnlineCompiler: typeof import('../packages/element-plus')['ElContractOnlineCompiler']
+    ElBgyTree: typeof import('../packages/element-plus')['ElBgyTree']
     ElBgyTreeSelect: typeof import('../packages/element-plus')['ElBgyTreeSelect']
   }
 
