@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import clipboardCopy from 'clipboard-copy'
 import { ElMessage } from 'element-plus'
-import * as Icons from '@element-plus/icons-vue'
+import * as Icons from '@cs-element-plus/icons-vue'
 import { useLang } from '../../composables/lang'
 import localeData from '../../../i18n/component/icons.json'
 

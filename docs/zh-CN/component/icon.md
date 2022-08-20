@@ -98,7 +98,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 ```
 
 <vp-script setup>
-import { Edit, Share, Delete, Search, Loading } from '@element-plus/icons-vue'
+import { Edit, Share, Delete, Search, Loading } from '@cs-element-plus/icons-vue'
 </vp-script>
 
 <ElRow>
@@ -207,10 +207,10 @@ import { Edit, Share, Delete, Search, Loading } from '@element-plus/icons-vue'
 
 ## Icon 属性
 
-| 属性  | 说明                        | 类型                           | 可选值 | 默认值  |
-| ----- | --------------------------- | ------------------------------ | ------ | ------- | ------- |
-| color | svg 的 fill 颜色            | Pick\<CSSProperties, 'color'\> | -      | inherit |
-| size  | SVG 图标的大小，size x size | number/                        | string | -       | inherit |
+| 属性  | 说明                        | 类型                             | 可选值 | 默认值  |
+| ----- | --------------------------- | -------------------------------- | ------ | ------- | ------- |
+| color | svg 的 fill 颜色            | `Pick\<CSSProperties, 'color'\>` | -      | inherit |
+| size  | SVG 图标的大小，size x size | number                           | string | -       | inherit |
 
 ## Icon 插槽
 
