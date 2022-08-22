@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { ref, reactive } from 'vue'
 import { hasOwn, isArray, isObject, isString } from '@vue/shared'
 import { isUndefined } from '@element-plus/utils'

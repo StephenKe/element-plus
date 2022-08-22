@@ -1,4 +1,12 @@
-import { buildProps } from '@element-plus/utils'
+//@ts-nocheck
+import { buildProps, definePropType } from '@element-plus/utils'
+
+// 头像下拉框数据结构类型
+export interface AvatarOptItem {
+  key: string // key
+  text: string // 文本描述
+  event: string // 事件名称
+}
 
 // porps
 export const toolbarProps = buildProps({
@@ -25,7 +33,8 @@ export const toolbarProps = buildProps({
   questionPageUrl: String,
   // 头像下拉选项
   avatarOptList: {
-    type: Array<AvatarOptItem>,
+    // type: Array<AvatarOptItem>,
+    type: definePropType<AvatarOptItem[]>(Array),
     default: () => [
       {
         key: 'changePwd',
@@ -40,10 +49,3 @@ export const toolbarProps = buildProps({
     ],
   },
 })
-
-// 头像下拉框数据结构类型
-export interface AvatarOptItem {
-  key: string // key
-  text: string // 文本描述
-  event: string // 事件名称
-}

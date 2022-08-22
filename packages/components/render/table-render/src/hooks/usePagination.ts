@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { computed, reactive } from 'vue'
 import type { PaginationProps } from '@element-plus/components'
 import type { Pagination } from '../index'

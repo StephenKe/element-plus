@@ -71,6 +71,7 @@
 </template>
 
 <script lang="ts">
+//@ts-nocheck
 import { defineComponent } from 'vue'
 import { Bell, QuestionFilled } from '@element-plus/icons-vue'
 import {
