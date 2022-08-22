@@ -1,113 +1,23 @@
 <template>
-  <!-- 下拉选择框 -->
-  <el-select
-    v-if="type === 'select'"
-    v-model="modelValue"
+  <component
+    :is="component"
+    v-model="currentValue"
+    :class="prop"
     v-bind="otherProps"
-    :placeholder="placeholder"
-    :clearable="clearable"
-    :disabled="disabled"
-    :multiple="multiple"
-    filterable
-    collapse-tags
-    collapse-tags-tooltip
   >
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-      :disabled="item.disabled"
-    ></el-option>
-  </el-select>
-
-  <!-- 单选框 -->
-  <el-radio-group
-    v-else-if="type === 'radio'"
-    v-model="modelValue"
-    v-bind="otherProps"
-    :disabled="disabled"
-  >
-    <component
-      :is="radioType === 'radio' ? 'el-radio' : 'el-radio-button'"
-      v-for="item in options"
-      :key="item.value"
-      :label="item.value"
-      :disabled="item.disabled"
+    <template
+      v-for="slot in Object.keys($slots)"
+      :key="slot"
+      #[slot]="slotProps"
     >
-      {{ item.label }}
-    </component>
-  </el-radio-group>
-
-  <!-- 日期选择框 -->
-  <el-date-picker
-    v-else-if="dateTypes.includes(type)"
-    v-model="modelValue"
-    v-bind="otherProps"
-    :placeholder="placeholder"
-    :type="type"
-    :format="format"
-    :clearable="clearable"
-    :disabled="disabled"
-  />
-
-  <!-- switch开关 -->
-  <el-switch
-    v-else-if="type === 'switch'"
-    v-model="modelValue"
-    v-bind="otherProps"
-    :disabled="disabled"
-  />
-
-  <!-- 多行文本框 -->
-  <el-input
-    v-else-if="type === 'textarea'"
-    v-model="modelValue"
-    v-bind="otherProps"
-    :placeholder="placeholder"
-    type="textarea"
-    :rows="rows"
-    :show-word-limit="showWordLimit"
-    :autosize="autosize"
-    :maxlength="maxlength"
-  ></el-input>
-
-  <!-- 货币输入框 -->
-  <!-- <el-input
-    v-else-if="type === 'currency'"
-    v-model="modelValue"
-    v-bind="otherProps"
-    :placeholder="placeholder"
-    :clearable="clearable"
-    :disabled="disabled"
-    :maxlength="maxlength"
-  >
-    <template #prepend>￥</template>
-  </el-input> -->
-
-  <!-- 数字输入框 -->
-  <el-input-number
-    v-else-if="type === 'number'"
-    v-model="modelValue"
-    v-bind="otherProps"
-    :placeholder="placeholder"
-  />
-
-  <!-- 文本输入框 -->
-  <el-input
-    v-else
-    v-model="modelValue"
-    v-bind="otherProps"
-    :placeholder="placeholder"
-    :clearable="clearable"
-    :disabled="disabled"
-    :maxlength="maxlength"
-  ></el-input>
+      <slot :name="slot" v-bind="slotProps" />
+    </template>
+  </component>
 </template>
 <script lang="ts">
-//@ts-nocheck
-import { defineComponent, computed } from 'vue'
-import { isFunction, isString } from '@vue/shared'
+import { defineComponent, computed, ref, watch, provide, toRaw } from 'vue'
+import { isString, isArray } from '@vue/shared'
+import { clone, merge } from 'lodash'
 import {
   ElInput,
   ElRadioGroup,
@@ -118,32 +28,20 @@ import {
   ElSwitch,
   ElDatePicker,
   ElInputNumber,
+  formRenderItemProps,
 } from '@element-plus/components'
 import { UPDATE_MODEL_EVENT } from '@element-plus/constants'
-import { itemRenderProps, ItemType } from './index'
+import { isUndefined } from '@element-plus/utils'
+import { FieldFlags, isRangeFlags, isDateFlags } from '../../shared/FieldFlags'
+import fieldText from './field-text.vue'
+import fieldDate from './field-date.vue'
+import fieldNumber from './field-number.vue'
+import fieldRadio from './field-radio.vue'
+import fieldSelect from './field-select.vue'
+import fieldSwitch from './field-switch.vue'
+import { itemRenderProps } from './index'
 import type { ItemRenderProps } from './index'
 import type { SetupContext } from 'vue'
-
-const dateTypes = [
-  ItemType.Year,
-  ItemType.Month,
-  ItemType.Date,
-  ItemType.Dates,
-  ItemType.Datetime,
-  ItemType.Week,
-]
-const dateFormat = {
-  [ItemType.Year]: 'YYYY',
-  [ItemType.Month]: 'YYYY-MM',
-  [ItemType.Date]: 'YYYY-MM-DD',
-  [ItemType.Dates]: 'YYYY-MM-DD',
-  [ItemType.Datetime]: 'YYYY-MM-DD HH:mm:ss',
-  [ItemType.Week]: 'YYYY年 第w周',
-}
-const placeholderPrefix = (type: ItemType) =>
-  [ItemType.Select, ItemType.Radio].concat(dateTypes).includes(type)
-    ? '请选择'
-    : '请输入'
 
 export default defineComponent({
   name: 'ElItemRender',
@@ -158,74 +56,102 @@ export default defineComponent({
     ElDatePicker,
     ElInputNumber,
   },
+  inheritAttrs: false,
   props: itemRenderProps,
-  emits: [UPDATE_MODEL_EVENT],
+  emits: [UPDATE_MODEL_EVENT, 'update:start', 'update:end'],
   setup(props: ItemRenderProps, { attrs, emit }: SetupContext) {
-    const modelValue = computed({
-      get() {
-        // 如果提供的 valueFormat
-        if (isFunction(props.valueFormat)) {
-          return props.valueFormat(props.modelValue)
-        }
-        if (props.modelValue) {
-          return props.modelValue
-        }
-        if ([ItemType.Text, ItemType.Radio].includes(props.type)) {
-          return props.modelValue ?? ''
-        }
-        if (ItemType.Select === props.type) {
-          return props.modelValue ?? (props.multiple ? [] : '')
-        }
-        if (ItemType.Switch === props.type) {
-          return Boolean(props.modelValue) ?? false
-        }
-        if (ItemType.Number === props.type) {
-          return Number(props.modelValue ?? props.min ?? 0)
-        }
-        return null
-      },
-      set(val) {
-        emit(UPDATE_MODEL_EVENT, val)
-      },
-    })
-
-    // el-date-picker format
-    const format = computed(() => {
-      if (dateTypes.includes(props.type)) {
-        return props.format || dateFormat[props.type]
+    const initialVal = computed(() => {
+      if (isArray(props.prop) && isRangeFlags(props.type)) {
+        return [props.start, props.end].every(isUndefined)
+          ? undefined
+          : [props.start, props.end]
+      } else {
+        return props.modelValue
       }
-      return ''
     })
+    const currentValue = ref<any>(initialVal.value)
 
-    // placeholder 提示
-    const placeholder = computed(() => {
-      if (props.placeholder) {
-        return props.placeholder
-      }
-      // 如果是禁用的输入框，且用户没有设置 placeholder，则不展示
-      if (disabled.value) {
-        return ''
-      }
-      return `${placeholderPrefix(props.type)}${props.label}`
-    })
-
-    // 是否禁用，可以给定一个 boolean 类型的值或者返回 boolean 的函数
-    const disabled = computed(() =>
-      isFunction(props.disabled)
-        ? props.disabled(modelValue.value)
-        : props.disabled
+    // 字段类型标记
+    const typeFlag = computed<number>(
+      () =>
+        (isString(props.type) ? FieldFlags[props.type] : props.type) as number
     )
 
-    // 其他属性
-    const otherProps = computed(() => attrs)
+    // 字段类型
+    const type = computed<string>(() => FieldFlags[typeFlag.value] as string)
+
+    // 非以下几个属性外，其他属性排除掉
+    const excludeProps = computed(() =>
+      Object.keys(formRenderItemProps).filter(
+        (key: string) =>
+          !['disabled', 'maxlength', 'placeholder', 'prop'].includes(key)
+      )
+    )
+
+    // 其他未在 props 里声明的属性，通过 v-bind 传递给子组件
+    const otherProps = computed(() => {
+      const cloneAttrs = clone(toRaw(attrs))
+      // 有值时
+      if (isArray(excludeProps) && excludeProps.length) {
+        // 属性少的用来循环
+        if (Object.keys(cloneAttrs).length > excludeProps.length) {
+          excludeProps.forEach((key: string) => {
+            Reflect.deleteProperty(cloneAttrs, key)
+          })
+        } else {
+          Object.keys(cloneAttrs).forEach((key: string) => {
+            if (excludeProps.includes(key)) {
+              Reflect.deleteProperty(cloneAttrs, key)
+            }
+          })
+        }
+      }
+      return merge({}, cloneAttrs)
+    })
+
+    const component = computed(() => {
+      if (typeFlag.value & FieldFlags.number) return fieldNumber
+      if (isDateFlags(typeFlag.value)) return fieldDate
+      if (typeFlag.value & FieldFlags.select) return fieldSelect
+      if (typeFlag.value & FieldFlags.radio) return fieldRadio
+      if (typeFlag.value & FieldFlags.switch) return fieldSwitch
+      return fieldText
+    })
+
+    watch([() => props.start, () => props.end], (newVal) => {
+      if (newVal.every(isUndefined)) {
+        currentValue.value = []
+      } else {
+        currentValue.value = newVal
+      }
+    })
+
+    watch(
+      () => props.modelValue,
+      (val) => {
+        currentValue.value = val
+      }
+    )
+
+    watch(
+      () => currentValue.value,
+      (val) => {
+        if (isArray(props.prop)) {
+          emit('update:start', val?.[0])
+          emit('update:end', val?.[1])
+        } else {
+          emit(UPDATE_MODEL_EVENT, val)
+        }
+      }
+    )
+
+    // 提供给子组件使用的
+    provide('type', type.value)
 
     return {
-      dateTypes,
-      modelValue,
-      placeholder,
-      disabled,
-      format,
+      currentValue,
       otherProps,
+      component,
     }
   },
 })

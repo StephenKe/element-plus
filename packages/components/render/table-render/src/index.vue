@@ -2,60 +2,17 @@
   <div :class="ns.b()">
     <!-- 搜索区域 -->
     <el-card v-if="searchItem.length" :class="ns.b('search')" :shadow="shadow">
-      <el-form
+      <el-form-render
         ref="formRef"
-        inline
+        v-model="searchFormData"
+        :form-item="searchItem"
         :size="size"
         :label-width="labelWidth"
-        :model="searchForm"
-        :rules="searchFormRules"
+        :expand-size="expandSize"
+        :submit-button="submitButton"
+        @submit="handleSearchSubmit"
       >
-        <transition v-for="(item, index) in searchItem" :key="item.prop">
-          <el-form-item
-            v-show="searchExpanded || index < expandSize"
-            :label="`${item.label}${item.colon ?? colon ? '：' : ''}`"
-            :label-width="item.labelWidth || labelWidth"
-            :prop="item.prop"
-            :size="size"
-            :class="item.prop"
-            :style="formItemStyle(item)"
-          >
-            <template v-if="item.type === 'slot'">
-              <slot
-                v-if="$slots[item.prop]"
-                :name="item.prop"
-                :form="searchForm"
-                :item="item"
-                :index="index"
-              ></slot>
-            </template>
-            <el-item-range-render
-              v-else-if="item.range"
-              v-model="searchForm"
-              v-bind="item"
-            ></el-item-range-render>
-            <el-item-render
-              v-else
-              v-model="searchForm[item.prop]"
-              v-bind="item"
-            ></el-item-render>
-          </el-form-item>
-        </transition>
-        <el-form-item :style="searchButtonStyle">
-          <el-button
-            v-if="searchExpandVisible"
-            type="text"
-            @click="handleExpand"
-          >
-            {{ searchExpanded ? '收起' : '展开' }}
-            <el-icon class="el-icon--right">
-              <component :is="searchExpanded ? 'arrow-up' : 'arrow-down'" />
-            </el-icon>
-          </el-button>
-          <el-button @click="handleSearchReset">重置</el-button>
-          <el-button type="primary" @click="handleSearchSubmit">查询</el-button>
-        </el-form-item>
-      </el-form>
+      </el-form-render>
     </el-card>
 
     <!-- 数据区域 -->
@@ -131,7 +88,22 @@
                   :min-width="col.width"
                   width="auto"
                 >
-                  <!-- 插槽列 -->
+                  <!-- TableColumn header插槽 -->
+                  <template
+                    v-if="hasOwn(col, 'headerSlot')"
+                    #header="scopedData"
+                  >
+                    <slot
+                      :name="
+                        isString(col.headerSlot)
+                          ? col.headerSlot
+                          : col.headerSlot
+                      "
+                      v-bind="scopedData"
+                    ></slot>
+                  </template>
+
+                  <!-- TableColumn 默认插槽 -->
                   <template v-if="hasOwn(col, 'slot')" #default="scopedData">
                     <!-- 内置功能，slot 为 operation 时 -->
                     <template v-if="col.slot === 'operation'">
@@ -194,9 +166,10 @@
                         type="text"
                         @click="col.onClick && col.onClick(scopedData)"
                       >
-                        {{ scopedData.row[col.prop] }}
+                        {{ scopedData.row[String(col.prop)] }}
                       </el-button>
                     </template>
+                    <!-- 用户自定义插槽 -->
                     <template v-else>
                       <slot
                         :name="isString(col.slot) ? col.slot : col.prop"
@@ -263,17 +236,17 @@
     >
       <el-form-render
         ref="editFormRef"
-        v-model="editForm"
+        v-model="editFormData"
         :form-item="formItem"
-        :rules="editFormRules"
-        :reset-visible="false"
-        :submit-visible="false"
+        :submit-button="false"
+        :reset-button="false"
+        :clear-button="false"
         :row-key="rowKey"
         :row-size="formRowSize"
         :size="size"
         :label-width="labelWidth"
         :colon="colon"
-        @on-submit="handleSubmit"
+        @submit="handleSubmit"
         @validate-fields-error="handleValidateFieldsError"
       ></el-form-render>
       <template #footer>
@@ -287,8 +260,15 @@
 </template>
 
 <script lang="ts">
-//@ts-nocheck
-import { defineComponent, ref, computed, watch, onBeforeMount } from 'vue'
+import {
+  defineComponent,
+  ref,
+  computed,
+  watch,
+  toRaw,
+  unref,
+  inject,
+} from 'vue'
 import {
   NOOP,
   isFunction,
@@ -297,7 +277,7 @@ import {
   camelize,
   isArray,
 } from '@vue/shared'
-import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
+import { useDebounceFn } from '@vueuse/core'
 import _ from 'lodash'
 import { useNamespace } from '@element-plus/hooks'
 import {
@@ -308,7 +288,6 @@ import {
   ElPagination,
   ElRow,
   ElCol,
-  ElIcon,
   ElForm,
   ElFormItem,
   ElDialog,
@@ -316,35 +295,39 @@ import {
   ElMessage,
   ElMessageBox,
   ElLoading,
-  // ElFormRender,
+  ElFormRender,
   ElItemRender,
-  ElItemRangeRender,
+  ElItemSplitRender,
   ElDropdown,
   ElDropdownMenu,
   ElDropdownItem,
 } from '@element-plus/components'
+import { buttonGroupContextKey } from '@element-plus/tokens'
 import { debugWarn } from '@element-plus/utils'
-import { isBoolean as isBool, isNumber } from '@element-plus/utils'
 import { isEqual } from 'lodash-unified'
 import { merge } from 'lodash'
+import { isBoolean, isNumber } from '@element-plus/utils'
 import tableProps from '@element-plus/components/table/src/table/defaults'
 import { paginationEmits } from '@element-plus/components/pagination/src/pagination'
-import ElFormRender from '../../form-render'
-import { useForm, useHttp, usePagination } from './hooks'
+// import ElFormRender from '../../form-render'
+import { FieldFlags } from '@element-plus/components/render/shared'
+import {
+  useApi,
+  usePagination,
+} from '@element-plus/components/render/table-render/src/hooks'
 import {
   tableRenderProps,
   tableRenderEmits,
   tableEmits,
   ActionType,
-} from './index'
-import type { SetupContext } from 'vue'
-import type { ItemRenderProps } from '@element-plus/components'
+} from '@element-plus/components/render/table-render/src'
+import type { ValidateFieldsError } from 'async-validator'
+import type { FormButtonProps } from '@element-plus/components'
 import type {
   TableRenderProps,
   TableRenderColumn,
   TableRenderButtonProps,
-} from './index'
-import type { CrudHttpRequestOptions } from './request.type'
+} from '@element-plus/components/render/table-render/src'
 
 const COMPONENT_NAME = 'ElTableRender'
 const tableDebugWarn = _.curry(debugWarn)(COMPONENT_NAME)
@@ -366,24 +349,20 @@ export default defineComponent({
     ElPagination,
     ElRow,
     ElCol,
-    ElIcon,
     ElForm,
     ElFormItem,
-    ArrowDown,
-    ArrowUp,
     ElFormRender,
     ElItemRender,
-    ElItemRangeRender,
+    ElItemSplitRender,
     ElDropdown,
     ElDropdownMenu,
     ElDropdownItem,
   },
   props: tableRenderProps,
   emits: tableRenderEmits,
-  setup(props: TableRenderProps, { expose, emit, attrs, slots }: SetupContext) {
+  setup(props: TableRenderProps, { expose, emit, attrs, slots }) {
     const ns = useNamespace('table-render')
-    const size = ref(props.size)
-    const colon = ref(props.colon)
+    const buttonGroupContext = inject(buttonGroupContextKey, undefined)
     const rowKey = ref(props.rowKey)
     const key = computed(() =>
       isFunction(rowKey.value) ? rowKey.value() : rowKey.value
@@ -394,13 +373,13 @@ export default defineComponent({
       slots.bodyLeft ? 24 - props.bodyLeftSpan : 24
     )
 
-    const { insertApi, selectApi, updateApi, deleteApi } = useHttp(
-      props.requests
-    )
+    const { insertApi, selectApi, updateApi, deleteApi } = useApi(props.api)
 
     // dialog
     const editFormRef = ref<InstanceType<typeof ElFormRender>>()
-    const dialogTitle = computed(() => (editForm[key.value] ? '编辑' : '新增'))
+    const dialogTitle = computed(() =>
+      editFormData.value[key.value] ? '编辑' : '新增'
+    )
     const dialogComponent = computed(() =>
       props.dialogType === 'dialog' ? ElDialog : ElDrawer
     )
@@ -426,29 +405,23 @@ export default defineComponent({
         }
       }
     })
-    const formRowSize = computed(() => props.formRowSize)
-    const {
-      formItem,
-      formData: editForm,
-      formRules: editFormRules,
-      resetFormData: resetEditFormData,
-    } = useForm(props.formItem)
+    const editFormData = ref<Record<string, any>>({})
     const triggerReset = () => {
       editFormRef.value?.onReset()
       dialogVisible.value = false
-      emit('form-reset', editForm)
+      emit('form-reset', editFormData.value)
     }
     const triggerSubmit = () => {
       loading.value = true
       editFormRef.value?.onSubmit()
     }
     // 表单提交
-    const handleSubmit = (formData, stopLoading) => {
+    const handleSubmit = (formData: any, stopLoading: Function) => {
       const isUpdate = key.value in formData
       const caller = isUpdate ? updateApi : insertApi
       caller(formData)
         .then((result) => {
-          emit('form-submit', editForm, result)
+          emit('form-submit', toRaw(editFormData.value), result)
           dialogVisible.value = false
           handleSearchSubmit()
           ElMessage.success(`${dialogTitle.value}成功`)
@@ -458,7 +431,7 @@ export default defineComponent({
           stopLoading()
         })
     }
-    const handleValidateFieldsError = (fields) => {
+    const handleValidateFieldsError = (fields: ValidateFieldsError) => {
       loading.value = false
       emit('validate-fields-error', fields)
     }
@@ -468,81 +441,46 @@ export default defineComponent({
       (val) => {
         if (!val) {
           loading.value = false
-          resetEditFormData()
+          editFormRef.value?.onReset()
         }
       }
     )
 
     // search
-    const formRef = ref<InstanceType<typeof ElForm>>()
-    const {
-      formItem: searchItem,
-      formData: searchForm,
-      formRules: searchFormRules,
-      resetFormData: resetSearchFormData,
-    } = useForm(props.searchItem)
-    const widthPercent = computed<number>(
-      () => +(100 / props.rowSize).toFixed(2)
+    const formRef = ref<InstanceType<typeof ElFormRender>>()
+    const searchFormData = ref({})
+    const submitButton = computed<FormButtonProps>(
+      () => ({ label: '查询' } as FormButtonProps)
     )
-    const labelWidth = computed(() => props.labelWidth)
-    const searchExpanded = ref(false)
-    const searchExpandVisible = computed(
-      () => searchItem.value.length > props.expandSize
-    )
-    const searchButtonStyle = computed(() => ({
-      width: `${widthPercent.value}%`,
-    }))
-    const formItemStyle = (col: ItemRenderProps) => {
-      // 跨度值不能大于 rowSize
-      const colSpan = Math.min(col.colSpan, props.rowSize)
-      return {
-        flex: `0 0 ${widthPercent.value * colSpan}%`,
-        maxWidth: `${widthPercent.value * colSpan}%`,
-      }
-    }
-
-    // 搜索栏字段展示或收起
-    const handleExpand = () => {
-      searchExpanded.value = !searchExpanded.value
-      emit('search-expanded', searchExpanded.value)
-    }
 
     // 表单查询重置
     const handleSearchReset = () => {
-      // 清空 searchForm 属性
-      resetSearchFormData()
-      formRef.value?.resetFields()
-      emit('search-reset', searchForm)
+      // 清空 searchFormData 属性
+      formRef.value?.onReset()
+      emit('search-reset', searchFormData.value)
     }
 
     // 表单查询提交
-    const handleSearchSubmit = async () => {
-      await fetchPageData()
-      emit('search-submit', searchForm)
-    }
-
-    onBeforeMount(() => {
-      if (isArray(props.searchItem)) {
-        props.searchItem.forEach((item: ItemRenderProps) => {
-          if (item.prop) {
-            searchForm[item.prop] = ''
-          }
-          if (item.start) {
-            searchForm[item.start] = ''
-          }
-          if (item.end) {
-            searchForm[item.end] = ''
-          }
-        })
+    const handleSearchSubmit = async (
+      formData = {},
+      stopLoading = () => ({})
+    ) => {
+      try {
+        await fetchPageData()
+        emit('search-submit', formData)
+      } catch (e) {
+        tableDebugWarn('查询异常')
+      } finally {
+        isFunction(stopLoading) && stopLoading()
       }
-    })
+    }
 
     // table
     const tableRef = ref<InstanceType<typeof ElTable>>()
     // el-table attrs
     const tableAttrs = computed(() => {
       const mergeAttrsAndProps = merge(props, attrs)
-      const tblAttrs = {}
+      const tblAttrs: Record<string, any> = {}
       for (const key in mergeAttrsAndProps) {
         const camelizeKey = camelize(key)
         if (camelizeKey in tableProps) {
@@ -570,7 +508,7 @@ export default defineComponent({
             col.operation = (col.operation || []).map(
               (e: TableRenderButtonProps) => {
                 e.type = e.type || 'text'
-                e.size = e.size || size.value || 'small'
+                e.size = e.size || props.size || buttonGroupContext?.size
                 return e
               }
             )
@@ -593,7 +531,7 @@ export default defineComponent({
         )
       }
       e.type = e.type || 'primary'
-      e.size = e.size || size.value || 'small'
+      e.size = e.size || props.size || buttonGroupContext?.size
       return e
     }
     const actionLeftButton = computed(() =>
@@ -619,7 +557,7 @@ export default defineComponent({
       deleteApi(params)
         .then(() => {
           ElMessage.success('删除成功')
-          handleSearchSubmit()
+          triggerSearch()
         })
         .catch(() => {
           ElMessage.error('删除失败')
@@ -684,7 +622,7 @@ export default defineComponent({
         case ActionType.Update: // 更新
           if (scopedData) {
             dialogVisible.value = true
-            Object.assign(editForm, scopedData.row)
+            Object.assign(editFormData.value, scopedData.row)
           }
           break
         default:
@@ -699,7 +637,7 @@ export default defineComponent({
          * 2. 选中的行数据
          * 3. 当前行的数据
          */
-        self.onClick(tableData.value, selectRows, scopedData)
+        self.onClick(toRaw(unref(tableData)), toRaw(selectRows), scopedData)
       }
     }
 
@@ -763,15 +701,19 @@ export default defineComponent({
 
     const fetchPageData = async () => {
       const { currentPage, pageSize } = paginationAttr
+      const {
+        page = 'page',
+        size = 'size',
+        total = 'data.total',
+        records = 'data.data',
+      } = selectApi.props || {}
       await selectApi({
-        [props.props.currentPage]: currentPage,
-        [props.props.pageSize]: pageSize,
-        ...searchForm,
+        [page]: currentPage,
+        [size]: pageSize,
+        ...searchFormData.value,
       } as Record<string, any>).then((result: any) => {
-        paginationAttr.total = _.result(result, props.props.total) // 总记录数
-        tableData.value = wrapperTableData(
-          _.result(result, props.props.records, [])
-        )
+        paginationAttr.total = _.result(result, total) // 总记录数
+        tableData.value = wrapperTableData(_.result(result, records, []))
 
         // 如果记录之前选中的项
         if (props.persistent) {
@@ -818,9 +760,9 @@ export default defineComponent({
       }
     )
 
-    watch((props.requests as CrudHttpRequestOptions)?.select?.params, () => {
+    watch(props.api.select?.params, () => {
       if (props.autoSearch) {
-        handleSearchSubmit()
+        triggerSearch()
       }
     })
 
@@ -829,10 +771,10 @@ export default defineComponent({
       btn: TableRenderButtonProps,
       scopedData?: object
     ) => {
-      if (isBool(btn.visible)) return btn.visible
+      if (isBoolean(btn.visible)) return btn.visible
 
       if (isFunction(btn.visible))
-        return btn.visible(btn, scopedData || tableData.value)
+        return btn.visible.call(btn, scopedData || tableData.value)
 
       // 默认展示
       return true
@@ -843,10 +785,10 @@ export default defineComponent({
       btn: TableRenderButtonProps,
       scopedData?: object
     ) => {
-      if (isBool(btn.disabled)) return btn.disabled
+      if (isBoolean(btn.disabled)) return btn.disabled
 
       if (isFunction(btn.disabled))
-        return btn.disabled(btn, scopedData || tableData.value)
+        return btn.disabled.call(btn, scopedData || tableData.value)
 
       // 默认不禁用
       return false
@@ -904,6 +846,7 @@ export default defineComponent({
      * 返回当前选中的行
      */
     const getSelectionRows = () => mapSetToArray(selectionMap)
+    const triggerSearch = useDebounceFn(handleSearchSubmit, 250)
 
     /**
      * 设置行选是否选中
@@ -956,7 +899,7 @@ export default defineComponent({
       // 设置行选是否选中
       toggleRowSelection,
       // 搜索查询事件
-      triggerSearch: handleSearchSubmit,
+      triggerSearch,
       // 表格数据
       tableData: computed(() => tableData.value),
       // 分页信息
@@ -965,24 +908,18 @@ export default defineComponent({
 
     return {
       ns,
-      size,
-      colon,
       loading,
       hasOwn,
+      isArray,
       isString,
       bodyRightSpan,
+      FieldFlags,
 
       // 查询区
       formRef,
-      labelWidth,
-      searchItem,
-      searchForm,
-      searchFormRules,
-      searchExpandVisible,
-      searchExpanded,
-      searchButtonStyle,
-      formItemStyle,
-      handleExpand,
+      searchFormData,
+      submitButton,
+      triggerSearch,
       handleSearchReset,
       handleSearchSubmit,
 
@@ -997,10 +934,7 @@ export default defineComponent({
       dialogProps,
       dialogVisible,
       editFormRef,
-      formItem,
-      editForm,
-      editFormRules,
-      formRowSize,
+      editFormData,
       triggerReset,
       triggerSubmit,
       handleSubmit,

@@ -1,0 +1,17 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+
+@include b(item-split-render) {
+  display: flex;
+  flex: 1;
+
+  .separator {
+    margin: 0 5px;
+  }
+
+  .el-input {
+    display: flex;
+    flex: 1;
+  }
+}

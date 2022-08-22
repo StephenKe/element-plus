@@ -23,7 +23,6 @@ server {
     gzip_disable "MSIE [1-6]\.";
     # 添加vary响应头,验证缓存
     gzip_vary on;
-
     location / {
         root   /usr/share/nginx/html;
         index  index.html index.htm;

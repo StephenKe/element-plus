@@ -1,0 +1,33 @@
+@use 'mixins/mixins' as *;
+@use 'mixins/var' as *;
+@use 'common/var' as *;
+
+@include b(form-render) {
+  display: flex;
+  flex-flow: row wrap;
+  .el-form-item {
+    &__label {
+      padding-right: 0px;
+    }
+    &__content {
+      align-items: flex-start;
+      .el-select,
+      .el-input-number,
+      .el-input.el-date-editor,
+      .el-range-editor {
+        width: 100%;
+      }
+    }
+    &:last-child {
+      flex: 1 0 auto;
+      .el-form-item__content {
+        justify-content: flex-end;
+      }
+    }
+  }
+  &.el-form--inline {
+    .el-form-item {
+      margin-right: 0;
+    }
+  }
+}
