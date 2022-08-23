@@ -82,13 +82,13 @@
                 label="模块描述"
               >
               </el-table-column>
-              <el-table-column prop="variableVO.fieldType" label="填充方式">
+              <el-table-column
+                align="center"
+                prop="variableVO.fieldType"
+                label="填充类型"
+              >
                 <template #default="scope">
-                  {{
-                    scope.row.variableVO.fieldType === 'MANUAL_VARIABLE'
-                      ? '手工'
-                      : '自动'
-                  }}
+                  {{ formatFillType(scope.row.variableVO.fieldType) }}
                 </template>
               </el-table-column>
               <el-table-column label="操作" width="130">
@@ -225,6 +225,22 @@ export default defineComponent({
           // 光标定位
           CxApi.gotoxyContentArea(editor.value, id)
         }
+      }
+    }
+
+    function formatFillType(fieldType) {
+      if (fieldType === '10') {
+        return '文本'
+      } else if (fieldType === '20') {
+        return '中台文件'
+      } else if (fieldType === '30') {
+        return '附件URL'
+      } else if (fieldType === '40') {
+        return '勾选'
+      } else if (fieldType === 'MANUAL_VARIABLE') {
+        return '手填'
+      } else {
+        return '未知'
       }
     }
 
@@ -371,9 +387,14 @@ export default defineComponent({
     }
     // 设置变量
     const handleVariableSelect = (row) => {
+      let contentAreaType = 'rich'
+      const type = row.variableVO.fieldType
+      if (type === 'MANUAL_VARIABLE' || type === '10' || type === '40') {
+        contentAreaType = 'plain'
+      }
       const contentRecord = {
-        fileId: ythTemplate.value.localFileId,
-        contentAreaType: 'plain',
+        fileId: this.ythTemplate.localFileId,
+        contentAreaType: contentAreaType,
       }
       // 保存内容域
       saveContentRecord(props.urlPrefix, contentRecord).then((res) => {
@@ -412,7 +433,6 @@ export default defineComponent({
           }
           // 强制保存文档
           CxApi.forceSave(editor.value)
-          searchVariableForm.isPublicVariableList = false
           // 刷新列表
           getVariableDataList()
         })
@@ -457,6 +477,7 @@ export default defineComponent({
       variableCurrentPage,
       variablePageSize,
       variableTotal,
+      formatFillType,
       clickPublicVariable,
       handleVariableSearch,
       handleVariableReset,
