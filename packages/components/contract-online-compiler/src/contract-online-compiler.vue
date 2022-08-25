@@ -55,6 +55,23 @@
                     ></el-input>
                   </el-form-item>
                 </el-col>
+                <el-col :span="12">
+                  <el-form-item label="字段所属模块:">
+                    <el-select
+                      v-model="searchVariableForm.fieldClassList"
+                      multiple
+                      clearable
+                      placeholder="字段所属模块"
+                    >
+                      <el-option
+                        v-for="item in fieldClassList"
+                        :key="item.fieldClass"
+                        :value="item.fieldClass"
+                        :label="item.fieldClassDesc"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </el-col>
               </el-row>
             </el-query-form>
             <div :class="ns.e('save-bar')">
@@ -163,6 +180,7 @@ import {
   getYthTemplateVariablePage,
   ythTemplateVariableSave,
   ythTemplateVariableDeleteBatch,
+  fieldClassAllList,
 } from './api/yth/ythTemplateVariable'
 import {
   saveContentRecord,
@@ -291,12 +309,17 @@ export default defineComponent({
       }
       return config
     }
+    const fieldClassList = ref([])
+    fieldClassAllList().then((res) => {
+      fieldClassList.value = res.data
+    })
 
     const searchVariableForm = reactive({
       isPublicVariableList: false,
       moduleFlag: props.busLine.value,
       fieldDesc: '',
       fieldName: '',
+      fieldClassList: [],
       variableDTO: {},
     })
     const variableDataListLoading = ref(false)
@@ -471,6 +494,7 @@ export default defineComponent({
     return {
       ns,
       variableTab,
+      fieldClassList,
       searchVariableForm,
       options,
       variableList,

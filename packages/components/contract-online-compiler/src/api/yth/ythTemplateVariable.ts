@@ -28,3 +28,11 @@ export function ythTemplateVariableSave(urlPrefix, data) {
     data,
   })
 }
+
+// 所有字段分类 -- 详情
+export function fieldClassAllList(urlPrefix) {
+  return request({
+    url: `${urlPrefix}/business/contract/variable/fieldClassAll`,
+    method: 'get',
+  })
+}
