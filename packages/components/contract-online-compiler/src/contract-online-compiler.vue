@@ -300,7 +300,7 @@ export default defineComponent({
       variableDTO: {},
     })
     const variableDataListLoading = ref(false)
-    const variableCurrentPage = ref(0)
+    const variableCurrentPage = ref(1)
     const variablePageSize = ref(10)
     const variableTotal = ref(0)
     // 变量
