@@ -39,18 +39,19 @@ popconfirm/trigger-event
 
 ## 属性
 
-| 属性                | 说明                                                                                 | 类型               | 可选值                                             | 默认值         |
-| ------------------- | ------------------------------------------------------------------------------------ | ------------------ | -------------------------------------------------- | -------------- |
-| title               | 标题                                                                                 | String             | —                                                  | —              |
-| confirm-button-text | 确认按钮文字                                                                         | String             | —                                                  | —              |
-| cancel-button-text  | 取消按钮文字                                                                         | String             | —                                                  | —              |
-| confirm-button-type | 确认按钮类型                                                                         | String             | primary / success / warning / danger / info / text | primary        |
-| cancel-button-type  | 取消按钮类型                                                                         | String             | primary / success / warning / danger / info / text | text           |
-| icon                | 自定义图标                                                                           | String / Component | —                                                  | QuestionFilled |
-| icon-color          | Icon 颜色                                                                            | String             | —                                                  | #f90           |
-| hide-icon           | 是否隐藏 Icon                                                                        | Boolean            | —                                                  | false          |
-| teleported          | 是否将 popover 的下拉列表插入至 body 元素                                            | boolean            | true / false                                       | true           |
-| persistent          | 当 popover 组件长时间不触发且 `persistent` 属性设置为 `false` 时, popover 将会被删除 | boolean            | —                                                  | false          |
+| 属性                | 说明                                                                                 | 类型               | 可选值                                             | 默认值          |
+| ------------------- | ------------------------------------------------------------------------------------ | ------------------ | -------------------------------------------------- | --------------- |
+| title               | 标题                                                                                 | String             | —                                                  | —               |
+| confirm-button-text | 确认按钮文字                                                                         | String             | —                                                  | —               |
+| cancel-button-text  | 取消按钮文字                                                                         | String             | —                                                  | —               |
+| confirm-button-type | 确认按钮类型                                                                         | String             | primary / success / warning / danger / info / text | primary         |
+| cancel-button-type  | 取消按钮类型                                                                         | String             | primary / success / warning / danger / info / text | text            |
+| icon                | 自定义图标                                                                           | String / Component | —                                                  | QuestionFilled  |
+| icon-color          | Icon 颜色                                                                            | String             | —                                                  | #f90            |
+| hide-icon           | 是否隐藏 Icon                                                                        | Boolean            | —                                                  | false           |
+| teleported          | 是否将 popover 的下拉列表插入至 body 元素                                            | boolean            | true / false                                       | true            |
+| persistent          | 当 popover 组件长时间不触发且 `persistent` 属性设置为 `false` 时, popover 将会被删除 | boolean            | —                                                  | false           |
+| width               | 弹出窗口宽度                                                                         | string/number      | -                                                  | Min width 150px |
 
 ## 插槽
 

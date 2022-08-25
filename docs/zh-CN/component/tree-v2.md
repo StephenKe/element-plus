@@ -67,7 +67,7 @@ tree-v2/filter
 
 :::
 
-## 属性
+## TreeV2 属性
 
 | 属性                  | 说明                                                                                                           | 类型                  | 默认值 |
 | --------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- | ------ |
@@ -95,24 +95,28 @@ tree-v2/filter
 | children | 指定子树为节点对象的某个属性值                           | string         | children |
 | disabled | 指定节点选择框是否禁用为节点对象的某个属性值             | string         | disabled |
 
-## 方法
+## TreeV2 方法
 
 Tree 内部使用 TreeNode 类型的对象来包装用户传入的数据，用来构造树节点之间的关系。 `Tree` 暴露了以下方法：
 | 方法 | 说明 | 参数 |
-| ------------------- | ----------------------------------------------------------- | ---------------------------------- |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
 | filter | 对树节点进行筛选操作 | `(query: string)` |
 | getCheckedNodes | 若节点可被选择（即`show-checkbox`为 `true`），则返回目前被选中的节点所组成的数组 | `(leafOnly: boolean)` |
 | getCheckedKeys | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前被选中的节点的 key 所组成的数组 | `(leafOnly: boolean)` |
 | setCheckedKeys | 通过 keys 设置目前勾选的节点 | `(keys: TreeKey[])` |
 | setChecked | 通过 key 设置某个节点的勾选状态 | `(key: TreeKey, checked: boolean)` |
-| getHalfCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前半选中的节点所组成的数组 | - |
-| getHalfCheckedKeys | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前半选中的节点的 key 所组成的数组 | - |
-| getCurrentKey | 获取当前被选中节点的 key，若没有节点被选中则返回 `undefined` | - |
-| getCurrentNode | 获取当前被选中节点的 data，若没有节点被选中则返回 `undefined` | - |
-| setCurrentKey | 通过 key 设置某个节点的当前选中状态 | `(key: TreeKey)` |
-| setData | 当数据量非常庞大的时候，使用 reactive 数据将导致性能非常低下，所以我们提供了一个能够规避这种情况的方法 | `(data: TreeData)` |
+| setExpandedKeys | set certain nodes to be expanded | `(keys: TreeKey[])` |
+| getHalfCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes | - |
+| getHalfCheckedKeys | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of node's keys | - |
+| getCurrentKey | return the highlight node's key (undefined if no node is highlighted) | - |
+| getCurrentNode | return the highlight node's data (undefined if no node is highlighted) | - |
+| setCurrentKey | set highlighted node by key | `(key: TreeKey)` |
+| getNode | get node by key or data | `(data: TreeKey \| TreeNodeData)` |
+| expandNode | expand specified node | `(node: TreeNode)` |
+| collapseNode | collapse specified node | `(node: TreeNode)` |
+| setData | When the data is very large, using reactive data will cause the poor performance, so we provide a way to avoid this situation | `(data: TreeData)` |
 
-## 事件
+## TreeV2 事件
 
 | 事件名           | 说明                               | 参数                                                                                                                                    |
 | ---------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -124,7 +128,7 @@ Tree 内部使用 TreeNode 类型的对象来包装用户传入的数据，用�
 | node-expand      | 节点被展开时触发的事件             | `(data: TreeNodeData, node: TreeNode)`                                                                                                  |
 | node-collapse    | 节点被收起时触发的事件             | `(data: TreeNodeData, node: TreeNode)`                                                                                                  |
 
-## 插槽
+## TreeV2 插槽
 
 | 名称 | 说明                                                                       |
 | ---- | -------------------------------------------------------------------------- |
