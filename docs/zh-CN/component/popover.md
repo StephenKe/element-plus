@@ -43,7 +43,7 @@ popover/nested-information
 
 ## 嵌套操作
 
-当然，你还可以嵌套操作， 它比使用 dialog 更加轻量
+当然，你还可以嵌套操作， 它比使用 dialog 更加轻量。
 
 :::demo
 
@@ -53,7 +53,7 @@ popover/nested-operation
 
 ## 指令
 
-您可以指令性方式弹出窗口，但不再推荐 \*\*\*\* ，因为这使您的应用程序 变得复杂， 您可以参考上述虚拟触发来实现一样的效果。
+您可以使用指令性方式弹出窗口，但这种方法**不再推荐** ，因为这使得应用程序变得复杂， 您可以参考虚拟触发来实现一样的效果。
 
 :::demo
 
@@ -67,7 +67,7 @@ popover/directive-usage
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | trigger                   | 触发方式                                                                                                                                    | string          | click/focus/hover/contextmenu                                                                             | click                                                   |
 | title                     | 标题                                                                                                                                        | string          | —                                                                                                         | —                                                       |
-| effect                    | Tooltip 主题，Element Plus 内置了 `dark` / `light` 两种主题                                                                                 | string          | string                                                                                                    | dark                                                    |
+| effect                    | Tooltip 主题，Element Plus 内置了 `dark` / `light` 两种主题                                                                                 | string          | string                                                                                                    | light                                                   |
 | content                   | 显示的内容，也可以通过写入默认 `slot` 修改显示内容                                                                                          | string          | —                                                                                                         | —                                                       |
 | width                     | 宽度                                                                                                                                        | string / number | —                                                                                                         | 最小宽度 150px                                          |
 | placement                 | 出现位置                                                                                                                                    | string          | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom                                                  |

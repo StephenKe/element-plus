@@ -110,9 +110,9 @@ form/size-control
 
 :::
 
-## 可访问性
+## 无障碍
 
-当在 `el-form-item`内只有一个输入框(或相关的控制，如选择或复选框)， 将自动使用表单标签(form-item-label)。 然而，如果同时有多个输入框在 `el-form-item`内， 表单项将被分配为 [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) [组](https://www.w3.org/TR/wai-aria/#group) 的角色。 在这种情况下，需要手动给每个 input 指定访问标签。
+当在 `el-form-item` 内只有一个输入框（或相关的控制部件，如选择或复选框），表单项的标签将自动附加在那个输入框上。 然而，如果同时有多个输入框在 `el-form-item`内， 表单项将被分配为 [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) [组](https://www.w3.org/TR/wai-aria/#group) 的角色。 在这种情况下，需要手动给每个 input 指定访问标签。
 
 :::demo
 
@@ -124,22 +124,23 @@ form/accessibility
 
 ### Form 属性
 
-| 属性                      | 说明                                                                                        | 类型                              | 默认值    |
-| ------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------- | --------- |
-| `model`                   | 表单数据对象                                                                                | `Record<string, any>`             | —         |
-| `rules`                   | 表单验证规则                                                                                | `FormRules`                       | —         |
-| `inline`                  | 行内表单模式                                                                                | `boolean`                         | `false`   |
-| `label-position`          | 表单域标签的位置， 当设置为 `left` 或 `right` 时，则也需要设置 `label-width` 属性           | `'left' \| 'right' \| 'top'`      | `'right'` |
-| `label-width`             | 标签的长度，例如 `'50px'`。 作为 Form 直接子元素的 form-item 会继承该值。 可以使用 `auto`。 | `string \| number`                | —         |
-| `label-suffix`            | 表单域标签的后缀                                                                            | `string`                          | —         |
-| `hide-required-asterisk`  | 是否显示必填字段的标签旁边的红色星号                                                        | `boolean`                         | `false`   |
-| `show-message`            | 是否显示校验错误信息                                                                        | `boolean`                         | `true`    |
-| `inline-message`          | 是否以行内形式展示校验信息                                                                  | `boolean`                         | `false`   |
-| `status-icon`             | 是否在输入框中显示校验结果反馈图标                                                          | `boolean`                         | `false`   |
-| `validate-on-rule-change` | 是否在 `rules` 属性改变后立即触发一次验证                                                   | `boolean`                         | `true`    |
-| `size`                    | 用于控制该表单内组件的尺寸                                                                  | `'large' \| 'default' \| 'small'` | —         |
-| `disabled`                | 是否禁用该表单内的所有组件。 如果设置为 `true`, 它将覆盖内部组件的 `disabled` 属性          | `boolean`                         | `false`   |
-| `scroll-to-error`         | 当校验失败时，滚动到第一个错误表单项                                                        | `boolean`                         | `false`   |
+| 属性                        | 说明                                                                                        | 类型                              | 默认值    |
+| --------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------- | --------- |
+| `model`                     | 表单数据对象                                                                                | `Record<string, any>`             | —         |
+| `rules`                     | 表单验证规则                                                                                | `FormRules`                       | —         |
+| `inline`                    | 行内表单模式                                                                                | `boolean`                         | `false`   |
+| `label-position`            | 表单域标签的位置， 当设置为 `left` 或 `right` 时，则也需要设置 `label-width` 属性           | `'left' \| 'right' \| 'top'`      | `'right'` |
+| `label-width`               | 标签的长度，例如 `'50px'`。 作为 Form 直接子元素的 form-item 会继承该值。 可以使用 `auto`。 | `string \| number`                | —         |
+| `label-suffix`              | 表单域标签的后缀                                                                            | `string`                          | —         |
+| `hide-required-asterisk`    | 是否显示必填字段的标签旁边的红色星号                                                        | `boolean`                         | `false`   |
+| `require-asterisk-position` | 星号的位置。                                                                                | `'left' \| 'right'`               | `'left'`  |
+| `show-message`              | 是否显示校验错误信息                                                                        | `boolean`                         | `true`    |
+| `inline-message`            | 是否以行内形式展示校验信息                                                                  | `boolean`                         | `false`   |
+| `status-icon`               | 是否在输入框中显示校验结果反馈图标                                                          | `boolean`                         | `false`   |
+| `validate-on-rule-change`   | 是否在 `rules` 属性改变后立即触发一次验证                                                   | `boolean`                         | `true`    |
+| `size`                      | 用于控制该表单内组件的尺寸                                                                  | `'large' \| 'default' \| 'small'` | —         |
+| `disabled`                  | 是否禁用该表单内的所有组件。 如果设置为 `true`, 它将覆盖内部组件的 `disabled` 属性          | `boolean`                         | `false`   |
+| `scroll-to-error`           | 当校验失败时，滚动到第一个错误表单项                                                        | `boolean`                         | `false`   |
 
 ### Form 方法
 
