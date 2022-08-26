@@ -99,22 +99,22 @@ tree-v2/filter
 
 Tree 内部使用 TreeNode 类型的对象来包装用户传入的数据，用来构造树节点之间的关系。 `Tree` 暴露了以下方法：
 | 方法 | 说明 | 参数 |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| ------------------- | ----------------------------------------------------------- | ---------------------------------- |
 | filter | 对树节点进行筛选操作 | `(query: string)` |
 | getCheckedNodes | 若节点可被选择（即`show-checkbox`为 `true`），则返回目前被选中的节点所组成的数组 | `(leafOnly: boolean)` |
 | getCheckedKeys | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前被选中的节点的 key 所组成的数组 | `(leafOnly: boolean)` |
 | setCheckedKeys | 通过 keys 设置目前勾选的节点 | `(keys: TreeKey[])` |
 | setChecked | 通过 key 设置某个节点的勾选状态 | `(key: TreeKey, checked: boolean)` |
-| setExpandedKeys | set certain nodes to be expanded | `(keys: TreeKey[])` |
-| getHalfCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes | - |
-| getHalfCheckedKeys | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of node's keys | - |
-| getCurrentKey | return the highlight node's key (undefined if no node is highlighted) | - |
-| getCurrentNode | return the highlight node's data (undefined if no node is highlighted) | - |
-| setCurrentKey | set highlighted node by key | `(key: TreeKey)` |
-| getNode | get node by key or data | `(data: TreeKey \| TreeNodeData)` |
-| expandNode | expand specified node | `(node: TreeNode)` |
-| collapseNode | collapse specified node | `(node: TreeNode)` |
-| setData | When the data is very large, using reactive data will cause the poor performance, so we provide a way to avoid this situation | `(data: TreeData)` |
+| setExpandedKeys | 设置当前展开的节点 | `(keys: TreeKey[])` |
+| getHalfCheckedNodes | 如果节点可用被选中 (`show-checkbox` 为 `true`), 它将返回当前半选中的节点组成的数组 | - |
+| getHalfCheckedKeys | 若节点可被选中(`show-checkbox` 为 `true`)，则返回目前半选中的节点的 key 所组成的数组 | - |
+| getCurrentKey | 获取当前被选中节点的 key，若没有节点被选中则返回 `undefined` | - |
+| getCurrentNode | 获取当前被选中节点的 data，若没有节点被选中则返回 `undefined` | - |
+| setCurrentKey | 通过 key 设置某个节点的当前选中状态 | `(key: TreeKey)` |
+| getNode | 通过 key 或 data 获取节点 | `(data: TreeKey \| TreeNodeData)` |
+| expandNode | 展开指定节点 | `(node: TreeNode)` |
+| collapseNode | 折叠指定节点 | `(node: TreeNode)` |
+| setData | 当数据量非常庞大的时候，总是使用响应式数据将导致性能表现不佳，所以我们提供一种显式设置的方式来避免此种情况 | `(data: TreeData)` |
 
 ## TreeV2 事件
 

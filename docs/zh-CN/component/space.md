@@ -59,7 +59,7 @@ space/customized-size
 
 ## 自动换行
 
-在**水平 (horizontal) **模式下, 通过控制 `wrap `**(布尔类型) **来控制是否自动换行
+在 **水平 (horizontal) ** 模式下, 通过控制 `wrap`**（布尔类型）**来控制是否自动换行
 
 :::demo 利用 `wrap` 属性控制换行
 
@@ -69,7 +69,7 @@ space/auto-wrapping
 
 ## 行间分隔符
 
-有时候, 仅仅在行间加空白, 并不能满足我们的日常需求, 此时分隔符 (spacer) 就可以发挥非常好的作用了.
+有时候，仅仅在行间加空白并不能满足我们的日常需求，此时分隔符 (spacer) 就可以发挥非常好的作用了。
 
 ## 字母数字类型分隔符
 
@@ -89,7 +89,7 @@ space/vnode-type-spacer
 
 ## 对齐方式
 
-设置该值可以调整所有子节点在容器内的对齐方式, 可设置的值与 [align-items ](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items)一致
+设置该值可以调整所有子节点在容器内的对齐方式，可设置的值与 [align-items ](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items)一致。
 
 :::demo 使用 `alignment` 属性来对齐
 
@@ -121,18 +121,18 @@ space/fill-ratio
 
 ## Space 属性
 
-| 属性       | 说明                      | 类型                               | 可选值                                                                      | 默认值     |
-| ---------- | ------------------------- | ---------------------------------- | --------------------------------------------------------------------------- | ---------- | --- |
-| alignment  | 对齐的方式                | string                             | [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) | 'center'   |
-| class      | 类名                      | string / Array<Object \\           | String> / Object                                                            | -          | -   |
-| direction  | 排列的方向                | string                             | vertical/horizontal                                                         | horizontal |
-| prefix-cls | 给 space-items 的类名前缀 | string                             | el-space                                                                    | -          |
-| style      | 额外样式                  | string / Array<Object \\           | String> / Object                                                            | -          | -   |
-| spacer     | 间隔符                    | string / number / VNode            | -                                                                           | -          |
-| size       | 间隔大小                  | string / number / [number, number] | -                                                                           | 'small'    |
-| wrap       | 设置是否自动折行          | boolean                            | true / false                                                                | false      |
-| fill       | 子元素是否填充父容器      | boolean                            | true / false                                                                | false      |
-| fill-ratio | 填充父容器的比例          | number                             | -                                                                           | 100        |
+| 属性       | 说明                      | 类型                                      | 可选值                                                                      | 默认值     |
+| ---------- | ------------------------- | ----------------------------------------- | --------------------------------------------------------------------------- | ---------- | --- |
+| alignment  | 对齐的方式                | string                                    | [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) | 'center'   |
+| class      | 类名                      | string / Array<Record<string, boolean> \  | String> / Record<string, boolean>                                           | -          | -   |
+| direction  | 排列的方向                | string                                    | vertical/horizontal                                                         | horizontal |
+| prefix-cls | 给 space-items 的类名前缀 | string                                    | el-space                                                                    | -          |
+| style      | 额外样式                  | string / Array<Object \\                  | String> / Object                                                            | -          | -   |
+| spacer     | 间隔符                    | string / number / VNode                   | -                                                                           | -          |
+| size       | 间隔大小                  | string / number / [number, number]        | -                                                                           | 'small'    |
+| wrap       | 设置是否自动折行          | boolean                                   | true / false                                                                | false      |
+| fill       | 子元素是否填充父容器      | boolean                                   | true / false                                                                | false      |
+| fill-ratio | 填充父容器的比例          | number                                    | -                                                                           | 100        |
 
 ## Space 插槽
 
