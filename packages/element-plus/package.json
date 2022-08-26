@@ -1,6 +1,6 @@
 {
   "name": "cs-element-plus",
-  "version": "2.2.13",
+  "version": "2.2.14",
   "description": "基于 Vue 3，面向设计师和开发者的组件库，在 Element Plus 的基础上新增碧桂园 bgy 组件，且实时同步 Element Plus 最新版本",
   "keywords": [
     "element-plus",
@@ -60,7 +60,7 @@
     "@popperjs/core": "npm:@sxzz/popperjs-es@^2.11.7",
     "@types/lodash": "^4.14.182",
     "@types/lodash-es": "^4.17.6",
-    "@vueuse/core": "^8.7.5",
+    "@vueuse/core": "^9.1.0",
     "async-validator": "^4.2.5",
     "axios": "^0.27.2",
     "dayjs": "^1.11.3",
