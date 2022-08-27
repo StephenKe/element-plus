@@ -295,7 +295,7 @@ export const useSelect = (props: TreeSelectPropsType, states: States, ctx) => {
 
   const handleFocus = (event) => {
     if (!states.softFocus) {
-      if (props.automaticDropdown || props.filterable) {
+      if (props.automaticDropdown) {
         states.visible = true
         if (props.filterable) {
           states.menuVisibleOnFocus = true
@@ -623,7 +623,7 @@ export const useSelect = (props: TreeSelectPropsType, states: States, ctx) => {
       filterMethod(val)
     } else {
       states.filteredOptionsCount = states.optionsCount
-      queryChange.value.query = val
+      queryChange.value.query = val?.trim()
 
       triggerRef(queryChange)
     }
