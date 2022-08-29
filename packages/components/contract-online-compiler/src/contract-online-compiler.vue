@@ -310,7 +310,7 @@ export default defineComponent({
       return config
     }
     const fieldClassList = ref([])
-    fieldClassAllList().then((res) => {
+    fieldClassAllList(props.urlPrefix).then((res) => {
       fieldClassList.value = res.data
     })
 
@@ -370,7 +370,7 @@ export default defineComponent({
       searchVariableForm.isPublicVariableList = false
       searchVariableForm.fieldDesc = ''
       searchVariableForm.fieldName = ''
-      this.getVariableDataList()
+      getVariableDataList()
     }
     // 选择指定内容域并跳转到内容域所在位置-文字处理
     const contentAreaOrientation = (name, flag) => {
@@ -416,8 +416,8 @@ export default defineComponent({
         contentAreaType = 'plain'
       }
       const contentRecord = {
-        fileId: this.ythTemplate.localFileId,
-        contentAreaType: contentAreaType,
+        fileId: ythTemplate.value.localFileId,
+        contentAreaType,
       }
       // 保存内容域
       saveContentRecord(props.urlPrefix, contentRecord).then((res) => {
