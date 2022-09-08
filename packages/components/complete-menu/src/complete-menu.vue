@@ -28,7 +28,7 @@
           v-model="searchState.selectValue"
           @change="handleSelectChange"
         >
-          <el-option key="" value="" label="全部"></el-option>
+          <!-- <el-option key="" value="" label="全部"></el-option> -->
           <el-option
             v-for="menu in firstLevelMenus"
             :key="menu.index"
@@ -51,12 +51,12 @@
         @input="handleSearchInput"
       >
         <template #prepend>
-          <el-button
+          <!-- <el-button
             v-show="!searchState.selectLabel"
             @click="handleSwitchFilterMode"
           >
             全部
-          </el-button>
+          </el-button> -->
           <el-button
             v-show="searchState.selectLabel"
             @click="handleSwitchFilterMode"
@@ -267,6 +267,8 @@ const ElCompleteMenu: DefineComponent = defineComponent({
   props: completeMenuProps,
   emits: completeMenuEmits,
   setup(props, { emit }) {
+    // 默认选择第一个菜单
+    const DEFAULT_MENU_VALUE = props.data[0].index
     // 当前激活的顶部按钮
     const active = ref('home')
     // 展开/收起是否展示tooltip
@@ -341,7 +343,7 @@ const ElCompleteMenu: DefineComponent = defineComponent({
     const activeFilterMode = ref('select')
     // 菜单搜索绑定值
     const searchState = reactive({
-      selectValue: '',
+      selectValue: DEFAULT_MENU_VALUE,
       searchValue: '',
       selectLabel: '',
     })
@@ -388,7 +390,7 @@ const ElCompleteMenu: DefineComponent = defineComponent({
         menuData.value =
           props.data.filter((menu) => menu.index === val)[0]?.children || []
     }
-
+    selectFilterMenus(DEFAULT_MENU_VALUE)
     // 根据 value 匹配菜单数据
     const matchMenus = (value: string, menus: Array<CompleteMenuDataItem>) => {
       const result: Array<CompleteMenuDataItem> = []
