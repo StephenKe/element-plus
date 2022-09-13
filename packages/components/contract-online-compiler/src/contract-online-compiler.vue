@@ -279,6 +279,7 @@ export default defineComponent({
             edit: true,
             print: true,
             review: true,
+            canConfigCT: false,
           },
         },
         editorConfig: {
@@ -292,8 +293,8 @@ export default defineComponent({
             chat: false,
             comments: true,
             zoom: 120,
-            leftMenu: false,
-            rightMenu: false,
+            leftMenu: true,
+            rightMenu: true,
             toolbar: true,
             displayTitle: false,
             header: true,
