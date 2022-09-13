@@ -36,6 +36,10 @@ export const contractOnlineCompilerProps = buildProps({
     type: Number,
     default: 16,
   },
+  queryFormLabelWidth: {
+    type: String,
+    default: '80px',
+  },
   fileId: {
     type: String,
     required: true,

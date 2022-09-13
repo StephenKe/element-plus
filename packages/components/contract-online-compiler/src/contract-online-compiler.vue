@@ -7,7 +7,7 @@
             <el-query-form
               :model="searchVariableForm"
               :class="ns.e('query-form')"
-              label-width="80px"
+              :label-width="queryFormLabelWidth"
               @reset="handleVariableReset"
               @search="handleVariableSearch"
             >
@@ -143,7 +143,7 @@
           </el-tab-pane>
         </el-tabs>
       </el-col>
-      <el-col :span="rightSpan">
+      <el-col :span="rightSpan" :class="ns.e('changxie')">
         <div id="editContract"></div>
       </el-col>
     </el-row>
