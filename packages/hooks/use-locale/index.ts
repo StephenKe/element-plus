@@ -1,7 +1,8 @@
 import { computed, isRef, ref, unref } from 'vue'
 import { get } from 'lodash-unified'
-import English from '@element-plus/locale/lang/en'
-import { useGlobalConfig } from '../use-global-config'
+// import English from '@element-plus/locale/lang/en'
+import Chinese from '@element-plus/locale/lang/zh-cn'
+// import { useGlobalConfig } from '../use-global-config'
 import type { MaybeRef } from '@vueuse/core'
 import type { Ref } from 'vue'
 import type { Language } from '@element-plus/locale'
@@ -42,6 +43,7 @@ export const buildLocaleContext = (
 }
 
 export const useLocale = () => {
-  const locale = useGlobalConfig('locale')
-  return buildLocaleContext(computed(() => locale.value || English))
+  // const locale = useGlobalConfig('locale')
+  // return buildLocaleContext(computed(() => locale.value || English))
+  return buildLocaleContext(computed(() => Chinese))
 }

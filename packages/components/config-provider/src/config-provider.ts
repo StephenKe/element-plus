@@ -1,6 +1,7 @@
 import { defineComponent, renderSlot, watch } from 'vue'
 import { buildProps, definePropType } from '@element-plus/utils'
 import { provideGlobalConfig, useSizeProp } from '@element-plus/hooks'
+import Chinese from '@element-plus/locale/lang/zh-cn'
 
 import type { ExtractPropTypes } from 'vue'
 import type { AxiosInstance } from 'axios'
@@ -20,6 +21,7 @@ export const configProviderProps = buildProps({
 
   locale: {
     type: definePropType<Language>(Object),
+    default: Chinese,
   },
 
   size: useSizeProp,
