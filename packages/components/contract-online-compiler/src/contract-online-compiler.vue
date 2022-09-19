@@ -247,7 +247,7 @@ export default defineComponent({
     }
 
     function formatFillType(fieldType) {
-      if (fieldType === '10') {
+      if (fieldType === '10' || fieldType === '50') {
         return '文本'
       } else if (fieldType === '20') {
         return '中台文件'
