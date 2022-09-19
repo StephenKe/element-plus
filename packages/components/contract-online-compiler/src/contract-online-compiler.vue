@@ -408,9 +408,11 @@ export default defineComponent({
     const cursorInsertJsonToEditor = (json, contentAreaId) => {
       // 获取内容域信息
       getContentRecordInfo(props.urlPrefix, contentAreaId).then((res) => {
+        const cxContentRecord = res.data.cxContentRecord
         const addSdt = CxUtil.buildInsertAddSdt(
           contentAreaId,
-          res.data.cxContentRecord.contentAreaType
+          cxContentRecord.contentAreaType,
+          cxContentRecord.incrementId
         )
         const jsonArr = [CxUtil.buildInsertObj(json, undefined, addSdt)]
         // 插入内容域
