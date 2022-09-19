@@ -248,7 +248,9 @@ export default defineComponent({
 
     function formatFillType(fieldType) {
       if (fieldType === '10') {
-        return '文本'
+        return '纯文本'
+      } else if (fieldType === '50') {
+        return '富文本'
       } else if (fieldType === '20') {
         return '中台文件'
       } else if (fieldType === '30') {
@@ -301,6 +303,12 @@ export default defineComponent({
             statusBar: true,
             autosave: true,
             forcesave: true,
+            logo: {
+              image: 'https://gcm.countrygarden.com.cn/bgy_auth_logo.png',
+              blank: true, // 是否在新窗口打开
+              text: '碧桂园', // 显示文字
+              url: 'https://www.bgy.com.cn/home', // 回跳的url地址 todo 目前显示官方网址
+            },
           },
           callbackUrl: `${props.urlPrefix}/office/callback/cx/yth/template?fileId=${ythTemplate.value.localFileId}&callbackUrl=${props.callbackUrl}&templateId=${ythTemplate.value.id}`,
         },
