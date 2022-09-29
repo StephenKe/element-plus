@@ -33,11 +33,11 @@ export const CxUtil = {
     return obj
   },
   // 构建插入内容域创建内容域对象
-  buildInsertAddSdt(name, type, readonly, nodel) {
+  buildInsertAddSdt(name, type, id, readonly, nodel) {
     const addSdt = {
       // 1为富文本内容域、2为纯文本内容域
       type: type === 'plain' ? 2 : 1,
-      id: name,
+      id: id || name,
       name,
       tag: name,
       readonly: readonly || true,
