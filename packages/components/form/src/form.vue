@@ -92,6 +92,13 @@ const validate = async (
   callback?: FormValidateCallback
 ): FormValidationResult => validateField(undefined, callback)
 
+const validateAsync = async (
+  callback?: FormValidateCallback
+): FormValidationResult => {
+  const re = await validateFieldAsync(undefined, callback)
+  return re
+}
+
 const doValidateField = async (
   props: Arrayable<FormItemProp> = []
 ): Promise<boolean> => {
@@ -139,6 +146,30 @@ const validateField: FormContext['validateField'] = async (
   }
 }
 
+const validateFieldAsync: FormContext['validateField'] = async (
+  modelProps = [],
+  callback
+) => {
+  const shouldThrow = !isFunction(callback)
+  try {
+    const result = await doValidateField(modelProps)
+    // When result is false meaning that the fields are not validatable
+    // if (result === true) {
+    //   callback?.(result)
+    // }
+    callback?.(result)
+    return result
+  } catch (e) {
+    const invalidFields = e as ValidateFieldsError
+
+    if (props.scrollToError) {
+      scrollToField(Object.keys(invalidFields)[0])
+    }
+    callback?.(false, invalidFields)
+    return shouldThrow && Promise.reject(invalidFields)
+  }
+}
+
 const scrollToField = (prop: FormItemProp) => {
   const field = filterFields(fields, prop)[0]
   if (field) {
@@ -151,6 +182,9 @@ watch(
   () => {
     if (props.validateOnRuleChange) {
       validate().catch((err) => debugWarn(err))
+    }
+    if (props.validateAsyncOnRuleChange) {
+      validateAsync().catch((err) => debugWarn(err))
     }
   },
   { deep: true }
@@ -175,6 +209,8 @@ provide(
 defineExpose({
   /** @description validate form */
   validate,
+  /** @description validateAsync form */
+  validateAsync,
   /** @description validate form field */
   validateField,
   /** @description reset fields */

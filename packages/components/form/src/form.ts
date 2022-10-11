@@ -50,6 +50,10 @@ export const formProps = buildProps({
     type: Boolean,
     default: true,
   },
+  validateAsyncOnRuleChange: {
+    type: Boolean,
+    default: false,
+  },
   hideRequiredAsterisk: {
     type: Boolean,
     default: false,
@@ -60,6 +64,10 @@ export type FormProps = ExtractPropTypes<typeof formProps>
 
 export const formEmits = {
   validate: (prop: FormItemProp, isValid: boolean, message: string) =>
+    (isArray(prop) || isString(prop)) &&
+    isBoolean(isValid) &&
+    isString(message),
+  validateAsync: (prop: FormItemProp, isValid: boolean, message: string) =>
     (isArray(prop) || isString(prop)) &&
     isBoolean(isValid) &&
     isString(message),
