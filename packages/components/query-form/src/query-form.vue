@@ -38,7 +38,15 @@
 </template>
 <script lang="ts">
 // @ts-nocheck
-import { defineComponent, ref, computed, watch, onMounted } from 'vue'
+import {
+  defineComponent,
+  ref,
+  computed,
+  watch,
+  onMounted,
+  effect,
+  nextTick,
+} from 'vue'
 import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import { useNamespace } from '@element-plus/hooks'
 import {
@@ -85,17 +93,24 @@ export default defineComponent({
         ? getEleHeight(formItems[0], props.size, formEle.value)
         : 0
     })
+    watch(
+      () => props.model,
+      () => {
+        nextTick(() => {
+          if (formEle.value) {
+            // const formItems = formEle.value.getElementsByClassName('el-form-item')
+            // console.log('formItems ', formItems, formRef.value?.$el.children)
+            recomputedCollapse()
+          }
+        })
+      },
+      {
+        deep: true,
+      }
+    )
     // 是否显示展开/收起按钮，通过 dom 元素高度判断
-    const showCollapseBtns = computed(() => {
-      if (!formChildren.value || !formChildren.value.length) return false
-      else
-        return (
-          Array.from(formChildren.value).reduce((total, child) => {
-            total += getEleHeight(child, props.size)
-            return total
-          }, 0) > firstItemHeight.value
-        )
-    })
+    const showCollapseBtns = ref(false)
+
     // is 类名
     const isClassName = computed(() =>
       isCollapse.value ? 'collapse' : 'expand'
@@ -115,6 +130,19 @@ export default defineComponent({
       formHeight.value = getShowHeight(val)
     })
 
+    const recomputedCollapse = () => {
+      if (!formChildren.value || !formChildren.value.length)
+        showCollapseBtns.value = false
+      else {
+        showCollapseBtns.value =
+          Array.from(formChildren.value).reduce((total, child) => {
+            total += getEleHeight(child, props.size)
+            return total
+          }, 0) > firstItemHeight.value
+        isCollapse.value = !showCollapseBtns.value
+      }
+    }
+
     // 获取当前状态展示高度
     const getShowHeight = (isCollapse) => {
       return formChildren.value?.length
@@ -129,6 +157,7 @@ export default defineComponent({
 
     onMounted(() => {
       formHeight.value = getShowHeight(isCollapse.value)
+      recomputedCollapse()
     })
 
     // form validate
