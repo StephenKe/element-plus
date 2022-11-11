@@ -126,6 +126,19 @@ export default defineComponent({
       formHeight.value = getShowHeight(val)
     })
 
+    const recomputedCollapse = () => {
+      if (!formChildren.value || !formChildren.value.length)
+        showCollapseBtns.value = false
+      else {
+        showCollapseBtns.value =
+          Array.from(formChildren.value).reduce((total, child) => {
+            total += getEleHeight(child, props.size)
+            return total
+          }, 0) > firstItemHeight.value
+        isCollapse.value = !showCollapseBtns.value
+      }
+    }
+
     // 获取当前状态展示高度
     const getShowHeight = (isCollapse) => {
       return formChildren.value?.length
@@ -140,6 +153,7 @@ export default defineComponent({
 
     onMounted(() => {
       formHeight.value = getShowHeight(isCollapse.value)
+      recomputedCollapse()
     })
 
     // form validate
