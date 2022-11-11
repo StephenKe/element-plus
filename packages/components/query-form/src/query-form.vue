@@ -96,16 +96,11 @@ export default defineComponent({
     watch(
       () => props.model,
       () => {
-        nextTick(() => {
-          if (formEle.value) {
-            // const formItems = formEle.value.getElementsByClassName('el-form-item')
-            // console.log('formItems ', formItems, formRef.value?.$el.children)
-            recomputedCollapse()
-          }
-        })
+        nextTick(recomputedCollapse)
       },
       {
         deep: true,
+        flush: 'post',
       }
     )
     // 是否显示展开/收起按钮，通过 dom 元素高度判断
@@ -131,15 +126,15 @@ export default defineComponent({
     })
 
     const recomputedCollapse = () => {
-      if (!formChildren.value || !formChildren.value.length)
-        showCollapseBtns.value = false
-      else {
+      if (formChildren.value?.length) {
         showCollapseBtns.value =
           Array.from(formChildren.value).reduce((total, child) => {
             total += getEleHeight(child, props.size)
             return total
           }, 0) > firstItemHeight.value
         isCollapse.value = !showCollapseBtns.value
+      } else {
+        showCollapseBtns.value = false
       }
     }
 
@@ -156,7 +151,9 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      formHeight.value = getShowHeight(isCollapse.value)
+      setTimeout(() => {
+        formHeight.value = getShowHeight(isCollapse.value)
+      })
       recomputedCollapse()
     })
 
