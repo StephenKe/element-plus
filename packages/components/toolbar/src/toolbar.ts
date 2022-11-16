@@ -3,9 +3,41 @@ import { buildProps, definePropType } from '@element-plus/utils'
 
 // 头像下拉框数据结构类型
 export interface AvatarOptItem {
-  key: string // key
-  text: string // 文本描述
-  event: string // 事件名称
+  /**
+   * 文本描述
+   */
+  text: string
+  /**
+   * 事件名称
+   */
+  event: string
+  /**
+   * 其他属性
+   */
+  [key: string]: any
+}
+
+export interface QuestionPageItem {
+  /**
+   * 展示文案
+   */
+  text: string
+  /**
+   * 是否展示分割线
+   */
+  divided?: boolean
+  /**
+   * 是否禁用
+   */
+  disabled?: boolean
+  /**
+   * 其他属性
+   */
+  [key: string]: any
+}
+
+export interface QuestionPage {
+  [index: number]: QuestionPageItem
 }
 
 // porps
@@ -30,19 +62,19 @@ export const toolbarProps = buildProps({
       'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
   },
   // 我要提问页面地址
-  questionPageUrl: String,
+  questionPageUrl: {
+    type: definePropType<string | QuestionPage>([String, Array]),
+  },
   // 头像下拉选项
   avatarOptList: {
     // type: Array<AvatarOptItem>,
     type: definePropType<AvatarOptItem[]>(Array),
     default: () => [
       {
-        key: 'changePwd',
         text: '修改密码',
         event: 'changePwd',
       },
       {
-        key: 'logout',
         text: '注销',
         event: 'logout',
       },

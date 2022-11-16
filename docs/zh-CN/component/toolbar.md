@@ -37,24 +37,35 @@ toolbar/custom
 
 :::
 
+## questionPageUrl，avatarOptList 为数组时
+
+`questionPageUrl`为数组时，点击下拉项触发`questionClick`事件，回调函数为点击项的对象
+
+:::demo
+
+toolbar/questionPageUrl
+
+:::
+
 ## 属性
 
-| 属性            | 说明                                  | 类型   | 可选值 | 默认值                                                                                                          |
-| --------------- | ------------------------------------- | ------ | ------ | --------------------------------------------------------------------------------------------------------------- |
-| logoSrc         | logo 图片地址（为保持统一不建议修改） | string | —      | —                                                                                                               |
-| title           | 系统标题                              | string | —      | 一体化平台                                                                                                      |
-| questionPageUrl | 我要提问系统地址 URL                  | string | —      | —                                                                                                               |
-| msgNum          | 消息数量                              | number | —      | 0                                                                                                               |
-| avatarUrl       | 头像 URL                              | string | —      | https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png                                             |
-| avatarOptList   | 头像下拉框选项                        | array  | -      | [{ key: 'changePwd', text: '修改密码', event: 'changePwd', }, { key: 'logout', text: '注销', event: 'logout' }] |
+| 属性            | 说明                                  | 类型         | 可选值 | 默认值                                                                         |
+| --------------- | ------------------------------------- | ------------ | ------ | ------------------------------------------------------------------------------ |
+| logoSrc         | logo 图片地址（为保持统一不建议修改） | string       | —      | —                                                                              |
+| title           | 系统标题                              | string       | —      | 一体化平台                                                                     |
+| questionPageUrl | 我要提问                              | string/array | —      | 为数组时，页面展示为下拉项，点击下拉项触发`questionClick`事件击                |
+| msgNum          | 消息数量                              | number       | —      | 0                                                                              |
+| avatarUrl       | 头像 URL                              | string       | —      | https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png            |
+| avatarOptList   | 头像下拉框选项                        | array        | -      | [{ text: '修改密码', event: 'changePwd', }, { text: '注销', event: 'logout' }] |
 
 ## 事件
 
-| 事件名      | 说明                 | 回调参数 |
-| ----------- | -------------------- | -------- |
-| showMessage | 点击消息图标事件     | —        |
-| changePwd   | 修改密码按钮点击事件 | —        |
-| logout      | 注销按钮点击事件     | —        |
+| 事件名        | 说明                            | 回调参数                      |
+| ------------- | ------------------------------- | ----------------------------- |
+| showMessage   | 点击消息图标事件                | —                             |
+| changePwd     | 修改密码按钮点击事件            | —                             |
+| logout        | 注销按钮点击事件                | —                             |
+| questionClick | 仅`questionPageUrl`为数组时生效 | 参数为`questionPageUrl`数据项 |
 
 ## 插槽
 
