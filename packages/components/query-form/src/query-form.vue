@@ -38,15 +38,7 @@
 </template>
 <script lang="ts">
 // @ts-nocheck
-import {
-  defineComponent,
-  ref,
-  computed,
-  watch,
-  onMounted,
-  effect,
-  nextTick,
-} from 'vue'
+import { defineComponent, ref, computed, watch, onMounted, nextTick } from 'vue'
 import { ArrowDown, ArrowUp } from '@element-plus/icons-vue'
 import { useNamespace } from '@element-plus/hooks'
 import {
@@ -74,7 +66,7 @@ export default defineComponent({
   props: queryFormProps,
   emits: queryFormEmits,
   expose: ['validate', 'validateField', 'resetFields', 'clearValidate'],
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     // css 命名空间
     const ns = useNamespace('query-form')
 
@@ -94,23 +86,27 @@ export default defineComponent({
         : 0
     })
     watch(
-      () => props.model,
+      () => slots.default(),
       () => {
         nextTick(() => {
-          if (formEle.value) {
-            // const formItems = formEle.value.getElementsByClassName('el-form-item')
-            // console.log('formItems ', formItems, formRef.value?.$el.children)
-            recomputedCollapse()
+          if (!formChildren.value || !formChildren.value.length) {
+            showCollapseBtns.value = false
+          } else {
+            showCollapseBtns.value =
+              Array.from(formChildren.value).reduce((total, child) => {
+                total += getEleHeight(child, props.size)
+                return total
+              }, 0) > firstItemHeight.value
           }
         })
       },
       {
         deep: true,
+        immediate: true,
       }
     )
     // 是否显示展开/收起按钮，通过 dom 元素高度判断
     const showCollapseBtns = ref(false)
-
     // is 类名
     const isClassName = computed(() =>
       isCollapse.value ? 'collapse' : 'expand'
@@ -131,15 +127,15 @@ export default defineComponent({
     })
 
     const recomputedCollapse = () => {
-      if (!formChildren.value || !formChildren.value.length)
-        showCollapseBtns.value = false
-      else {
+      if (formChildren.value?.length) {
         showCollapseBtns.value =
           Array.from(formChildren.value).reduce((total, child) => {
             total += getEleHeight(child, props.size)
             return total
           }, 0) > firstItemHeight.value
         isCollapse.value = !showCollapseBtns.value
+      } else {
+        showCollapseBtns.value = false
       }
     }
 
@@ -156,7 +152,9 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      formHeight.value = getShowHeight(isCollapse.value)
+      setTimeout(() => {
+        formHeight.value = getShowHeight(isCollapse.value)
+      })
       recomputedCollapse()
     })
 

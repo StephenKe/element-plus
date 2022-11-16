@@ -46,6 +46,17 @@
   @include e(right) {
     padding: 0 var(--el-toolbar-padding) 0 0;
     align-items: flex-end;
+    .el-dropdown {
+      top: -5px;
+    }
+    .question-dropdown {
+      display: flex;
+    }
+    .arrow-icon {
+      margin-left: 5px;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   & .#{$namespace}-toolbar__left,
