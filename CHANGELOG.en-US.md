@@ -16,7 +16,6 @@ _2022-11-11_
 - Components [calendar] fix range cross year bug (#10574 by @sunyuu)
 - Style(components): [select] Fix tags style (#10502 by @kooriookami)
 - Style(components): [select-v2] Uniform style consistent with select (#10501 by @kooriookami)
->>>>>>> 2.2.21
 
 ### 2.2.20
 
