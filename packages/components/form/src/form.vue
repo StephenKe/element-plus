@@ -136,6 +136,8 @@ const validateField: FormContext['validateField'] = async (
     }
     return result
   } catch (e) {
+    if (e instanceof Error) throw e
+
     const invalidFields = e as ValidateFieldsError
 
     if (props.scrollToError) {

@@ -1,4 +1,4 @@
-import { isArray, isObject } from '@vue/shared'
+import { isArray, isObject, isString } from '@vue/shared'
 import { isNil } from 'lodash-unified'
 
 export {
@@ -38,3 +38,10 @@ export type Truth = boolean
 export type TruthResolver<T> = (self: T, ...args: any[]) => boolean
 
 export type TruthOrResolver<T> = Truth | TruthResolver<T>
+
+export const isStringNumber = (val: string): boolean => {
+  if (!isString(val)) {
+    return false
+  }
+  return !Number.isNaN(Number(val))
+}
