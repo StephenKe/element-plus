@@ -2,12 +2,17 @@
 import { computed } from 'vue'
 import { useLang } from '../../composables/lang'
 import homeLocale from '../../../i18n/pages/home.json'
+
+defineProps<{
+  isHome?: boolean
+}>()
+
 const lang = useLang()
 const homeLang = computed(() => homeLocale[lang.value])
 </script>
 
 <template>
-  <footer class="footer">
+  <footer class="footer" :class="{ 'is-home': isHome }">
     <div class="footer-main">
       <h4>{{ homeLang['10'] }}</h4>
       <a
@@ -22,7 +27,7 @@ const homeLang = computed(() => homeLocale[lang.value])
         class="footer-main-link"
         target="_blank"
       >
-        {{ homeLang['12'] }}
+        {{ homeLang['china_mirror'] }}
       </a>
       <!-- <a
         href="https://element.eleme.io/"
@@ -32,11 +37,11 @@ const homeLang = computed(() => homeLocale[lang.value])
         {{ homeLang['13'] }}
       </a> -->
       <a
-        :href="`/${lang}/guide/theming`"
+        href="https://element.eleme.io/"
         class="footer-main-link"
         target="_blank"
       >
-        {{ homeLang['14'] }}
+        {{ homeLang['13'] }}
       </a>
     </div>
 
@@ -75,13 +80,21 @@ const homeLang = computed(() => homeLocale[lang.value])
 </template>
 
 <style lang="scss">
+.dark .footer {
+  background-color: var(--el-fill-color-lighter);
+}
 .footer {
-  background-color: var(--bg-color);
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 19px;
+  background-color: #f5f7fa;
   box-sizing: border-box;
+  padding: 42px 64px 64px;
   // height: 340px;
+
+  &.is-home {
+    background-color: var(--bg-color);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 19px;
+  }
 
   .container {
     box-sizing: border-box;
@@ -92,12 +105,14 @@ const homeLang = computed(() => homeLocale[lang.value])
     font-size: 0;
     display: inline-block;
     vertical-align: top;
-    margin-right: 110px;
+    margin-right: 130px;
 
     h4 {
       font-size: 18px;
       line-height: 1;
       margin: 0 0 15px 0;
+      font-weight: 400;
+      color: var(--el-text-color-primary);
     }
 
     .footer-main-link {

@@ -2,9 +2,9 @@ node_modules
 dist
 pnpm-lock.yaml
 CHANGELOG.en-US.md
-!.*
 docs/components.d.ts
 coverage
+play
 ssr-testing/cases/*
 packages/components/bgy-anchor/*
 packages/components/bgy-tree-transfer/*
@@ -19,3 +19,7 @@ packages/components/contract-edit-form/*
 packages/components/contract-online-compiler/*
 packages/utils/request.ts
 packages/utils/util.ts
+docs/.vitepress/i18n/*
+docs/.vitepress/crowdin/*
+!docs/.vitepress/crowdin/en-US
+!.*
