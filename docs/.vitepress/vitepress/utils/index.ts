@@ -4,9 +4,7 @@ import {
   isExternal,
   normalize,
 } from 'vitepress/dist/client/theme-default/utils'
-import { inBrowser } from 'vitepress'
 
-import type { Ref } from 'vue'
 import type { Route } from 'vitepress'
 
 export * from './colors'
