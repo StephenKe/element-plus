@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2.2.22
+
+_2022-11-18_
+
+#### Bug fixes
+
+- Components [select-v2] case-insensitive when filterable (#10575 by @hellomrbigshot)
+- Style(components): [pagination] Refactor pagination style (#10563 by @kooriookami)
+
 ### 2.2.21
 
 _2022-11-11_
@@ -2097,7 +2106,7 @@ _2021-11-05_
 - Components [el-image] initialIndex (#4235 by @Alanscut)
 - Components [el-message] merge the same content messages(#3836 by @zhazhanitian) (#3988)
 - Docs add support for copying svg content (#4169 by @adaex)
-- 
+-
 #### Bug fixes
 
 - Components [el-tree-v2] indent can not set zero (#3881 by @btea)
