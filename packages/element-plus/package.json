@@ -1,6 +1,6 @@
 {
   "name": "cs-element-plus",
-  "version": "2.2.26",
+  "version": "2.2.26-beta1.0",
   "description": "基于 Vue 3，面向设计师和开发者的组件库，在 Element Plus 的基础上新增碧桂园 bgy 组件，且实时同步 Element Plus 最新版本",
   "keywords": [
     "element-plus",
