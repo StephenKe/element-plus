@@ -82,6 +82,8 @@ import { ElSelectV2 } from '@element-plus/components/select-v2'
 import { ElSkeleton, ElSkeletonItem } from '@element-plus/components/skeleton'
 import { ElSlider } from '@element-plus/components/slider'
 import { ElSpace } from '@element-plus/components/space'
+import { ElStatistic } from '@element-plus/components/statistic'
+import { ElCountdown } from '@element-plus/components/countdown'
 import { ElStep, ElSteps } from '@element-plus/components/steps'
 import { ElSwitch } from '@element-plus/components/switch'
 import { ElTable, ElTableColumn } from '@element-plus/components/table'
@@ -194,6 +196,8 @@ export default [
   ElSkeletonItem,
   ElSlider,
   ElSpace,
+  ElStatistic,
+  ElCountdown,
   ElSteps,
   ElStep,
   ElSwitch,
