@@ -108,7 +108,10 @@
                 </template>
                 <!-- 三级菜单 -->
                 <template v-for="third in sed.children" :key="third.index">
-                  <el-custom-menu-item :index="third.index">
+                  <el-custom-menu-item
+                    :index="third.index"
+                    :tooltip="third.tooltip"
+                  >
                     <template #title>
                       <span :style="spanPaddingStyle">
                         <el-icon v-if="third.icon">
@@ -142,7 +145,11 @@
                   </el-custom-menu-item>
                 </template>
               </el-custom-sub-menu>
-              <el-custom-menu-item v-else :index="sed.index">
+              <el-custom-menu-item
+                v-else
+                :index="sed.index"
+                :tooltip="sed.tooltip"
+              >
                 <template #title>
                   <span :style="spanPaddingStyle">
                     <el-icon v-if="sed.icon">
@@ -175,7 +182,11 @@
             </template>
           </el-custom-sub-menu>
           <!-- 无子级 -->
-          <el-custom-menu-item v-else :index="first.index">
+          <el-custom-menu-item
+            v-else
+            :index="first.index"
+            :tooltip="first.tooltip"
+          >
             <!-- 收起时仅展示 icon -->
             <el-icon v-if="collapse && first.icon">
               <component :is="first.icon" />

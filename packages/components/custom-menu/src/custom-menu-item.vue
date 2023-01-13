@@ -12,9 +12,10 @@
   >
     <el-tooltip
       v-if="
-        parentMenu.type.name === 'ElCustomMenu' &&
-        rootMenu.props.collapse &&
-        $slots.title
+        (parentMenu.type.name === 'ElCustomMenu' &&
+          rootMenu.props.collapse &&
+          $slots.title) ||
+        tooltip
       "
       :effect="Effect.DARK"
       placement="right"
@@ -35,7 +36,7 @@
           padding: '0 20px',
         }"
       >
-        <slot />
+        <slot name="title" />
       </div>
     </el-tooltip>
     <template v-else>
@@ -56,6 +57,7 @@ import {
   getCurrentInstance,
   toRef,
   reactive,
+  shallowRef,
 } from 'vue'
 import { ElTooltip, Effect } from '@element-plus/components'
 import { throwError } from '@element-plus/utils'
@@ -82,6 +84,8 @@ export default defineComponent({
     const instance = getCurrentInstance()!
     const rootMenu = inject<CustomMenuProvider>('rootMenu')
     if (!rootMenu) throwError(COMPONENT_NAME, 'can not inject root menu')
+
+    const tooltip = shallowRef(props.tooltip)
 
     const { parentMenu, paddingStyle, indexPath } = useMenu(
       instance,

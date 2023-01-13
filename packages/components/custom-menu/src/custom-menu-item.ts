@@ -13,6 +13,7 @@ export const customMenuItemProps = buildProps({
     type: definePropType<RouteLocationRaw>([String, Object]),
   },
   disabled: Boolean,
+  tooltip: Boolean,
 } as const)
 export type CustomMenuItemProps = ExtractPropTypes<typeof customMenuItemProps>
 
