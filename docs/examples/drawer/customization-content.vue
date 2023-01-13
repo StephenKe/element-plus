@@ -24,7 +24,7 @@
     title="I have a nested form inside!"
     :before-close="handleClose"
     direction="ltr"
-    custom-class="demo-drawer"
+    class="demo-drawer"
   >
     <div class="demo-drawer__content">
       <el-form :model="form">
@@ -53,8 +53,7 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import { ElMessageBox } from 'element-plus'
-import type { ElDrawer } from 'element-plus'
+import { ElDrawer, ElMessageBox } from 'element-plus'
 
 const formLabelWidth = '80px'
 let timer
