@@ -18,7 +18,10 @@
     />
 
     <!-- 中间搜索框 -->
-    <div v-show="!collapse" class="el-complete-menu__middle">
+    <div
+      v-show="!collapse && active !== 'collect'"
+      class="el-complete-menu__middle"
+    >
       <!-- 下拉框搜索 -->
       <div
         v-show="activeFilterMode === 'select'"
@@ -340,6 +343,26 @@ const ElCompleteMenu: DefineComponent = defineComponent({
         }
       }
     )
+    // 监听收藏菜单数据变化，更新显示
+    watch(props.collectedData, (value) => {
+      if (collectedMenuData.value.length !== value.length) {
+        collectedMenuData.value = value.map((data) => {
+          return Object.assign({}, data, { isCollected: true })
+        })
+        if (active.value === 'collect') {
+          menuData.value = [...collectedMenuData.value]
+        }
+        if (active.value === 'home') {
+          menuData.value = [
+            ...initMenuIsCollected(
+              props.data.filter(
+                (menu) => menu.index === searchState.selectValue
+              )[0].children
+            ),
+          ]
+        }
+      }
+    })
     // 常用菜单
     const commonUsedMenuData = shallowRef(
       props.commonUsedData.map((data) => {
@@ -478,7 +501,13 @@ const ElCompleteMenu: DefineComponent = defineComponent({
       // 更新菜单
       switch (tool.key) {
         case 'home':
-          menuData.value = [...initMenuIsCollected(props.data)]
+          menuData.value = [
+            ...initMenuIsCollected(
+              props.data.filter(
+                (menu) => menu.index === searchState.selectValue
+              )[0].children
+            ),
+          ]
           break
         case 'common':
           menuData.value = [...commonUsedMenuData.value]
@@ -524,30 +553,30 @@ const ElCompleteMenu: DefineComponent = defineComponent({
     /********************** 菜单收藏 start *************************/
     // 收藏/取消收藏
     const handleCollect = (menu) => {
-      menu.isCollected = !menu.isCollected
-      // 调整全部菜单的收藏标识
-      menuData.value = [...menuData.value]
-      if (menu.isCollected) {
-        collectedMenuData.value.push(menu)
-      } else {
-        const index = collectedMenuData.value.findIndex(
-          (menuItem) => menuItem.index === menu.index
-        )
-        collectedMenuData.value.splice(index, 1)
-        if (active.value === 'collect') {
-          menuData.value = [...collectedMenuData.value]
-        }
-      }
+      // menu.isCollected = !menu.isCollected
+      // // 调整全部菜单的收藏标识
+      // menuData.value = [...menuData.value]
+      // if (menu.isCollected) {
+      //   collectedMenuData.value.push(menu)
+      // } else {
+      //   const index = collectedMenuData.value.findIndex(
+      //     (menuItem) => menuItem.index === menu.index
+      //   )
+      //   collectedMenuData.value.splice(index, 1)
+      //   if (active.value === 'collect') {
+      //     menuData.value = [...collectedMenuData.value]
+      //   }
+      // }
 
-      // 若该菜单在常用菜单中，调整常用菜单的收藏标识
-      if (commonUsedMenuData.value && commonUsedMenuData.value.length) {
-        const commonIndex = commonUsedMenuData.value.findIndex(
-          (item) => item.index === menu.index
-        )
-        if (commonIndex > -1)
-          commonUsedMenuData.value[commonIndex].isCollected = menu.isCollected
-      }
-      emit('collect', menu, collectedMenuData.value)
+      // // 若该菜单在常用菜单中，调整常用菜单的收藏标识
+      // if (commonUsedMenuData.value && commonUsedMenuData.value.length) {
+      //   const commonIndex = commonUsedMenuData.value.findIndex(
+      //     (item) => item.index === menu.index
+      //   )
+      //   if (commonIndex > -1)
+      //     commonUsedMenuData.value[commonIndex].isCollected = menu.isCollected
+      // }
+      emit('collect', menu)
     }
     /********************** 菜单收藏 end ***************************/
 
