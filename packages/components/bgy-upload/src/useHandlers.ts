@@ -37,6 +37,34 @@ export function getFullUrl(domain: string, urlProp: string): string {
   return `${formatDomain}${urlProp}`
 }
 
+const outerHostNameList = [
+  'sispsit.countrygarden.com.cn',
+  'sispuat.countrygarden.com.cn',
+  'sisp.countrygarden.com.cn'
+]
+
+const ispOuterFlag = () => {
+  const { href, hostname } = window.location
+
+  return (
+    outerHostNameList.includes(hostname) ||
+    href.includes('/gys-outer-home/') ||
+    href.includes(':3001/')
+  )
+}
+
+const getIspToken = () => {
+  return ispOuterFlag()
+    ? localStorage.getItem('gys_access_token')
+    : localStorage.getItem('bgy_access_token')
+}
+
+// 获取YTH token
+export function getToken(): string {
+  const sapToken = localStorage.getItem('cloud_authorization')
+  return sapToken ? { Authorization: `Bearer ${sapToken}` } : { token: getIspToken() }
+}
+
 export default (props: IUseHandlersProps) => {
   const uploadFiles = ref<UploadFile[]>([])
   const uploadRef = ref<UploadRef | null>(null)

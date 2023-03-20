@@ -19,7 +19,7 @@ import { debugWarn } from '@element-plus/utils'
 import ajax from './ajax'
 import UploadList from './upload-list.vue'
 import Upload from './upload.vue'
-import useHandlers, { getFullUrl } from './useHandlers'
+import useHandlers, { getFullUrl, getToken } from './useHandlers'
 import {
   UPLOAD_URL,
   YTH_PROJECT,
@@ -27,6 +27,7 @@ import {
   REMOVE_URL,
   DOWNLOAD_URL,
   MULTI_DOWNLOAD_URL,
+  YTH_ACCEPT,
 } from './constants'
 
 import type { PropType } from 'vue'
@@ -86,6 +87,10 @@ export default defineComponent({
     inlineTip: {
       type: Boolean,
       default: true,
+    },
+    needDefaultAcceptTips: {
+      type: Boolean,
+      default: false,
     },
     showFileList: {
       type: Boolean,
@@ -348,6 +353,12 @@ export default defineComponent({
       uploadList = null
     }
 
+    const _accept = this.accept.length
+      ? this.accept
+      : this.sourceSystem === YTH_PROJECT
+      ? YTH_ACCEPT
+      : []
+
     const uploadData = {
       type: this.type,
       drag: this.drag,
@@ -355,11 +366,15 @@ export default defineComponent({
       multiple: this.multiple,
       'before-upload': this.beforeUpload,
       'with-credentials': this.withCredentials,
-      headers: this.headers,
+      headers: Object.keys(this.headers)?.length
+        ? this.headers
+        : this.sourceSystem === YTH_PROJECT
+        ? getToken()
+        : this.headers,
       method: this.method,
       name: this.name,
       data: this.data,
-      accept: this.accept
+      accept: _accept
         .flat()
         .map((e) => `.${e}`)
         .join(','),
@@ -380,11 +395,22 @@ export default defineComponent({
       'http-request': this.httpRequest,
       ref: 'uploadRef',
     }
+    // console.log('🚀 ~ file: index.vue:393 ~ render ~ uploadData:', uploadData)
 
     const tipInfo = () => {
       const arr = [] as Array<string>
-      if (this.accept.length) {
-        const accepts = this.accept
+      if (_accept.length && _accept !== YTH_ACCEPT) {
+        const accepts = _accept
+          .map((e) => (e instanceof Array ? e.join('/') : e))
+          .join(', ')
+        arr.push(`支持${accepts}`)
+      }
+      if (
+        _accept.length &&
+        this.needDefaultAcceptTips &&
+        _accept === YTH_ACCEPT
+      ) {
+        const accepts = _accept
           .map((e) => (e instanceof Array ? e.join('/') : e))
           .join(', ')
         arr.push(`支持${accepts}`)
@@ -398,6 +424,7 @@ export default defineComponent({
       if (this.limit) {
         arr.push(`最多支持${this.limit}个附件。`)
       }
+
       // `支持jpg/jpeg/png, pdf, doc/docx, xls/xlsx, ppt/pptx,zip,rar，单个文件大小不超过4M，单次上传文件不得超过3个，最多支持10个附件。`
       return arr.join('，')
     }

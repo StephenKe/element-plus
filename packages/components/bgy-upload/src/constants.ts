@@ -20,3 +20,5 @@ export const DOWNLOAD_URL =
 // 批量下载
 export const MULTI_DOWNLOAD_URL =
   '/integration-api/platform-file/file/batch/download?fileIds=FILEIDS'
+// 一体化附件后缀
+export const YTH_ACCEPT = ['bmp', 'csv', 'doc', 'docx', 'dwg', 'et', 'etb', 'gsh6', 'heic', 'html', 'jpeg', 'jpg', 'l52', 'mov', 'mp4', 'ofd', 'pdf', 'png', 'ppt', 'pptx', 'psd', 'rar', 'rtf', 'tif', 'txt', 'webp', 'wps', 'xls', 'xlsx']
